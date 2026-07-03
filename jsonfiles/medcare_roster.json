@@ -1,0 +1,745 @@
+[
+  {
+    "npi": "1023754512",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Leslie",
+      "middle": "",
+      "last": "Abraham",
+      "suffix": "NP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "3919 N. Fry Rd",
+            "address_2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "281-646-2273"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1033607684",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Sarah",
+      "middle": "",
+      "last": "Khan",
+      "suffix": "DO"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "4645 Sweetwater Blvd",
+            "address_2": "Ste 200",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "281-565-1112"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1043859192",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Casey",
+      "middle": "",
+      "last": "Landrum",
+      "suffix": "NP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "3919 N. Fry Rd",
+            "address_2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "281-646-2273"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1104417161",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Arianna",
+      "middle": "",
+      "last": "Dominguez Torres",
+      "suffix": "FNP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "4224 Cypress Creek Pkwy",
+            "address_2": "Ste. 301",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77068",
+            "phone": "281-972-7301"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1154962462",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Humberto",
+      "middle": "",
+      "last": "Martinez",
+      "suffix": "FNP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Family Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "110 W Southmore Ave.",
+            "address_2": "",
+            "city": "Pasadena",
+            "state": "TX",
+            "zip": "77502",
+            "phone": "832-582-5153"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1235697822",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Joy",
+      "middle": "",
+      "last": "Ebomwonyi",
+      "suffix": "FNP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "8785 West Bellfort St",
+            "address_2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77031",
+            "phone": "713-771-2292"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1265822373",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Saba",
+      "middle": "",
+      "last": "Jafri",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "705 S Fry Rd",
+            "address_2": "# 235",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77450",
+            "phone": "832-400-2776"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1336402254",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Farhan",
+      "middle": "",
+      "last": "Rizvi",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "4645 Sweetwater Blvd",
+            "address_2": "Ste 200",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "281-565-1112"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1508497108",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Olawale",
+      "middle": "",
+      "last": "Adio-Oduola",
+      "suffix": "NP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "8785 West Bellfort St",
+            "address_2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77031",
+            "phone": "713-771-2292"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1518937101",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Sanderlin",
+      "middle": "",
+      "last": "Damien",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Family Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "8420 Antoine Drive",
+            "address_2": "Ste 107",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77088",
+            "phone": "(281) 447-5570"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1528698834",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Sue",
+      "middle": "",
+      "last": "Gragera",
+      "suffix": "NP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "3919 N. Fry Rd",
+            "address_2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "281-646-2273"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1538568506",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Cameron",
+      "middle": "",
+      "last": "Perry",
+      "suffix": "PA"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Physican Assistant"
+        ],
+        "addresses": [
+          {
+            "address": "3919 N. Fry Rd",
+            "address_2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "281-646-2273"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1568446094",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Thomas",
+      "middle": "",
+      "last": "Roselle",
+      "suffix": "PA"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "3919 N. Fry Rd",
+            "address_2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "281-646-2273"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1598430894",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Yujian",
+      "middle": "",
+      "last": "Zhang",
+      "suffix": "NP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "4645 Sweetwater Blvd",
+            "address_2": "Ste 200",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "281-565-1112"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1639785355",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Angel",
+      "middle": "",
+      "last": "Santos Mazquiaran",
+      "suffix": "FNP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Nurse Practitioner"
+        ],
+        "addresses": [
+          {
+            "address": "4224 Cypress Creek Pkwy",
+            "address_2": "Ste. 301",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77068",
+            "phone": "281-972-7301"
+          },
+          {
+            "address": "10656 Jones Rd",
+            "address_2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-970-6966"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1669423067",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Swati",
+      "middle": "",
+      "last": "Joglekar",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "4645 Sweetwater Blvd",
+            "address_2": "Ste 200",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "281-565-1112"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1710977913",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Roussel",
+      "middle": "",
+      "last": "Clement",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "11850 Bissonnet St.",
+            "address_2": "Ste. 2",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77099",
+            "phone": "281-372-6892"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1760795165",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Muzna",
+      "middle": "",
+      "last": "Ilyas",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "4645 Sweetwater Blvd",
+            "address_2": "Ste 200",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "281-565-1112"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1811978901",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Nancy",
+      "middle": "",
+      "last": "Naghavi",
+      "suffix": "PCP"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Family Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "3919 N. Fry Rd",
+            "address_2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "281-646-2273"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1932339371",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "Syed",
+      "middle": "",
+      "last": "Jafri",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Internal Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "705 S Fry Rd",
+            "address_2": "# 235",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77450",
+            "phone": "832-400-2776"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  },
+  {
+    "npi": "1982646675",
+    "type": "Individual",
+    "name": {
+      "prefix": "",
+      "first": "ABDUL-AZIZ",
+      "middle": "",
+      "last": "ALHASSAN",
+      "suffix": "MD"
+    },
+    "sex": "",
+    "languages": [],
+    "lastUpdatedOn": "",
+    "plans": [
+      {
+        "maPlanId": "UNKNOWN",
+        "accepting": "not accepting",
+        "specialty": [
+          "Family Medicine"
+        ],
+        "addresses": [
+          {
+            "address": "10039 Bissonnet St",
+            "address_2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77036",
+            "phone": "713-771-2292"
+          }
+        ],
+        "networks": [],
+        "year": []
+      }
+    ]
+  }
+]
