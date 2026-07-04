@@ -27,7 +27,14 @@ const convertExcelToJson = async (filePath) => {
   const rows = XLSX.utils.sheet_to_json(sheet, {
     defval: "",
   });
-console.log(workbook.SheetNames);
+
+
+const headers = XLSX.utils.sheet_to_json(sheet, {
+  header: 1,
+})[0];
+
+console.log(headers);
+
   const providers = {};
 rows.forEach((row) => {
   const npi = String(row["npi"] || "").trim();
@@ -59,8 +66,8 @@ if (/^(n\/?a)$/i.test(specialty)) {
 
       name: {
         prefix: String(row["prefix"] || "").trim(),
-        first: String(row["first name"] || "").trim(),
-        middle: String(row["middle name"] || "").trim(),
+        first: String(row["ﬁrst name"] || "").trim(),
+        middle: String(row["middle name'"] || "").trim(),
         last: String(row["last name"] || "").trim(),
         suffix: String(row["suffix"] || "").trim(),
       },
