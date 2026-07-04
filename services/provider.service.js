@@ -30,92 +30,116 @@ const convertExcelToJson = async (filePath) => {
 console.log(workbook.SheetNames);
   const providers = {};
 rows.forEach((row) => {
-  const npi = String(row["NPI"] || "").trim();
+  const npi = String(row["npi"] || "").trim();
 
   if (!npi) return;
+let specialty = String(row["Specialty code"] || "").trim();
 
-  const providerType = String(row["Provider Type"] || "")
-    .trim()
-    .toUpperCase();
+if (/^(n\/?a)$/i.test(specialty)) {
+  specialty = "N/A";
+} else if (/^\d+$/.test(specialty)) {
+  specialty = specialty.padStart(3, "0");
+}
+  const networkId = String(row["networkId"] || "").trim();
 
-  const isFacility =
-    providerType === "FACILITY" ||
-    providerType === "GROUP" ||
-    providerType === "ENTITY";
+  const address = {
+    address: String(row["address"] || "").trim(),
+    address_2: String(row["address2"] || "").trim(),
+    city: String(row["city"] || "").trim(),
+    state: String(row["state"] || "").trim(),
+    zip: String(row["zip"] || "").trim(),
+    phone: String(row["phone"] || "").trim(),
+  };
 
-  const specialty = String(row["Specialty"] || "").trim();
-
-  const providerName = splitName(
-    String(row["Provider Name"] || "").trim()
-  );
-
+  // Create provider only once per NPI
   if (!providers[npi]) {
     providers[npi] = {
       npi,
-      type: isFacility ? "Facility" : "Individual",
+      type: "Individual",
 
-      ...(isFacility
-        ? {
-            facilityName: String(
-              row["Group/Entity Name"] ||
-                row["Provider Name"] ||
-                ""
-            ).trim(),
-            facilityType: specialty ? [specialty] : [],
-          }
-        : {
-            name: {
-              prefix: providerName.prefix,
-              first: providerName.first,
-              middle: providerName.middle,
-              last: providerName.last,
-              suffix: providerName.suffix,
-            },
-            sex: "",
-            languages: ["English"],
-          }),
+      name: {
+        prefix: String(row["prefix"] || "").trim(),
+        first: String(row["first name"] || "").trim(),
+        middle: String(row["middle name"] || "").trim(),
+        last: String(row["last name"] || "").trim(),
+        suffix: String(row["suffix"] || "").trim(),
+      },
 
-      lastUpdatedOn: "",
+      sex: String(row["sex"] || "").trim(),
+
+      languages: ["English"],
+
+      lastUpdatedOn:
+        String(row["lastUpdatedOn"] || "").trim() ||
+        new Date().toISOString().split("T")[0],
 
       plans: [
         {
-          maPlanId: "UNKNOWN",
-          accepting: "",
-          specialty: specialty ? [specialty] : [],
+          maPlanId: "H5767-001-000",
+          accepting: String(row["accepting"] || "").trim(),
+          specialty: [],
           addresses: [],
           networks: [],
-          year: [],
+          year: ["2027"],
+        },
+        {
+          maPlanId: "H5767-002-000",
+          accepting: String(row["accepting"] || "").trim(),
+          specialty: [],
+          addresses: [],
+          networks: [],
+          year: ["2027"],
+        },
+        {
+          maPlanId: "H5767-003-000",
+          accepting: String(row["accepting"] || "").trim(),
+          specialty: [],
+          addresses: [],
+          networks: [],
+          year: ["2027"],
         },
       ],
     };
   }
 
-  const address = {
-    address: String(row["STREET"] || "").trim(),
-    address_2: "",
-    city: String(row["CITY"] || "").trim(),
-    state: String(row["STATE"] || "").trim(),
-    zip: String(row["ZIP"] || "").trim(),
-    phone: String(row["PHONE"] || "").trim(),
-  };
+  // Update all three plans
+  providers[npi].plans.forEach((plan) => {
+    // Add specialty
+    if (
+      specialty &&
+      !plan.specialty.includes(specialty)
+    ) {
+      plan.specialty.push(specialty);
+    }
 
-  const exists = providers[npi].plans[0].addresses.some(
-    (a) =>
-      a.address === address.address &&
-      a.city === address.city &&
-      a.state === address.state &&
-      a.zip === address.zip &&
-      a.phone === address.phone
-  );
+    // Add network
+    if (
+      networkId &&
+      !plan.networks.includes(networkId)
+    ) {
+      plan.networks.push(networkId);
+    }
 
-  if (!exists) {
-    providers[npi].plans[0].addresses.push(address);
-  }
+    // Add address
+    const addressExists = plan.addresses.some(
+      (a) =>
+        a.address === address.address &&
+        a.address_2 === address.address_2 &&
+        a.city === address.city &&
+        a.state === address.state &&
+        a.zip === address.zip &&
+        a.phone === address.phone
+    );
+
+    if (!addressExists && address.address) {
+      plan.addresses.push(address);
+    }
+  });
 });
   const result = Object.values(providers);
-  const outputFile = path.join("output", `${uuid()}.json`);
+  const outputFile = path.join("jsonfiles", `${uuid()}.json`);
 
-  await fs.ensureDir("output");
+  await fs.ensureDir("jsonfiles");
   await fs.writeJson(outputFile, result, {
     spaces: 2,
   });
@@ -253,8 +277,6 @@ const addRosterData = async (rosterData, rosterName = "providers") => {
     throw err;
   }
 };
-
-
 
 module.exports = {
   getProvidersByRoster,
