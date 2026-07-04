@@ -48,7 +48,7 @@ app.get("/", (req, res) => {
 
 app.use(
   "/json",
-  express.static(path.join(__dirname, "jsonFiles"), {
+  express.static(path.join(__dirname, "jsonfiles"), {
     etag: true,
     lastModified: true,
     index: false,
