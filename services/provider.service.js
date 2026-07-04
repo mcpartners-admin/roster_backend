@@ -147,43 +147,38 @@ if (/^(n\/?a)$/i.test(specialty)) {
   return outputFile;
 };
 
-const addRosterData = async (rosterData, rosterName = "providers") => {
+const addRosterData = async (
+  rosterData,
+  rosterName = "providers",
+  jsonFilePath = ""
+) => {
   try {
     console.log(`Received ${rosterData.length} providers`);
 
     const providers = rosterData.map((provider) => ({
-      rosterName,
-
-      npi: String(provider.npi).trim(),
-
-      type:
-        provider.type === "FACILITY" ||
-        provider.type === "Facility"
-          ? "Facility"
-          : "Individual",
-
+      jsonFilePath,
+      npi: String(provider.npi || "").trim(),
+      type: provider.type === "Facility" ? "Facility" : "Individual",
       lastUpdatedOn:
         provider.lastUpdatedOn ||
         new Date().toISOString().split("T")[0],
 
-      ...(provider.type === "Facility" ||
-      provider.type === "FACILITY"
+      ...(provider.type === "Facility"
         ? {
             facilityName: provider.facilityName || "",
             facilityType: provider.facilityType || [],
           }
         : {
             name: {
-              prefix: provider.name?.prefix || undefined,
+              prefix: provider.name?.prefix || "",
               first: provider.name?.first || "",
               middle: provider.name?.middle || "",
               last: provider.name?.last || "",
-              suffix: provider.name?.suffix || undefined,
+              suffix: provider.name?.suffix || "",
             },
-            sex:
-              provider.sex === "Male" || provider.sex === "Female"
-                ? provider.sex
-                : undefined,
+
+            sex: provider.sex || "",
+
             languages:
               provider.languages?.length > 0
                 ? provider.languages
@@ -191,93 +186,106 @@ const addRosterData = async (rosterData, rosterName = "providers") => {
           }),
 
       plans: (provider.plans || []).map((plan) => ({
-        maPlanId: plan.maPlanId || "UNKNOWN",
+        maPlanId: plan.maPlanId,
 
         yearContractYear:
-          plan.yearContractYear ||
-          (plan.year && plan.year[0]) ||
-          new Date().getFullYear().toString(),
+          Array.isArray(plan.year) && plan.year.length
+            ? String(plan.year[0])
+            : "2027",
 
-        specialty: plan.specialty || [],
+        specialty: Array.isArray(plan.specialty)
+          ? [...new Set(plan.specialty)]
+          : [],
 
         accepting:
-          String(plan.accepting).toLowerCase() === "accepting"
+          String(plan.accepting || "")
+            .trim()
+            .toLowerCase() === "accepting"
             ? "Accepting"
             : "Not Accepting",
 
         networkId:
-          plan.networkId ||
-          (plan.networks && plan.networks[0]) ||
-          "",
+          Array.isArray(plan.networks) && plan.networks.length
+            ? plan.networks.join(",")
+            : "",
 
         addresses: (plan.addresses || []).map((address) => ({
-          address: address.address || "",
-          address2: address.address2 || address.address_2 || "",
-          city: address.city || "",
+          address: String(address.address || "").trim(),
+
+          address2: String(
+            address.address2 || address.address_2 || ""
+          ).trim(),
+
+          city: String(address.city || "").trim(),
+
           state: String(address.state || "")
-            .toUpperCase()
-            .substring(0, 2),
-          zip: String(address.zip || "")
-            .replace(/\D/g, "")
-            .substring(0, 5),
-          phone: String(address.phone || "")
-            .replace(/\D/g, "")
-            .substring(0, 10),
+            .trim()
+            .toUpperCase(),
+
+          zip: String(address.zip || "").replace(/\D/g, ""),
+
+          phone: String(address.phone || "").replace(/\D/g, ""),
         })),
       })),
     }));
 
-    console.log("Mapped Providers:", providers.length);
+    console.log(`Mapped ${providers.length} providers`);
 
     let inserted = 0;
+    const failed = [];
 
     for (const provider of providers) {
       try {
-        console.log("\n================================");
-        console.log("Validating NPI:", provider.npi);
+        console.log(`Saving ${provider.npi}`);
 
         const doc = new Provider(provider);
 
         await doc.validate();
 
-        console.log("Validation Passed");
-
         await doc.save();
 
         inserted++;
 
-        console.log("Saved Successfully");
+        console.log(`✔ ${provider.npi} inserted`);
       } catch (err) {
-        console.log("\nValidation Failed");
-        console.log("NPI:", provider.npi);
+        console.log(`✖ ${provider.npi} failed`);
+
+        failed.push({
+          npi: provider.npi,
+          message: err.message,
+        });
 
         if (err.name === "ValidationError") {
-          Object.keys(err.errors).forEach((field) => {
-            console.log("--------------------------------");
-            console.log("Field :", field);
-            console.log("Value :", err.errors[field].value);
-            console.log("Message :", err.errors[field].message);
-            console.log("Kind :", err.errors[field].kind);
+          Object.values(err.errors).forEach((e) => {
+            console.log(
+              `${e.path} => ${e.message} (value: ${e.value})`
+            );
           });
         } else {
           console.log(err);
         }
 
-        // Stop on the first error
-        throw err;
+        // continue with next provider
       }
     }
 
-    console.log(`Inserted ${inserted} providers`);
+    console.log("--------------------------------");
+    console.log(`Inserted : ${inserted}`);
+    console.log(`Failed   : ${failed.length}`);
 
-    return inserted;
+    if (failed.length) {
+      console.table(failed);
+    }
+
+    return {
+      inserted,
+      failed,
+    };
   } catch (err) {
-    console.error("\n========== ERROR ==========");
     console.error(err);
     throw err;
   }
 };
-
 module.exports = {
   getProvidersByRoster,
   convertExcelToJson,

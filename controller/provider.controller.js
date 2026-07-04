@@ -69,7 +69,7 @@ const uploadSeedFromJson = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Data seeded successfully",
-      insertedCount: Array.isArray(inserted) ? inserted.length : 0,
+      data: { insertedCount: inserted.inserted,failedCount: inserted.failed.length },
     });
   } catch (error) {
     return res.status(500).json({

@@ -11,7 +11,6 @@ dotenv.config();
 
 const app = express();
 
-app.set('trust proxy', true);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -39,11 +38,22 @@ app.get("/", (req, res) => {
     message: "Roster API is running",
   });
 });
+// app.use(
+//   "/json",
+//   express.static(path.join(__dirname, "jsonfiles"), {
+//     index: false,
+//     extensions: ["json"],
+//   })
+// );
+
 app.use(
   "/json",
-  express.static(path.join(__dirname, "jsonfiles"), {
+  express.static(path.join(__dirname, "jsonFiles"), {
+    etag: true,
+    lastModified: true,
     index: false,
-    extensions: ["json"],
+    maxAge: 0,
+    cacheControl: true,
   })
 );
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

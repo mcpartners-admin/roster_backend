@@ -6,14 +6,12 @@ const planSchema = new mongoose.Schema(
     maPlanId: { type: String, required: true, trim: true },
     yearContractYear: {
       type: String,
-      required: true,
       trim: true,
-      match: [/^\d{4}$/, "Contract year must be 4 digits"],
     },
-    addresses: { type: [addressSchema], required: true, default: [] },
-    specialty: { type: [String], required: true, default: [] },
-    accepting: { type: String, enum: ["Accepting", "Not Accepting"], default: "Accepting" },
-    networkId: { type: String, trim: true },
+    addresses: { type: [addressSchema], default: [] },
+    specialty: { type: [String],default: [] },
+    accepting: { type: String,  default: "" },
+    networkId: { type: [String], default: [] },
   },
   { _id: false }
 );
