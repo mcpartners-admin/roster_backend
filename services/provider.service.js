@@ -144,7 +144,11 @@ if (/^(n\/?a)$/i.test(specialty)) {
   });
 });
   const result = Object.values(providers);
-  const outputFile = path.join("jsonfiles", `${uuid()}.json`);
+ const fileName = path
+  .basename(filePath, path.extname(filePath))
+  .replace(/\s+/g, "_");
+
+const outputFile = path.join("jsonfiles", `${fileName}.json`);
 
   await fs.ensureDir("jsonfiles");
   await fs.writeJson(outputFile, result, {
