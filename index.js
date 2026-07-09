@@ -12,19 +12,6 @@ dotenv.config();
 const app = express();
 
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: {
-    success: false,
-    message: "Too many requests from this IP, please try again later.",
-  },
-});
-
-app.use(limiter);
-app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
