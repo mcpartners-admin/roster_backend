@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const getClient = () => {
-  const baseURL = process.env.HAPI_BASE_URL || "http://localhost:8080/fhir";
+  const baseURL = process.env.HAPI_BASE_URL;
 
   return axios.create({
     baseURL,

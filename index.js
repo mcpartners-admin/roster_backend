@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 // );
 
 app.use(
-  "/mrf",
+  "/providers",
   express.static(path.join(__dirname, "jsonfiles"), {
     etag: true,
     lastModified: true,
