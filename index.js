@@ -8,10 +8,7 @@ const routes = require("./src/routes");
 const dotenv = require("dotenv");
 dotenv.config();
 
-
 const app = express();
-
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
@@ -19,12 +16,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Roster API is running",
-  });
-});
 // app.use(
 //   "/json",
 //   express.static(path.join(__dirname, "jsonfiles"), {
@@ -33,9 +24,10 @@ app.get("/", (req, res) => {
 //   })
 // );
 
+
 app.use(
   "/providers",
-  express.static(path.join(__dirname, "jsonfiles"), {
+  express.static(path.join(__dirname, "src", "jsonfiles"), {
     etag: true,
     lastModified: true,
     index: false,
