@@ -39,6 +39,14 @@ const rows = XLSX.utils.sheet_to_json(sheet, {
     if (!provider) {
       provider = createProvider(normalizedRow);
       providers.set(providerKey, provider);
+    }else{
+     
+  logger.record(index + 2, normalizedRow.npi, {
+    field: "npi",
+    message: `Duplicate provider found with NPI ${normalizedRow.npi}`,
+    severity: "warning",
+  });
+
     }
     mergeNormalizedRowIntoProvider(provider, normalizedRow);
   }

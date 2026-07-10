@@ -3,6 +3,28 @@ const {
   DEFAULT_YEAR,
 } = require("../config/cms.config");
 
+function formatSpecialtyCode(code) {
+  if (code === null || code === undefined || code === "") {
+    return null;
+  }
+
+  const text = String(code).trim();
+
+  if (!/^\d+$/.test(text)) {
+    return text;
+  }
+
+  if (text.length === 1) {
+    return `00${text}`;
+  }
+
+  if (text.length === 2) {
+    return `0${text}`;
+  }
+
+  return text;
+}
+
 function createPlan(planId, normalizedRow) {
   return {
     maPlanId: planId,
@@ -46,8 +68,9 @@ function mergeNormalizedRowIntoProvider(provider, normalizedRow) {
     // Specialty
     if (Array.isArray(normalizedRow.specialty)) {
       normalizedRow.specialty.forEach((code) => {
-        if (code) {
-          plan.specialty.add(code);
+        const formattedCode = formatSpecialtyCode(code);
+        if (formattedCode) {
+          plan.specialty.add(formattedCode);
         }
       });
     }
