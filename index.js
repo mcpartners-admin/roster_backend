@@ -4,7 +4,7 @@ const path = require("path");
 const rateLimit = require("express-rate-limit");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
-const routes = require("./routes");
+const routes = require("./src/routes");
 const dotenv = require("dotenv");
 dotenv.config();
 

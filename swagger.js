@@ -9,7 +9,7 @@ const options = {
       description: "API for MA provider and facility roster data",
     },
   },
-  apis: ["./routes/**/*.js"],
+  apis: ["./src/routes/**/*.js"],
 };
 
 module.exports = swaggerJSDoc(options);
