@@ -69,9 +69,7 @@ function validateNormalizedRow(row = {}) {
   //   errors.push(createIssue("phone", "Phone must be ten digits", row.phone));
   // }
 
-  // if (!row.accepting || !ACCEPTING_VALUES.includes(row.accepting)) {
-  //   errors.push(createIssue("accepting", "Accepting must be Accepting or Not Accepting", row.accepting));
-  // }
+ 
 
   if (!Array.isArray(row.languages)) {
     errors.push(createIssue("languages", "Languages must be provided as an array", row.languages));
@@ -81,9 +79,9 @@ function validateNormalizedRow(row = {}) {
   //   errors.push(createIssue("specialty", "Specialty must be N/A or a three-digit code", row.specialty));
   // }
 
-  // if (!row.specialty && row.specialty !== "") {
-  //   warnings.push(createIssue("specialty", "Specialty is missing", row.specialty, "warning"));
-  // }
+  if (!row.specialty || !Array.isArray(row.specialty) || row.specialty.length === 0) {
+    errors.push(createIssue("specialty", "Specialty is missing", row.specialty));
+  }
 
   return {
     valid: errors.length === 0,

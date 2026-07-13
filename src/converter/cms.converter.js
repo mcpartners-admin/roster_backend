@@ -37,18 +37,20 @@ const rows = XLSX.utils.sheet_to_json(sheet, {
     let provider = providers.get(providerKey);
 
     if (!provider) {
-      provider = createProvider(normalizedRow);
-      providers.set(providerKey, provider);
-    }else{
-     
+     provider = createProvider(normalizedRow);
+     providers.set(providerKey, provider);
+   }
+
+   const isUpdated = mergeNormalizedRowIntoProvider(provider, normalizedRow);
+
+  if (!isUpdated) {
   logger.record(index + 2, normalizedRow.npi, {
     field: "npi",
     message: `Duplicate provider found with NPI ${normalizedRow.npi}`,
     severity: "warning",
   });
-
-    }
-    mergeNormalizedRowIntoProvider(provider, normalizedRow);
+  continue;
+   }
   }
 
   const finalizedProviders = Array.from(providers.values()).map(finalizeProvider);

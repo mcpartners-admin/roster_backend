@@ -7,19 +7,15 @@ const addressSchema = new mongoose.Schema(
     city: { type: String,default:"" ,trim: true },
     state: {
       type: String,
-      
       trim: true,
-     
     },
     zip: {
       type: String,
       trim: true,
-    
     },
     phone: {
       type: String,
-      trim: true,
-      
+      trim: true,  
     },
   },
   { _id: false }

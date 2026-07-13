@@ -2,16 +2,16 @@
   "totalRows": 3552,
   "validRows": 768,
   "skippedRows": 1059,
-  "executionTime": "35822.973878ms",
+  "executionTime": "2870.079365ms",
   "memoryUsage": {
-    "rss": "316MB",
-    "heapUsed": "95MB",
-    "heapTotal": "123MB"
+    "rss": "194MB",
+    "heapUsed": "69MB",
+    "heapTotal": "101MB"
   },
   "duplicateProviders": 2784,
-  "warnings": 1725,
+  "warnings": 100,
   "errors": 1063,
   "performance": {
-    "rowsPerSecond": 99
+    "rowsPerSecond": 1238
   }
 }

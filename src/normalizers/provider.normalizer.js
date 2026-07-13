@@ -31,9 +31,22 @@ function normalizeAccepting(value) {
 }
 
 function normalizeType(value) {
-  return normalizeString(value);
-}
+  if (!value) {
+    return null;
+  }
 
+  const type = String(value).trim().toUpperCase();
+
+  if (type === "PCP" || type === "SPC") {
+    return "INDIVIDUAL";
+  }
+
+  if (type === "FAC") {
+    return "FACILITY";
+  }
+
+  return value; // or return null if you want to reject unknown values
+}
 function normalizeSpecialty(value) {
   return normalizeString(value);
 }

@@ -64,20 +64,25 @@ function createProvider(normalizedRow) {
 }
 
 function mergeNormalizedRowIntoProvider(provider, normalizedRow) {
+  let hasChanges = false;
+
   provider.plans.forEach((plan) => {
     // Specialty
     if (Array.isArray(normalizedRow.specialty)) {
       normalizedRow.specialty.forEach((code) => {
         const formattedCode = formatSpecialtyCode(code);
-        if (formattedCode) {
+
+        if (formattedCode && !plan.specialty.has(formattedCode)) {
           plan.specialty.add(formattedCode);
+          hasChanges = true;
         }
       });
     }
 
     // Network
-    if (normalizedRow.network) {
+    if (normalizedRow.network && !plan.networks.has(normalizedRow.network)) {
       plan.networks.add(normalizedRow.network);
+      hasChanges = true;
     }
 
     // Address
@@ -90,11 +95,15 @@ function mergeNormalizedRowIntoProvider(provider, normalizedRow) {
       phone: normalizedRow.phone || "",
     };
 
-    if (address.address) {
-      plan.addresses.add(JSON.stringify(address));
+    const addressKey = JSON.stringify(address);
+
+    if (address.address && !plan.addresses.has(addressKey)) {
+      plan.addresses.add(addressKey);
+      hasChanges = true;
     }
   });
-  return provider;
+
+  return hasChanges;
 }
 
 function finalizeProvider(provider) {

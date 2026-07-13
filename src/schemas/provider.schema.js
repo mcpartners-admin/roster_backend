@@ -3,12 +3,10 @@ const planSchema = require("./plan.schema");
 
 const providerSchema = new mongoose.Schema(
   {
-   
     npi: {
       type: String,
       unique: true,
       trim: true,
-
     },
     type: {
       type: String,
@@ -31,10 +29,6 @@ const providerSchema = new mongoose.Schema(
     languages: { type: [String], default: [] },
     facilityName: { type: String, trim: true },
     facilityType: { type: [String], default: [] },
-    jsonFilePath: {
-  type: String,
-  trim: true,
-},
   },
   { timestamps: true }
 );
