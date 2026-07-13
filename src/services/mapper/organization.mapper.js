@@ -2,7 +2,7 @@ const { buildIdentifier, buildAddress, sanitizeId } = require("../../utils/fhir.
 
 const mapOrganization = (provider, address) => {
   const facilityName = provider?.facilityName || "Provider Organization";
-  const organizationId = `organization-${provider.organizationId}`;
+  const organizationId = `organization-${provider.npi}`;
 
   return {
     resourceType: "Organization",

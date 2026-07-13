@@ -81,6 +81,7 @@ const processBatch = async (providers, stats, total, batchSize) => {
 
 const uploadProviderResources = async (provider, stats, total, processed) => {
   const practitionerResource = mappers.practitioner(provider);
+  console.log("practitionerResource",practitionerResource)
   await hapiService.upsertResource(practitionerResource);
   stats.practitioners += 1;
   console.log(`Uploading Practitioner ${stats.practitioners}/${total}`);
@@ -103,6 +104,7 @@ const uploadProviderResources = async (provider, stats, total, processed) => {
     for (let addressIndex = 0; addressIndex < addresses.length; addressIndex += 1) {
       const address = addresses[addressIndex];
       const locationResource = mappers.location(provider, address, addressIndex, organizationResource.id);
+      console.log("locationResource",locationResource);
       await hapiService.upsertResource(locationResource);
       stats.locations += 1;
       locationIds.push(locationResource.id);

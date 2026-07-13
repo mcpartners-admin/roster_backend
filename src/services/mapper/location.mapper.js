@@ -1,7 +1,7 @@
 const { buildAddress, buildTelecom, sanitizeId } = require("../../utils/fhir.utils");
 
 const mapLocation = (provider, address, index, organizationId) => {
-  const locationId =  `location-${provider.locationId}`;
+  const locationId =  `location-${provider.npi}-${index + 1}`;;
 
   return {
     resourceType: "Location",
@@ -9,7 +9,7 @@ const mapLocation = (provider, address, index, organizationId) => {
     identifier: [
       {
         system: "urn:provider-directory:location",
-        value: `${provider?.npi || "provider"}-${index + 1}`,
+        value: `${provider.npi}-${index + 1}`,
       },
     ],
     status: "active",

@@ -1,8 +1,8 @@
 const { buildIdentifier, sanitizeId } = require("../../utils/fhir.utils");
 
 const mapInsurancePlan = (provider, plan, index) => {
-  const planId = `plan-${provider.planId}`;
-
+  const planId = `plan-${plan.maPlanId || `plan-${index + 1}`}`;
+console.log("planId",planId)
   return {
     resourceType: "InsurancePlan",
     id: planId,

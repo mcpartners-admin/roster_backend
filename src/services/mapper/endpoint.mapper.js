@@ -1,7 +1,7 @@
 const { buildTelecom, sanitizeId } = require("../../utils/fhir.utils");
 
 const mapEndpoint = (provider, address, index) => {
-  const endpointId = sanitizeId(`${provider?.npi || "provider"}-endpoint-${index + 1}`);
+  const endpointId = sanitizeId(`${provider?.npi}-endpoint-${index + 1}`);
 
   return {
     resourceType: "Endpoint",
