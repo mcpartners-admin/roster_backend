@@ -55,7 +55,6 @@ function createProvider(normalizedRow) {
     sex: normalizedRow.sex || null,
     languages: [...new Set(normalizedRow.languages || [])],
     lastUpdatedOn:
-      normalizedRow.lastUpdatedOn ||
       new Date().toISOString().split("T")[0],
     plans: DEFAULT_PLAN_IDS.map((planId) =>
       createPlan(planId, normalizedRow)
@@ -113,7 +112,7 @@ function finalizeProvider(provider) {
     name: provider.name,
     sex: provider.sex,
     languages: provider.languages,
-    lastUpdatedOn: provider.lastUpdatedOn,
+    lastUpdatedOn: new Date().toISOString().split("T")[0],
     plans: provider.plans.map((plan) => ({
       maPlanId: plan.maPlanId,
       accepting: plan.accepting,

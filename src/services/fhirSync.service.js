@@ -22,9 +22,7 @@ const syncFhir = async (options = {}) => {
     providersProcessed: 0,
     durationMs: 0,
   };
-
   const startedAt = Date.now();
-
   try {
     const query = {};
     let providers = [];
@@ -35,9 +33,7 @@ const syncFhir = async (options = {}) => {
     } else {
       const total = await Provider.countDocuments(query);
       stats.providersProcessed = total;
-
       const cursor = Provider.find(query).lean().cursor({ batchSize });
-
       for await (const provider of cursor) {
         providers.push(provider);
 
@@ -79,65 +75,203 @@ const processBatch = async (providers, stats, total, batchSize) => {
   console.log(`Processed ${Math.min(stats.providersProcessed, total)} provider records in batch of ${batchSize}`);
 };
 
-const uploadProviderResources = async (provider, stats, total, processed) => {
-  const practitionerResource = mappers.practitioner(provider);
-  console.log("practitionerResource",practitionerResource)
-  await hapiService.upsertResource(practitionerResource);
-  stats.practitioners += 1;
-  console.log(`Uploading Practitioner ${stats.practitioners}/${total}`);
+// const uploadProviderResources = async (provider, stats, total, processed) => {
+//   const practitionerResource = mappers.practitioner(provider);
+ 
+//   await hapiService.upsertResource(practitionerResource);
+//   stats.practitioners += 1;
+//   console.log(`Uploading Practitioner ${stats.practitioners}/${total}`);
 
-  const organizationResource = mappers.organization(provider, provider?.plans?.[0]?.addresses?.[0]);
-  await hapiService.upsertResource(organizationResource);
-  stats.organizations += 1;
-  console.log(`Uploading Organization ${stats.organizations}/${total}`);
+//   const organizationResource = mappers.organization(provider, provider?.plans?.[0]?.addresses?.[0]);
+//   await hapiService.upsertResource(organizationResource);
+//   stats.organizations += 1;
+//   console.log(`Uploading Organization ${stats.organizations}/${total}`);
+
+//   const locationIds = [];
+//   const healthcareServiceIds = [];
+//   const endpointIds = [];
+
+//   const planArray = Array.isArray(provider?.plans) ? provider.plans : [];
+
+//   for (let index = 0; index < planArray.length; index += 1) {
+//     const plan = planArray[index] || {};
+//     const addresses = Array.isArray(plan.addresses) ? plan.addresses : [];
+
+//     for (let addressIndex = 0; addressIndex < addresses.length; addressIndex += 1) {
+//       const address = addresses[addressIndex];
+//       const locationResource = mappers.location(provider, address, addressIndex, organizationResource.id);
+     
+//       await hapiService.upsertResource(locationResource);
+//       stats.locations += 1;
+//       locationIds.push(locationResource.id);
+//       console.log(`Uploading Location ${stats.locations}/${total}`);
+
+//       const healthcareServiceResource = mappers.healthcareService(provider, plan, addressIndex);
+//       await hapiService.upsertResource(healthcareServiceResource);
+//       stats.locations += 0;
+//       healthcareServiceIds.push(healthcareServiceResource.id);
+//       console.log(`Uploading HealthcareService ${healthcareServiceIds.length}/${total}`);
+
+//       const endpointResource = mappers.endpoint(provider, address, addressIndex);
+//       await hapiService.upsertResource(endpointResource);
+//       endpointIds.push(endpointResource.id);
+//       console.log(`Uploading Endpoint ${endpointIds.length}/${total}`);
+//     }
+
+//     const insurancePlanResource = mappers.insurancePlan(provider, plan, index);
+//     await hapiService.upsertResource(insurancePlanResource);
+//     stats.insurancePlans += 1;
+//     console.log(`Uploading InsurancePlan ${stats.insurancePlans}/${total}`);
+//   }
+
+//   const practitionerRoleResource = mappers.practitionerRole(
+//     provider,
+//     practitionerResource.id,
+//     organizationResource.id,
+//     locationIds,
+//     healthcareServiceIds,
+//     endpointIds
+//   );
+//   await hapiService.upsertResource(practitionerRoleResource);
+//   console.log(`Completed provider ${provider?.npi || provider?._id}`);
+// };
+
+
+const uploadProviderResources = async (provider, stats, total) => {
+  const isFacility = provider.type === "FACILITY";
+
+  let practitionerResource = null;
+  let organizationResource = null;
+
+  // Individual Provider
+  if (!isFacility) {
+    practitionerResource = mappers.practitioner(provider);
+    await hapiService.upsertResource(practitionerResource);
+    stats.practitioners += 1;
+    console.log(`Uploading Practitioner ${stats.practitioners}/${total}`);
+  }
+
+  // Facility
+  if (isFacility) {
+    organizationResource = mappers.organization(
+      provider,
+      provider?.plans?.[0]?.addresses?.[0]
+    );
+    await hapiService.upsertResource(organizationResource);
+    stats.organizations += 1;
+    console.log(`Uploading Organization ${stats.organizations}/${total}`);
+  }
 
   const locationIds = [];
   const healthcareServiceIds = [];
   const endpointIds = [];
+  const plans = Array.isArray(provider.plans)
+    ? provider.plans
+    : [];
 
-  const planArray = Array.isArray(provider?.plans) ? provider.plans : [];
-
-  for (let index = 0; index < planArray.length; index += 1) {
-    const plan = planArray[index] || {};
-    const addresses = Array.isArray(plan.addresses) ? plan.addresses : [];
-
-    for (let addressIndex = 0; addressIndex < addresses.length; addressIndex += 1) {
+  for (let planIndex = 0; planIndex < plans.length; planIndex++) {
+    const plan = plans[planIndex];
+    const addresses = Array.isArray(plan.addresses)
+      ? plan.addresses
+      : [];
+    for (
+      let addressIndex = 0;
+      addressIndex < addresses.length;
+      addressIndex++
+    ) {
       const address = addresses[addressIndex];
-      const locationResource = mappers.location(provider, address, addressIndex, organizationResource.id);
-      console.log("locationResource",locationResource);
+
+      // Location
+      const locationResource = mappers.location(
+        provider,
+        address,
+        addressIndex,
+        organizationResource?.id
+      );
       await hapiService.upsertResource(locationResource);
-      stats.locations += 1;
       locationIds.push(locationResource.id);
-      console.log(`Uploading Location ${stats.locations}/${total}`);
+      stats.locations++;
+      console.log(
+        `Uploading Location ${stats.locations}/${total}`
+      );
 
-      const healthcareServiceResource = mappers.healthcareService(provider, plan, addressIndex);
-      await hapiService.upsertResource(healthcareServiceResource);
-      stats.locations += 0;
-      healthcareServiceIds.push(healthcareServiceResource.id);
-      console.log(`Uploading HealthcareService ${healthcareServiceIds.length}/${total}`);
+      // HealthcareService
+      const healthcareServiceResource =
+        mappers.healthcareService(
+          provider,
+          plan,
+          addressIndex
+        );
 
-      const endpointResource = mappers.endpoint(provider, address, addressIndex);
-      await hapiService.upsertResource(endpointResource);
+      await hapiService.upsertResource(
+        healthcareServiceResource
+      );
+      healthcareServiceIds.push(
+        healthcareServiceResource.id
+      );
+      stats.healthcareServices++;
+      console.log(
+        `Uploading HealthcareService ${stats.healthcareServices}/${total}`
+      );
+
+      // Endpoint
+      const endpointResource =
+        mappers.endpoint(
+          provider,
+          address,
+          addressIndex
+        );
+
+      await hapiService.upsertResource(
+        endpointResource
+      );
       endpointIds.push(endpointResource.id);
-      console.log(`Uploading Endpoint ${endpointIds.length}/${total}`);
+      stats.endpoints++;
+      console.log(
+        `Uploading Endpoint ${stats.endpoints}/${total}`
+      );
     }
 
-    const insurancePlanResource = mappers.insurancePlan(provider, plan, index);
-    await hapiService.upsertResource(insurancePlanResource);
-    stats.insurancePlans += 1;
-    console.log(`Uploading InsurancePlan ${stats.insurancePlans}/${total}`);
+    // InsurancePlan
+    const insurancePlanResource =
+      mappers.insurancePlan(
+        provider,
+        plan,
+        planIndex
+      );
+
+    await hapiService.upsertResource(
+      insurancePlanResource
+    );
+    stats.insurancePlans++;
+    console.log(
+      `Uploading InsurancePlan ${stats.insurancePlans}/${total}`
+    );
   }
 
-  const practitionerRoleResource = mappers.practitionerRole(
-    provider,
-    practitionerResource.id,
-    organizationResource.id,
-    locationIds,
-    healthcareServiceIds,
-    endpointIds
+  // PractitionerRole only for Individual Providers
+  if (!isFacility) {
+    const practitionerRoleResource =
+      mappers.practitionerRole(
+        provider,
+        practitionerResource.id,
+        organizationResource?.id,
+        locationIds,
+        healthcareServiceIds,
+        endpointIds
+      );
+
+    await hapiService.upsertResource(
+      practitionerRoleResource
+    );
+    stats.practitionerRoles++;
+    console.log(
+      `Uploading PractitionerRole ${stats.practitionerRoles}/${total}`
+    );
+  }
+  console.log(
+    `Completed ${provider.type} ${provider.npi}`
   );
-  await hapiService.upsertResource(practitionerRoleResource);
-  console.log(`Completed provider ${provider?.npi || provider?._id}`);
 };
 
 module.exports = {

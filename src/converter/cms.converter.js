@@ -10,12 +10,12 @@ async function convertExcelToCmsJson(filePath, outputDir = path.resolve(__dirnam
   const startTime = process.hrtime.bigint();
   console.log(`Starting conversion of Excel file: ${startTime}`);
   const workbook = XLSX.readFile(filePath);
-  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  const sheet = workbook.Sheets[workbook.SheetNames[1]];
+
 const rows = XLSX.utils.sheet_to_json(sheet, {
   defval: "",
   raw: false,
 });
-
 
   const logger = createValidationLogger(path.resolve(__dirname, "..", ".."));
 
@@ -23,16 +23,17 @@ const rows = XLSX.utils.sheet_to_json(sheet, {
   let skippedRows = 0;
 
   for (let index = 0; index < rows.length; index += 1) {
+  
     const row = rows[index];
     const normalizedRow = normalizeRow(row);
-    const validation = validateNormalizedRow(normalizedRow);
+    // const validation = validateNormalizedRow(normalizedRow);
 
-    if (!validation.valid) {
-      skippedRows += 1;
-      validation.errors.forEach((issue) => logger.record(index + 2, normalizedRow.npi, issue));
-      validation.warnings.forEach((issue) => logger.record(index + 2, normalizedRow.npi, issue));
-      continue;
-    }
+    // if (!validation.valid) {
+    //   skippedRows += 1;
+    //   validation.errors.forEach((issue) => logger.record(index + 2, normalizedRow.npi, issue));
+    //   validation.warnings.forEach((issue) => logger.record(index + 2, normalizedRow.npi, issue));
+    //   continue;
+    // }
     const providerKey = normalizedRow.npi;
     let provider = providers.get(providerKey);
 

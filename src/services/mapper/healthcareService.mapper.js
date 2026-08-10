@@ -1,7 +1,7 @@
 const { sanitizeId } = require("../../utils/fhir.utils");
 
 const mapHealthcareService = (provider, plan, index) => {
-  const serviceId = `service-${provide.npi}`;
+  const serviceId = `service-${provider.npi}`;
 
   return {
     resourceType: "HealthcareService",

@@ -65,9 +65,9 @@ function validateNormalizedRow(row = {}) {
   //   errors.push(createIssue("zip", "ZIP must be five digits", row.zip));
   // }
 
-  // if (!row.phone || !PHONE_PATTERN.test(String(row.phone))) {
-  //   errors.push(createIssue("phone", "Phone must be ten digits", row.phone));
-  // }
+  if (!row.phone || !PHONE_PATTERN.test(String(row.phone))) {
+    errors.push(createIssue("phone", "Phone must be ten digits", row.phone));
+  }
 
  
 

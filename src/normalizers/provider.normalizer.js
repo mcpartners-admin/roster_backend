@@ -81,34 +81,30 @@ function pickValue(row, headers) {
 
 function normalizeRow(row = {}) {
   const normalized = {
-    npi: normalizeString(pickValue(row, ["Provider NPI (Type1)"])),
-    type: normalizeType(pickValue(row, ["Provider/Org Type (PCP,SPC,FAC)"])),
-    prefix: normalizeString(pickValue(row, ["Degree"])),
-    firstName: normalizeString(pickValue(row, ["Provider First Name"])),
-    middleName: normalizeString(pickValue(row, ["Provider Middle Initial"])),
-    lastName: normalizeString(pickValue(row, ["Provider Last Name"])),
+    npi: normalizeString(pickValue(row, ["npi (required)"])),
+    type: normalizeType(pickValue(row, ["type (required)"])),
+    prefix: normalizeString(pickValue(row, ["prefix"])),
+    firstName: normalizeString(pickValue(row, ["ﬁrst name (required)"])),
+    middleName: normalizeString(pickValue(row, ["middle name"])),
+    lastName: normalizeString(pickValue(row, ["last name (required)"])),
     suffix: normalizeString(pickValue(row, ["Suffix"])),
-    sex: normalizeSex(pickValue(row, ["Gender"])),
+    sex: normalizeSex(pickValue(row, ["gender"])),
     lastUpdatedOn: normalizeString(pickValue(row, ["Last Updated On"])),
     languages: [
-      normalizeString(pickValue(row, ["Language1"])),
-      normalizeString(pickValue(row, ["Language2"])),
-      normalizeString(pickValue(row, ["Language3"]))
+      normalizeString(pickValue(row, ["languages (required)"])),
     ].filter((item) => item !== undefined && item !== null && item !== ""),
-    accepting: normalizeAccepting(pickValue(row, ["Panel Status (Accepting)"])),
+    accepting: normalizeAccepting(pickValue(row, ["accepting"])),
     specialty: [
-      normalizeSpecialty(pickValue(row, ["HSD Code SPC1"])),
-      normalizeSpecialty(pickValue(row, ["HSD Code SPC2"])),
-      normalizeSpecialty(pickValue(row, ["HSD Code SPC3"]))
+      normalizeSpecialty(pickValue(row, ["Primary Specialty code (required)"]))
     ].filter((item) => item !== undefined && item !== null && item !== ""),
     network: normalizeString(pickValue(row, ["networkId"])),
-    year: normalizeYear(pickValue(row, ["Contract year (Required)"])),
-    address: normalizeString(pickValue(row, ["Office Address"])),
-    address2: normalizeString(pickValue(row, ["Office Address Line 2"])),
-    city: normalizeString(pickValue(row, ["Office Address City"])),
-    state: normalizeState(pickValue(row, ["Office Address State"])),
-    zip: normalizeZip(pickValue(row, ["Office Address Zip"])),
-    phone: normalizePhone(pickValue(row, ["Office Address Telephone"])),
+    year: normalizeYear(pickValue(row, [" contract year (required)"])),
+    address: normalizeString(pickValue(row, ["address (required)"])),
+    address2: normalizeString(pickValue(row, ["address2"])),
+    city: normalizeString(pickValue(row, ["city (required)"])),
+    state: normalizeState(pickValue(row, ["state (required)"])),
+    zip: normalizeZip(pickValue(row, ["zip (required)"])),
+    phone: normalizePhone(pickValue(row, ["phone (required)"])),
   };
 
   if (!normalized.year.length) {

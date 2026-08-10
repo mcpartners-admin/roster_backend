@@ -12,6 +12,7 @@ const mapPractitioner = (provider) => {
     active: true,
     name: humanName ? [humanName] : [],
     telecom: buildTelecom(null, null),
+    gender: provider.sex?.toLowerCase(),
     communication: (provider?.languages || [])
       .filter(Boolean)
       .map((language) => ({ language: { text: language } })),
