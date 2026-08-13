@@ -4,6 +4,7 @@ const {
   getProvidersByRoster,
   uploadProvidersFromExcel,
   uploadSeedFromJson,
+  uploadFacilitiesFromExcel
 } = require("../controller/provider.controller");
 const upload = multer({ dest: "src/uploads/" });
 const router = express.Router();
@@ -63,6 +64,46 @@ router.post(
   "/providers/upload",
   upload.single("file"),
   uploadProvidersFromExcel
+);
+
+/**
+ * @swagger
+ * /api/providers/upload-facility:
+ *   post:
+ *     summary: Upload an Excel file and convert it to a JSON output file for facility
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       200:
+ *         description: Excel file converted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
+ *                 outputFile:
+ *                   type: string
+ *       400:
+ *         description: Missing Excel file
+ *       500:
+ *         description: Server error while processing the Excel file
+ */
+router.post(
+  "/providers/upload-facility",
+  upload.single("file"),
+  uploadFacilitiesFromExcel
 );
 
 /**

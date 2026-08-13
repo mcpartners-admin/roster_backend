@@ -1,25 +1,75 @@
-const { buildAddress, buildTelecom, sanitizeId } = require("../../utils/fhir.utils");
+const {
+  buildAddress,
+  buildTelecom,
+  sanitizeId,
+} = require("../../utils/fhir.utils");
 
-const mapLocation = (provider, address, index, organizationId) => {
-  const locationId =  `location-${provider.npi}-${index + 1}`;;
+const mapLocation = (
+  provider,
+  address,
+  index,
+  organizationId = null
+) => {
+  const npi = String(provider?.npi || "").trim();
 
-  return {
+  if (!npi) {
+    throw new Error("Cannot create Location: NPI is missing");
+  }
+
+  const locationIndex = Number(index) + 1;
+
+  const locationId = sanitizeId(
+    `location-${npi}-${locationIndex}`
+  );
+
+  const providerName =
+    `${provider?.name?.first || ""} ${provider?.name?.last || ""}`
+      .trim();
+
+  const locationName =
+    provider?.facilityName ||
+    providerName ||
+    `Provider Location ${locationIndex}`;
+
+  const resource = {
     resourceType: "Location",
+
     id: locationId,
+
     identifier: [
       {
         system: "urn:provider-directory:location",
-        value: `${provider.npi}-${index + 1}`,
+        value: `${npi}-${locationIndex}`,
       },
     ],
+
     status: "active",
-    name: provider?.facilityName || `${provider?.name?.first || ""} ${provider?.name?.last || ""}`.trim() || "Provider Location",
+
+    name: locationName,
+
     mode: "instance",
-    type: [{ text: provider?.type || "Provider" }],
-    telecom: buildTelecom(address?.phone || null, null),
+
+    type: [
+      {
+        text: provider?.type || "Provider",
+      },
+    ],
+
     address: buildAddress(address),
-    managingOrganization: organizationId ? { reference: `Organization/${organizationId}` } : undefined,
+
+    telecom: buildTelecom(
+      address?.phone || null,
+      null
+    ),
   };
+
+  if (organizationId) {
+    resource.managingOrganization = {
+      reference: `Organization/${organizationId}`,
+    };
+  }
+
+  return resource;
 };
 
 module.exports = mapLocation;

@@ -42,6 +42,30 @@ const uploadProvidersFromExcel = async (req, res) => {
     });
   }
 };
+const uploadFacilitiesFromExcel = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Excel file is required",
+      });
+    }
+ console.log("Received file:", req.file.originalname, "at", req.file.path);
+    const outputFile = await providerService.convertFacilityExcelToJson(req.file.path);
+
+    return res.status(200).json({
+      success: true,
+      message: "Excel file converted successfully",
+      outputFile,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to process Excel file",
+    });
+  }
+};
+
 
 const uploadSeedFromJson = async (req, res) => {
   try {
@@ -83,4 +107,5 @@ module.exports = {
   getProvidersByRoster,
   uploadProvidersFromExcel,
   uploadSeedFromJson,
+  uploadFacilitiesFromExcel
 };

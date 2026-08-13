@@ -65,7 +65,7 @@ const buildAddress = (address) => {
     city: address.city || "",
     state: address.state || "",
     postalCode: address.zip || "",
-    country: "US",
+    country: "USA",
   };
 };
 

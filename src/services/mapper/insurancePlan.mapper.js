@@ -1,20 +1,53 @@
-const { buildIdentifier, sanitizeId } = require("../../utils/fhir.utils");
+const {
+  buildIdentifier,
+  sanitizeId,
+} = require("../../utils/fhir.utils");
 
-const mapInsurancePlan = (provider, plan, index) => {
-  const planId = `plan-${plan.maPlanId || `plan-${index + 1}`}`;
-console.log("planId",planId)
-  return {
+const mapInsurancePlan = (
+  provider,
+  plan,
+  index
+) => {
+  const maPlanId = String(
+    plan?.maPlanId || ""
+  ).trim();
+
+  if (!maPlanId) {
+    throw new Error(
+      `Cannot create InsurancePlan: MA Plan ID missing for NPI ${provider?.npi}`
+    );
+  }
+
+  const planId = sanitizeId(
+    `plan-${maPlanId}`
+  );
+
+  const resource = {
     resourceType: "InsurancePlan",
+
     id: planId,
+
     identifier: [
-      ...buildIdentifier("urn:provider-directory:plan-id", plan?.maPlanId),
-      ...buildIdentifier("urn:provider-directory:plan-network", (plan?.networkId || [])[0]),
+      ...buildIdentifier(
+        "urn:provider-directory:plan-id",
+        maPlanId
+      ),
     ],
-    name: plan?.maPlanId || `Plan ${index + 1}`,
+
+    name: maPlanId,
+
     status: "active",
-    type: [{ text: plan?.maPlanId || "Plan" }],
-    alias: [plan?.maPlanId || "Plan"].filter(Boolean),
+
+    type: [
+      {
+        text: "Medicare Advantage",
+      },
+    ],
+
+    alias: [maPlanId],
   };
+
+  return resource;
 };
 
 module.exports = mapInsurancePlan;

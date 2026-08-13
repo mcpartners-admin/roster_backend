@@ -1,21 +1,65 @@
-const { buildIdentifier, buildAddress, sanitizeId } = require("../../utils/fhir.utils");
+const {
+  buildIdentifier,
+  buildAddress,
+  sanitizeId,
+} = require("../../utils/fhir.utils");
 
 const mapOrganization = (provider, address) => {
-  const facilityName = provider?.facilityName || "Provider Organization";
-  const organizationId = `organization-${provider.npi}`;
+  const npi = String(provider?.npi || "").trim();
 
-  return {
+  if (!npi) {
+    throw new Error("Cannot create Organization: NPI is missing");
+  }
+
+  const organizationId = sanitizeId(
+    `organization-${npi}`
+  );
+
+  const facilityName =
+    provider?.facilityName ||
+    `${provider?.name?.first || ""} ${provider?.name?.last || ""}`
+      .trim() ||
+    `Provider Organization ${npi}`;
+
+  const resource = {
     resourceType: "Organization",
+
     id: organizationId,
-    identifier: [
-      ...buildIdentifier("urn:provider-directory:provider", provider?.npi),
-      ...buildIdentifier("urn:provider-directory:organization-name", facilityName),
-    ],
+
     active: true,
-    type: [{ text: provider?.type || "Provider" }],
+
+    identifier: [
+      ...buildIdentifier(
+        "urn:provider-directory:provider",
+        npi
+      ),
+
+      ...buildIdentifier(
+        "urn:provider-directory:organization-name",
+        facilityName
+      ),
+    ],
+
+    type: [
+      {
+        text: provider?.type || "Provider",
+      },
+    ],
+
     name: facilityName,
-    address: buildAddress(address) ? [buildAddress(address)] : [],
+
+    address: [],
   };
+
+  if (address) {
+    const builtAddress = buildAddress(address);
+
+    if (builtAddress) {
+      resource.address.push(builtAddress);
+    }
+  }
+
+  return resource;
 };
 
 module.exports = mapOrganization;

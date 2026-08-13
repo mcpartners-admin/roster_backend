@@ -1,0 +1,4643 @@
+[
+  {
+    "npi": "1275813610",
+    "type": "Facility",
+    "facilityName": "Encompass Health Rehabilitation Hospital of Cypress",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "13031 Wortham Center Dr.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "8322802500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "13031 Wortham Center Dr.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "8322802500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "13031 Wortham Center Dr.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "8322802500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1376829812",
+    "type": "Facility",
+    "facilityName": "Encompass Health Rehabilitation Hospital The Vintage",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "20180 Chasewood Park Dr.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77070",
+            "phone": "2812055100"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "20180 Chasewood Park Dr.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77070",
+            "phone": "2812055100"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "20180 Chasewood Park Dr.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77070",
+            "phone": "2812055100"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1417795188",
+    "type": "Facility",
+    "facilityName": "Encompass Health Rehabilitation Hospital of Houston at The Medical Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "3010 Yellowstone Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77054",
+            "phone": "8323807200"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "3010 Yellowstone Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77054",
+            "phone": "8323807200"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "3010 Yellowstone Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77054",
+            "phone": "8323807200"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1366871600",
+    "type": "Facility",
+    "facilityName": "Encompass Health Rehabilitation Hospital of Humble",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "19002 McKay Drive",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2814466148"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "19002 McKay Drive",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2814466148"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "19002 McKay Drive",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2814466148"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1881252203",
+    "type": "Facility",
+    "facilityName": "Encompass Health Rehabilitation Hospital of Katy",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "23331 Grand Reserve Dr.",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77494",
+            "phone": "2815053500"
+          },
+          {
+            "address": "2121 Business Center Dr.",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3469073000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "23331 Grand Reserve Dr.",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77494",
+            "phone": "2815053500"
+          },
+          {
+            "address": "2121 Business Center Dr.",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3469073000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "23331 Grand Reserve Dr.",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77494",
+            "phone": "2815053500"
+          },
+          {
+            "address": "2121 Business Center Dr.",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3469073000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1144756578",
+    "type": "Facility",
+    "facilityName": "Encompass Health Rehabilitation Hospital of Pearland",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049"
+        ],
+        "addresses": [
+          {
+            "address": "2121 Business Center Dr.",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3469073000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049"
+        ],
+        "addresses": [
+          {
+            "address": "2121 Business Center Dr.",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3469073000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049"
+        ],
+        "addresses": [
+          {
+            "address": "2121 Business Center Dr.",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3469073000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1922180264",
+    "type": "Facility",
+    "facilityName": "Gaspy Home Healthcare",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "055"
+        ],
+        "addresses": [
+          {
+            "address": "1919 North Loop West, Suite 400",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "7137420615"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "055"
+        ],
+        "addresses": [
+          {
+            "address": "1919 North Loop West, Suite 400",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "7137420615"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "055"
+        ],
+        "addresses": [
+          {
+            "address": "1919 North Loop West, Suite 400",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "7137420615"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1043878762",
+    "type": "Facility",
+    "facilityName": "Gaspy Infusion Services",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "11104 W Airport Blvd, Ste 223",
+            "address2": "",
+            "city": "Stafford",
+            "state": "TX",
+            "zip": "77477",
+            "phone": "8327911002"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "11104 W Airport Blvd, Ste 223",
+            "address2": "",
+            "city": "Stafford",
+            "state": "TX",
+            "zip": "77477",
+            "phone": "8327911002"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "11104 W Airport Blvd, Ste 223",
+            "address2": "",
+            "city": "Stafford",
+            "state": "TX",
+            "zip": "77477",
+            "phone": "8327911002"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1942379912",
+    "type": "Facility",
+    "facilityName": "Kindred Hospital Houston Medical Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "045",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "6441 Main Street",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "8327911002"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "045",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "6441 Main Street",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "8327911002"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "045",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "6441 Main Street",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "8327911002"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1528691755",
+    "type": "Facility",
+    "facilityName": "Kindred Hospital Houston Medical Center Acute Rehab Unit",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "6441 Main Street",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137900500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "6441 Main Street",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137900500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "6441 Main Street",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137900500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1043389034",
+    "type": "Facility",
+    "facilityName": "Kindred Hospital - Houston Northwest",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "045",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11297 Fallbrook Drive",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "7137900500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "045",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11297 Fallbrook Drive",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "7137900500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "045",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11297 Fallbrook Drive",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "7137900500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1952054603",
+    "type": "Facility",
+    "facilityName": "Kindred Hospital - Houston Northwest Acute Rehab Unit",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "11297 Fallbrook Drive",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2815171000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "11297 Fallbrook Drive",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2815171000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "11297 Fallbrook Drive",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2815171000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1720088412",
+    "type": "Facility",
+    "facilityName": "Kindred Hospital Sugar Land",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1550 First Colony Blvd.",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "3464246900"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1550 First Colony Blvd.",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "3464246900"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1550 First Colony Blvd.",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "3464246900"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1881227015",
+    "type": "Facility",
+    "facilityName": "Kindred Hospital Sugar Land Acute Rehab Unit",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "1550 First Colony Blvd.",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "2812756000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "1550 First Colony Blvd.",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "2812756000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "1550 First Colony Blvd.",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "2812756000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1073901476",
+    "type": "Facility",
+    "facilityName": "Cornerstone Specialty Hospitals Conroe",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "049",
+          "050",
+          "051",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1500 Grand Lake Drive",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77304",
+            "phone": "2812756000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "049",
+          "050",
+          "051",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1500 Grand Lake Drive",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77304",
+            "phone": "2812756000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "043",
+          "049",
+          "050",
+          "051",
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1500 Grand Lake Drive",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77304",
+            "phone": "2812756000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "14577139768",
+    "type": "Facility",
+    "facilityName": "Optimistic Healthcare Solutions",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "14520 Memorial Dr. Ste 22",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "8006744440"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "14520 Memorial Dr. Ste 22",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "8006744440"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "14520 Memorial Dr. Ste 22",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "8006744440"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1114975836",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic Inc",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "17320 Red Oak Dr Ste 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77090",
+            "phone": "8324939300"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "17320 Red Oak Dr Ste 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77090",
+            "phone": "8324939300"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "17320 Red Oak Dr Ste 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77090",
+            "phone": "8324939300"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1356447395",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic II",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "7727 Fannin Ste 102",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137959200"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "7727 Fannin Ste 102",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137959200"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "7727 Fannin Ste 102",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137959200"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1083851471",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic III",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11770 FM 1960 RD",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "7134617272"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11770 FM 1960 RD",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "7134617272"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11770 FM 1960 RD",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "7134617272"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1902801343",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic IV",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "2051 Greenhouse Rd Ste 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77084",
+            "phone": "2814922400"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "2051 Greenhouse Rd Ste 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77084",
+            "phone": "2814922400"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "2051 Greenhouse Rd Ste 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77084",
+            "phone": "2814922400"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1154645786",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic VII",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "6921 Brisbane Ct Ste 110",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "2813131145"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "6921 Brisbane Ct Ste 110",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "2813131145"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "6921 Brisbane Ct Ste 110",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77479",
+            "phone": "2813131145"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1508153818",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic VIII",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "2401 FM 646 Rd W Ste B",
+            "address2": "",
+            "city": "Dickinson",
+            "state": "TX",
+            "zip": "77539",
+            "phone": "2815343700"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "2401 FM 646 Rd W Ste B",
+            "address2": "",
+            "city": "Dickinson",
+            "state": "TX",
+            "zip": "77539",
+            "phone": "2815343700"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "2401 FM 646 Rd W Ste B",
+            "address2": "",
+            "city": "Dickinson",
+            "state": "TX",
+            "zip": "77539",
+            "phone": "2815343700"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1942570981",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic IX",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11221 Katy Fwy Ste 102",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "7134612000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11221 Katy Fwy Ste 102",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "7134612000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "11221 Katy Fwy Ste 102",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "7134612000"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1629319660",
+    "type": "Facility",
+    "facilityName": "One Step Diagnostic XI",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "3117 College Park Dr",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77384",
+            "phone": "9362717800"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "3117 College Park Dr",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77384",
+            "phone": "9362717800"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "3117 College Park Dr",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77384",
+            "phone": "9362717800"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1326104613",
+    "type": "Facility",
+    "facilityName": "Quest Dianostic Clinical Laboratories",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "27700 Nw Freeway  Ste 160",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77521",
+            "phone": "3462330023"
+          },
+          {
+            "address": "12344 Barker Cypress Rd  Ste 170",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77401",
+            "phone": "7137247106"
+          },
+          {
+            "address": "7538 Cypress Creek Pkwy",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77433",
+            "phone": "3463791611"
+          },
+          {
+            "address": "8610 Martin Luther King Blvd  Suite B",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77429",
+            "phone": "2817466407"
+          },
+          {
+            "address": "17070 Red Oak Dr  Suite 106",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77070",
+            "phone": "2814691726"
+          },
+          {
+            "address": "930 Fm 1960 Rd E  Ste B",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77033",
+            "phone": "7138161940"
+          },
+          {
+            "address": "1200 Binz St  Ste 115",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77090",
+            "phone": "2818932578"
+          },
+          {
+            "address": "11811 Fm 1960 Rd W  Suite 155",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77073",
+            "phone": "2815831881"
+          },
+          {
+            "address": "1140 Westmont Dr  Suite 510",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "7135278058"
+          },
+          {
+            "address": "7400 Fannin Street  Suite 180",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2819704883"
+          },
+          {
+            "address": "18322 Clay Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77015",
+            "phone": "7134550406"
+          },
+          {
+            "address": "12385 Kingsride Avenue",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77054",
+            "phone": "7137911684"
+          },
+          {
+            "address": "6410 Fannin Street  Suite 220",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77084",
+            "phone": "8325446506"
+          },
+          {
+            "address": "7777 Southwest Fwy  Ste 640",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7139732746"
+          },
+          {
+            "address": "11454 Space Center Blvd  Ste A",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137919101"
+          },
+          {
+            "address": "915 Gessner Rd  Ste 480",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7139861467"
+          },
+          {
+            "address": "3131 W Holcombe Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77059",
+            "phone": "2814872531"
+          },
+          {
+            "address": "11914 Astoria Blvd  Ste 110",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7138053714"
+          },
+          {
+            "address": "7737 Southwest Fwy  Ste 940",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77025",
+            "phone": "7136677772"
+          },
+          {
+            "address": "1631 North Loop W  Ste 170",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77089",
+            "phone": "2817408755"
+          },
+          {
+            "address": "1431 Studemont St",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7132057685"
+          },
+          {
+            "address": "925 Gessner Rd  Ste 490",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "2817405945"
+          },
+          {
+            "address": "10837 Katy Fwy  Suite 150",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77007",
+            "phone": "2817407989"
+          },
+          {
+            "address": "10680 Jones Road  Suite 200",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7138166482"
+          },
+          {
+            "address": "8200 Wednesbury Lane  Suite 450",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "7134615914"
+          },
+          {
+            "address": "12121 Richmond Ave  Suite 124",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2818949214"
+          },
+          {
+            "address": "1919 North Loop W  Suite 125",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7132713820"
+          },
+          {
+            "address": "18955 N Memorial Dr  Ste 320",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77082",
+            "phone": "2817526171"
+          },
+          {
+            "address": "8901 Fm Road 1960  Suite 203",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "7138619642"
+          },
+          {
+            "address": "21386 Provincial Blvd",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2817432323"
+          },
+          {
+            "address": "23920 Katy Freeway  Ste 465",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2814460206"
+          },
+          {
+            "address": "23824 Hwy 59 North  Suite 23816",
+            "address2": "",
+            "city": "Kingwood",
+            "state": "TX",
+            "zip": "77450",
+            "phone": "2815999603"
+          },
+          {
+            "address": "4904 Fairmont Pkwy  Building 1",
+            "address2": "",
+            "city": "Pasadena",
+            "state": "TX",
+            "zip": "77345",
+            "phone": "3462876506"
+          },
+          {
+            "address": "10907 Memorial  Hermann Dr  Ste 120",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77339",
+            "phone": "2813587033"
+          },
+          {
+            "address": "13406 Medical Complex Dr  Suite 170",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77505",
+            "phone": "2819911277"
+          },
+          {
+            "address": "106 W. Bay Area Blvd  Suite A",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3468331704"
+          },
+          {
+            "address": "600 N Kobayashi  Ste 109",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "2813511668"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "27700 Nw Freeway  Ste 160",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77521",
+            "phone": "3462330023"
+          },
+          {
+            "address": "12344 Barker Cypress Rd  Ste 170",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77401",
+            "phone": "7137247106"
+          },
+          {
+            "address": "7538 Cypress Creek Pkwy",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77433",
+            "phone": "3463791611"
+          },
+          {
+            "address": "8610 Martin Luther King Blvd  Suite B",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77429",
+            "phone": "2817466407"
+          },
+          {
+            "address": "17070 Red Oak Dr  Suite 106",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77070",
+            "phone": "2814691726"
+          },
+          {
+            "address": "930 Fm 1960 Rd E  Ste B",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77033",
+            "phone": "7138161940"
+          },
+          {
+            "address": "1200 Binz St  Ste 115",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77090",
+            "phone": "2818932578"
+          },
+          {
+            "address": "11811 Fm 1960 Rd W  Suite 155",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77073",
+            "phone": "2815831881"
+          },
+          {
+            "address": "1140 Westmont Dr  Suite 510",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "7135278058"
+          },
+          {
+            "address": "7400 Fannin Street  Suite 180",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2819704883"
+          },
+          {
+            "address": "18322 Clay Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77015",
+            "phone": "7134550406"
+          },
+          {
+            "address": "12385 Kingsride Avenue",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77054",
+            "phone": "7137911684"
+          },
+          {
+            "address": "6410 Fannin Street  Suite 220",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77084",
+            "phone": "8325446506"
+          },
+          {
+            "address": "7777 Southwest Fwy  Ste 640",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7139732746"
+          },
+          {
+            "address": "11454 Space Center Blvd  Ste A",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137919101"
+          },
+          {
+            "address": "915 Gessner Rd  Ste 480",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7139861467"
+          },
+          {
+            "address": "3131 W Holcombe Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77059",
+            "phone": "2814872531"
+          },
+          {
+            "address": "11914 Astoria Blvd  Ste 110",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7138053714"
+          },
+          {
+            "address": "7737 Southwest Fwy  Ste 940",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77025",
+            "phone": "7136677772"
+          },
+          {
+            "address": "1631 North Loop W  Ste 170",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77089",
+            "phone": "2817408755"
+          },
+          {
+            "address": "1431 Studemont St",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7132057685"
+          },
+          {
+            "address": "925 Gessner Rd  Ste 490",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "2817405945"
+          },
+          {
+            "address": "10837 Katy Fwy  Suite 150",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77007",
+            "phone": "2817407989"
+          },
+          {
+            "address": "10680 Jones Road  Suite 200",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7138166482"
+          },
+          {
+            "address": "8200 Wednesbury Lane  Suite 450",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "7134615914"
+          },
+          {
+            "address": "12121 Richmond Ave  Suite 124",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2818949214"
+          },
+          {
+            "address": "1919 North Loop W  Suite 125",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7132713820"
+          },
+          {
+            "address": "18955 N Memorial Dr  Ste 320",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77082",
+            "phone": "2817526171"
+          },
+          {
+            "address": "8901 Fm Road 1960  Suite 203",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "7138619642"
+          },
+          {
+            "address": "21386 Provincial Blvd",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2817432323"
+          },
+          {
+            "address": "23920 Katy Freeway  Ste 465",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2814460206"
+          },
+          {
+            "address": "23824 Hwy 59 North  Suite 23816",
+            "address2": "",
+            "city": "Kingwood",
+            "state": "TX",
+            "zip": "77450",
+            "phone": "2815999603"
+          },
+          {
+            "address": "4904 Fairmont Pkwy  Building 1",
+            "address2": "",
+            "city": "Pasadena",
+            "state": "TX",
+            "zip": "77345",
+            "phone": "3462876506"
+          },
+          {
+            "address": "10907 Memorial  Hermann Dr  Ste 120",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77339",
+            "phone": "2813587033"
+          },
+          {
+            "address": "13406 Medical Complex Dr  Suite 170",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77505",
+            "phone": "2819911277"
+          },
+          {
+            "address": "106 W. Bay Area Blvd  Suite A",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3468331704"
+          },
+          {
+            "address": "600 N Kobayashi  Ste 109",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "2813511668"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "27700 Nw Freeway  Ste 160",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77521",
+            "phone": "3462330023"
+          },
+          {
+            "address": "12344 Barker Cypress Rd  Ste 170",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77401",
+            "phone": "7137247106"
+          },
+          {
+            "address": "7538 Cypress Creek Pkwy",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77433",
+            "phone": "3463791611"
+          },
+          {
+            "address": "8610 Martin Luther King Blvd  Suite B",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77429",
+            "phone": "2817466407"
+          },
+          {
+            "address": "17070 Red Oak Dr  Suite 106",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77070",
+            "phone": "2814691726"
+          },
+          {
+            "address": "930 Fm 1960 Rd E  Ste B",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77033",
+            "phone": "7138161940"
+          },
+          {
+            "address": "1200 Binz St  Ste 115",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77090",
+            "phone": "2818932578"
+          },
+          {
+            "address": "11811 Fm 1960 Rd W  Suite 155",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77073",
+            "phone": "2815831881"
+          },
+          {
+            "address": "1140 Westmont Dr  Suite 510",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "7135278058"
+          },
+          {
+            "address": "7400 Fannin Street  Suite 180",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2819704883"
+          },
+          {
+            "address": "18322 Clay Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77015",
+            "phone": "7134550406"
+          },
+          {
+            "address": "12385 Kingsride Avenue",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77054",
+            "phone": "7137911684"
+          },
+          {
+            "address": "6410 Fannin Street  Suite 220",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77084",
+            "phone": "8325446506"
+          },
+          {
+            "address": "7777 Southwest Fwy  Ste 640",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7139732746"
+          },
+          {
+            "address": "11454 Space Center Blvd  Ste A",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "7137919101"
+          },
+          {
+            "address": "915 Gessner Rd  Ste 480",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7139861467"
+          },
+          {
+            "address": "3131 W Holcombe Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77059",
+            "phone": "2814872531"
+          },
+          {
+            "address": "11914 Astoria Blvd  Ste 110",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7138053714"
+          },
+          {
+            "address": "7737 Southwest Fwy  Ste 940",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77025",
+            "phone": "7136677772"
+          },
+          {
+            "address": "1631 North Loop W  Ste 170",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77089",
+            "phone": "2817408755"
+          },
+          {
+            "address": "1431 Studemont St",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7132057685"
+          },
+          {
+            "address": "925 Gessner Rd  Ste 490",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "2817405945"
+          },
+          {
+            "address": "10837 Katy Fwy  Suite 150",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77007",
+            "phone": "2817407989"
+          },
+          {
+            "address": "10680 Jones Road  Suite 200",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77024",
+            "phone": "7138166482"
+          },
+          {
+            "address": "8200 Wednesbury Lane  Suite 450",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77079",
+            "phone": "7134615914"
+          },
+          {
+            "address": "12121 Richmond Ave  Suite 124",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "2818949214"
+          },
+          {
+            "address": "1919 North Loop W  Suite 125",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "7132713820"
+          },
+          {
+            "address": "18955 N Memorial Dr  Ste 320",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77082",
+            "phone": "2817526171"
+          },
+          {
+            "address": "8901 Fm Road 1960  Suite 203",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "7138619642"
+          },
+          {
+            "address": "21386 Provincial Blvd",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2817432323"
+          },
+          {
+            "address": "23920 Katy Freeway  Ste 465",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2814460206"
+          },
+          {
+            "address": "23824 Hwy 59 North  Suite 23816",
+            "address2": "",
+            "city": "Kingwood",
+            "state": "TX",
+            "zip": "77450",
+            "phone": "2815999603"
+          },
+          {
+            "address": "4904 Fairmont Pkwy  Building 1",
+            "address2": "",
+            "city": "Pasadena",
+            "state": "TX",
+            "zip": "77345",
+            "phone": "3462876506"
+          },
+          {
+            "address": "10907 Memorial  Hermann Dr  Ste 120",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77339",
+            "phone": "2813587033"
+          },
+          {
+            "address": "13406 Medical Complex Dr  Suite 170",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77505",
+            "phone": "2819911277"
+          },
+          {
+            "address": "106 W. Bay Area Blvd  Suite A",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77584",
+            "phone": "3468331704"
+          },
+          {
+            "address": "600 N Kobayashi  Ste 109",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "2813511668"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1952961138",
+    "type": "Facility",
+    "facilityName": "PAM Health Rehabilitation Hospital of Houston Heights",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "1917 Ashland St Fl 4",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "8324939300"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "1917 Ashland St Fl 4",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "8324939300"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "1917 Ashland St Fl 4",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "8324939300"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1861882532",
+    "type": "Facility",
+    "facilityName": "PAM Health Rehabilitation Hospital of Humble",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "18839 McKay Boulevard",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2819646600"
+          },
+          {
+            "address": "655 East Medical Center Blvd",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77598",
+            "phone": "2812861500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "18839 McKay Boulevard",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2819646600"
+          },
+          {
+            "address": "655 East Medical Center Blvd",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77598",
+            "phone": "2812861500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "049",
+          "050",
+          "051"
+        ],
+        "addresses": [
+          {
+            "address": "18839 McKay Boulevard",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "2819646600"
+          },
+          {
+            "address": "655 East Medical Center Blvd",
+            "address2": "",
+            "city": "Webster",
+            "state": "TX",
+            "zip": "77598",
+            "phone": "2812861500"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1902578750",
+    "type": "Facility",
+    "facilityName": "Magnolia Crossing Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "10800 Flora Mae Meadows Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77089",
+            "phone": "8323282351"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "10800 Flora Mae Meadows Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77089",
+            "phone": "8323282351"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "10800 Flora Mae Meadows Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77089",
+            "phone": "8323282351"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1932520020",
+    "type": "Facility",
+    "facilityName": "Wharton Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1220 Sunny Lane",
+            "address2": "",
+            "city": "Wharton",
+            "state": "TX",
+            "zip": "77488",
+            "phone": "9795328853"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1220 Sunny Lane",
+            "address2": "",
+            "city": "Wharton",
+            "state": "TX",
+            "zip": "77488",
+            "phone": "9795328853"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1220 Sunny Lane",
+            "address2": "",
+            "city": "Wharton",
+            "state": "TX",
+            "zip": "77488",
+            "phone": "9795328853"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1922260876",
+    "type": "Facility",
+    "facilityName": "Jefferson Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "3840 Pointe Pkwy",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77706",
+            "phone": "4093470965"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "3840 Pointe Pkwy",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77706",
+            "phone": "4093470965"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "3840 Pointe Pkwy",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77706",
+            "phone": "4093470965"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1396098091",
+    "type": "Facility",
+    "facilityName": "Houston Heights Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "6920 TC Jester Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77091",
+            "phone": "7136810433"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "6920 TC Jester Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77091",
+            "phone": "7136810433"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "6920 TC Jester Blvd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77091",
+            "phone": "7136810433"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1710056171",
+    "type": "Facility",
+    "facilityName": "Memorial City Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1341 Blalock Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7138279083"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1341 Blalock Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7138279083"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1341 Blalock Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7138279083"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1134191553",
+    "type": "Facility",
+    "facilityName": "Spindletop Hill Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1020 S 23rd St",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77707",
+            "phone": "4098421829"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1020 S 23rd St",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77707",
+            "phone": "4098421829"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "1020 S 23rd St",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77707",
+            "phone": "4098421829"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1973536941",
+    "type": "Facility",
+    "facilityName": "The Woodlands Nursing and Rehabilitation Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "4650 S Panther Creek Dr",
+            "address2": "",
+            "city": "The Woodlands",
+            "state": "TX",
+            "zip": "77381",
+            "phone": "2813647307"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "4650 S Panther Creek Dr",
+            "address2": "",
+            "city": "The Woodlands",
+            "state": "TX",
+            "zip": "77381",
+            "phone": "2813647307"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "046"
+        ],
+        "addresses": [
+          {
+            "address": "4650 S Panther Creek Dr",
+            "address2": "",
+            "city": "The Woodlands",
+            "state": "TX",
+            "zip": "77381",
+            "phone": "2813647307"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1194769497",
+    "type": "Facility",
+    "facilityName": "Clinical Pathology Laboratories - Med Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "6414 Fannin Street, Suite G180",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "713-527-0437"
+          },
+          {
+            "address": "1010 W Baker Rd Suite 105",
+            "address2": "",
+            "city": "Baytown",
+            "state": "TX",
+            "zip": "77521",
+            "phone": "832-514-6542"
+          },
+          {
+            "address": "3110 Calder, Suite B",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77702",
+            "phone": "409-554-8743"
+          },
+          {
+            "address": "100 Medical Center Boulevard, Suite 108",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77304",
+            "phone": "936-494-0447"
+          },
+          {
+            "address": "10425 Huffmeister Rd Suite 490",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-571-3681"
+          },
+          {
+            "address": "5711 Alameda Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "832-530-4377"
+          },
+          {
+            "address": "11720 FM 1960  W.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-477-7430"
+          },
+          {
+            "address": "1200 Binz, Suite 1360",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "713-528-6406"
+          },
+          {
+            "address": "12121 Richmond Avenue # 116",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77042",
+            "phone": "281-589-2126"
+          },
+          {
+            "address": "12924 Bellaire, Suite 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77072",
+            "phone": "832-367-2612"
+          },
+          {
+            "address": "1919 N. Loop West, Suite 170A",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "713-802-1125"
+          },
+          {
+            "address": "5355 W. Sam Houston Parkway North, Suite 350",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77041",
+            "phone": "713-795-4299"
+          },
+          {
+            "address": "7777 SW Freeway, Suite 640",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "713-986-1467"
+          },
+          {
+            "address": "18648 McKay Dr. Suite 103",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "832-412-3549"
+          },
+          {
+            "address": "10020 Research Forest Dr.,Suite B",
+            "address2": "",
+            "city": "Magnolia",
+            "state": "TX",
+            "zip": "77354",
+            "phone": "281-259-7036"
+          },
+          {
+            "address": "2802 Business Center Drive, Suite 110",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "832-230-8792"
+          },
+          {
+            "address": "21309 Foster Road, Suite 200",
+            "address2": "",
+            "city": "Spring",
+            "state": "TX",
+            "zip": "77388",
+            "phone": "832-663-5470"
+          },
+          {
+            "address": "1429 Highway 6",
+            "address2": "",
+            "city": "Sugarland",
+            "state": "TX",
+            "zip": "77478",
+            "phone": "281-242-1280"
+          },
+          {
+            "address": "425 Holderrieth, Suite 113",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "281-516-3944"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "6414 Fannin Street, Suite G180",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "713-527-0437"
+          },
+          {
+            "address": "1010 W Baker Rd Suite 105",
+            "address2": "",
+            "city": "Baytown",
+            "state": "TX",
+            "zip": "77521",
+            "phone": "832-514-6542"
+          },
+          {
+            "address": "3110 Calder, Suite B",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77702",
+            "phone": "409-554-8743"
+          },
+          {
+            "address": "100 Medical Center Boulevard, Suite 108",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77304",
+            "phone": "936-494-0447"
+          },
+          {
+            "address": "10425 Huffmeister Rd Suite 490",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-571-3681"
+          },
+          {
+            "address": "5711 Alameda Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "832-530-4377"
+          },
+          {
+            "address": "11720 FM 1960  W.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-477-7430"
+          },
+          {
+            "address": "1200 Binz, Suite 1360",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "713-528-6406"
+          },
+          {
+            "address": "12121 Richmond Avenue # 116",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77042",
+            "phone": "281-589-2126"
+          },
+          {
+            "address": "12924 Bellaire, Suite 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77072",
+            "phone": "832-367-2612"
+          },
+          {
+            "address": "1919 N. Loop West, Suite 170A",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "713-802-1125"
+          },
+          {
+            "address": "5355 W. Sam Houston Parkway North, Suite 350",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77041",
+            "phone": "713-795-4299"
+          },
+          {
+            "address": "7777 SW Freeway, Suite 640",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "713-986-1467"
+          },
+          {
+            "address": "18648 McKay Dr. Suite 103",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "832-412-3549"
+          },
+          {
+            "address": "10020 Research Forest Dr.,Suite B",
+            "address2": "",
+            "city": "Magnolia",
+            "state": "TX",
+            "zip": "77354",
+            "phone": "281-259-7036"
+          },
+          {
+            "address": "2802 Business Center Drive, Suite 110",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "832-230-8792"
+          },
+          {
+            "address": "21309 Foster Road, Suite 200",
+            "address2": "",
+            "city": "Spring",
+            "state": "TX",
+            "zip": "77388",
+            "phone": "832-663-5470"
+          },
+          {
+            "address": "1429 Highway 6",
+            "address2": "",
+            "city": "Sugarland",
+            "state": "TX",
+            "zip": "77478",
+            "phone": "281-242-1280"
+          },
+          {
+            "address": "425 Holderrieth, Suite 113",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "281-516-3944"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "N/A"
+        ],
+        "addresses": [
+          {
+            "address": "6414 Fannin Street, Suite G180",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77030",
+            "phone": "713-527-0437"
+          },
+          {
+            "address": "1010 W Baker Rd Suite 105",
+            "address2": "",
+            "city": "Baytown",
+            "state": "TX",
+            "zip": "77521",
+            "phone": "832-514-6542"
+          },
+          {
+            "address": "3110 Calder, Suite B",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77702",
+            "phone": "409-554-8743"
+          },
+          {
+            "address": "100 Medical Center Boulevard, Suite 108",
+            "address2": "",
+            "city": "Conroe",
+            "state": "TX",
+            "zip": "77304",
+            "phone": "936-494-0447"
+          },
+          {
+            "address": "10425 Huffmeister Rd Suite 490",
+            "address2": "",
+            "city": "Cypress",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-571-3681"
+          },
+          {
+            "address": "5711 Alameda Rd",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "832-530-4377"
+          },
+          {
+            "address": "11720 FM 1960  W.",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77065",
+            "phone": "281-477-7430"
+          },
+          {
+            "address": "1200 Binz, Suite 1360",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77004",
+            "phone": "713-528-6406"
+          },
+          {
+            "address": "12121 Richmond Avenue # 116",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77042",
+            "phone": "281-589-2126"
+          },
+          {
+            "address": "12924 Bellaire, Suite 100",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77072",
+            "phone": "832-367-2612"
+          },
+          {
+            "address": "1919 N. Loop West, Suite 170A",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77008",
+            "phone": "713-802-1125"
+          },
+          {
+            "address": "5355 W. Sam Houston Parkway North, Suite 350",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77041",
+            "phone": "713-795-4299"
+          },
+          {
+            "address": "7777 SW Freeway, Suite 640",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "713-986-1467"
+          },
+          {
+            "address": "18648 McKay Dr. Suite 103",
+            "address2": "",
+            "city": "Humble",
+            "state": "TX",
+            "zip": "77338",
+            "phone": "832-412-3549"
+          },
+          {
+            "address": "10020 Research Forest Dr.,Suite B",
+            "address2": "",
+            "city": "Magnolia",
+            "state": "TX",
+            "zip": "77354",
+            "phone": "281-259-7036"
+          },
+          {
+            "address": "2802 Business Center Drive, Suite 110",
+            "address2": "",
+            "city": "Pearland",
+            "state": "TX",
+            "zip": "77074",
+            "phone": "832-230-8792"
+          },
+          {
+            "address": "21309 Foster Road, Suite 200",
+            "address2": "",
+            "city": "Spring",
+            "state": "TX",
+            "zip": "77388",
+            "phone": "832-663-5470"
+          },
+          {
+            "address": "1429 Highway 6",
+            "address2": "",
+            "city": "Sugarland",
+            "state": "TX",
+            "zip": "77478",
+            "phone": "281-242-1280"
+          },
+          {
+            "address": "425 Holderrieth, Suite 113",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "281-516-3944"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1639992514",
+    "type": "Facility",
+    "facilityName": "St Joseph Medical Center",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "041",
+          "042",
+          "043",
+          "045",
+          "040",
+          "047",
+          "048"
+        ],
+        "addresses": [
+          {
+            "address": "1401 St. Joseph Pkwy",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77002",
+            "phone": "7137564060"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "041",
+          "042",
+          "043",
+          "045",
+          "040",
+          "047",
+          "048"
+        ],
+        "addresses": [
+          {
+            "address": "1401 St. Joseph Pkwy",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77002",
+            "phone": "7137564060"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "041",
+          "042",
+          "043",
+          "045",
+          "040",
+          "047",
+          "048"
+        ],
+        "addresses": [
+          {
+            "address": "1401 St. Joseph Pkwy",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77002",
+            "phone": "7137564060"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  },
+  {
+    "npi": "1912989120",
+    "type": "Facility",
+    "facilityName": "Memorial MRI & Diagnostic",
+    "facilityType": [],
+    "lastUpdatedOn": "2026-08-13",
+    "plans": [
+      {
+        "maPlanId": "H5767-001-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1241 Campbell Road",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7134613399"
+          },
+          {
+            "address": "1346 Campbell Road",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7134613399"
+          },
+          {
+            "address": "21820 Katy Freeway #100",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "7134613399"
+          },
+          {
+            "address": "1900 North Loop West #160",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77018",
+            "phone": "7134613399"
+          },
+          {
+            "address": "11211 South Texas 6 Suite B",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77498",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3980 Dowlen Road",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77706",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3400 Interstate 30 #100",
+            "address2": "",
+            "city": "Mesquite",
+            "state": "TX",
+            "zip": "75150",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1360 West Campbell Road #122",
+            "address2": "",
+            "city": "Richardson",
+            "state": "TX",
+            "zip": "75080",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1202 E. NASA Parkway",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77058",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3502 South Padre Island Drive",
+            "address2": "",
+            "city": "Corpus Christi",
+            "state": "TX",
+            "zip": "78415",
+            "phone": "7134613399"
+          },
+          {
+            "address": "6000 Spring Creek Pkwy #150",
+            "address2": "",
+            "city": "Plano",
+            "state": "TX",
+            "zip": "75024",
+            "phone": "2143418770"
+          },
+          {
+            "address": "21820 Hillcrest Plaza Drive #E100",
+            "address2": "",
+            "city": "Dallas",
+            "state": "TX",
+            "zip": "75230",
+            "phone": "2143418770"
+          },
+          {
+            "address": "2210 Paddock Way Drive",
+            "address2": "",
+            "city": "Grand Prairie",
+            "state": "TX",
+            "zip": "75050",
+            "phone": "2143418770"
+          },
+          {
+            "address": "6491 Southwest Blvd",
+            "address2": "",
+            "city": "Benbrook",
+            "state": "TX",
+            "zip": "76132",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1905 W. Ennis Ave #500",
+            "address2": "",
+            "city": "Ennis",
+            "state": "TX",
+            "zip": "75119",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1034 E Hwy 67",
+            "address2": "",
+            "city": "Duncanville",
+            "state": "TX",
+            "zip": "75137",
+            "phone": "2143418770"
+          },
+          {
+            "address": "155 School St 100",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "7134613399"
+          },
+          {
+            "address": "9990 Dallas Pkwy 100",
+            "address2": "",
+            "city": "Frisco",
+            "state": "TX",
+            "zip": "75033",
+            "phone": "2143418770"
+          },
+          {
+            "address": "122 West Castellano",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79912",
+            "phone": "9155770100"
+          },
+          {
+            "address": "7812 Gateway East",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79915",
+            "phone": "9155770101"
+          },
+          {
+            "address": "1727 Lee Trevino",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79935",
+            "phone": "9155770102"
+          },
+          {
+            "address": "3080 Joe Battle Blvd",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79938",
+            "phone": "9155770103"
+          },
+          {
+            "address": "13650 Eastlake Blvd",
+            "address2": "",
+            "city": "Horizon City",
+            "state": "TX",
+            "zip": "79928",
+            "phone": "9155770104"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-002-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1241 Campbell Road",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7134613399"
+          },
+          {
+            "address": "1346 Campbell Road",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7134613399"
+          },
+          {
+            "address": "21820 Katy Freeway #100",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "7134613399"
+          },
+          {
+            "address": "1900 North Loop West #160",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77018",
+            "phone": "7134613399"
+          },
+          {
+            "address": "11211 South Texas 6 Suite B",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77498",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3980 Dowlen Road",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77706",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3400 Interstate 30 #100",
+            "address2": "",
+            "city": "Mesquite",
+            "state": "TX",
+            "zip": "75150",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1360 West Campbell Road #122",
+            "address2": "",
+            "city": "Richardson",
+            "state": "TX",
+            "zip": "75080",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1202 E. NASA Parkway",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77058",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3502 South Padre Island Drive",
+            "address2": "",
+            "city": "Corpus Christi",
+            "state": "TX",
+            "zip": "78415",
+            "phone": "7134613399"
+          },
+          {
+            "address": "6000 Spring Creek Pkwy #150",
+            "address2": "",
+            "city": "Plano",
+            "state": "TX",
+            "zip": "75024",
+            "phone": "2143418770"
+          },
+          {
+            "address": "21820 Hillcrest Plaza Drive #E100",
+            "address2": "",
+            "city": "Dallas",
+            "state": "TX",
+            "zip": "75230",
+            "phone": "2143418770"
+          },
+          {
+            "address": "2210 Paddock Way Drive",
+            "address2": "",
+            "city": "Grand Prairie",
+            "state": "TX",
+            "zip": "75050",
+            "phone": "2143418770"
+          },
+          {
+            "address": "6491 Southwest Blvd",
+            "address2": "",
+            "city": "Benbrook",
+            "state": "TX",
+            "zip": "76132",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1905 W. Ennis Ave #500",
+            "address2": "",
+            "city": "Ennis",
+            "state": "TX",
+            "zip": "75119",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1034 E Hwy 67",
+            "address2": "",
+            "city": "Duncanville",
+            "state": "TX",
+            "zip": "75137",
+            "phone": "2143418770"
+          },
+          {
+            "address": "155 School St 100",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "7134613399"
+          },
+          {
+            "address": "9990 Dallas Pkwy 100",
+            "address2": "",
+            "city": "Frisco",
+            "state": "TX",
+            "zip": "75033",
+            "phone": "2143418770"
+          },
+          {
+            "address": "122 West Castellano",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79912",
+            "phone": "9155770100"
+          },
+          {
+            "address": "7812 Gateway East",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79915",
+            "phone": "9155770101"
+          },
+          {
+            "address": "1727 Lee Trevino",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79935",
+            "phone": "9155770102"
+          },
+          {
+            "address": "3080 Joe Battle Blvd",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79938",
+            "phone": "9155770103"
+          },
+          {
+            "address": "13650 Eastlake Blvd",
+            "address2": "",
+            "city": "Horizon City",
+            "state": "TX",
+            "zip": "79928",
+            "phone": "9155770104"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      },
+      {
+        "maPlanId": "H5767-003-000",
+        "accepting": "",
+        "specialty": [
+          "047"
+        ],
+        "addresses": [
+          {
+            "address": "1241 Campbell Road",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7134613399"
+          },
+          {
+            "address": "1346 Campbell Road",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77055",
+            "phone": "7134613399"
+          },
+          {
+            "address": "21820 Katy Freeway #100",
+            "address2": "",
+            "city": "Katy",
+            "state": "TX",
+            "zip": "77449",
+            "phone": "7134613399"
+          },
+          {
+            "address": "1900 North Loop West #160",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77018",
+            "phone": "7134613399"
+          },
+          {
+            "address": "11211 South Texas 6 Suite B",
+            "address2": "",
+            "city": "Sugar Land",
+            "state": "TX",
+            "zip": "77498",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3980 Dowlen Road",
+            "address2": "",
+            "city": "Beaumont",
+            "state": "TX",
+            "zip": "77706",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3400 Interstate 30 #100",
+            "address2": "",
+            "city": "Mesquite",
+            "state": "TX",
+            "zip": "75150",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1360 West Campbell Road #122",
+            "address2": "",
+            "city": "Richardson",
+            "state": "TX",
+            "zip": "75080",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1202 E. NASA Parkway",
+            "address2": "",
+            "city": "Houston",
+            "state": "TX",
+            "zip": "77058",
+            "phone": "7134613399"
+          },
+          {
+            "address": "3502 South Padre Island Drive",
+            "address2": "",
+            "city": "Corpus Christi",
+            "state": "TX",
+            "zip": "78415",
+            "phone": "7134613399"
+          },
+          {
+            "address": "6000 Spring Creek Pkwy #150",
+            "address2": "",
+            "city": "Plano",
+            "state": "TX",
+            "zip": "75024",
+            "phone": "2143418770"
+          },
+          {
+            "address": "21820 Hillcrest Plaza Drive #E100",
+            "address2": "",
+            "city": "Dallas",
+            "state": "TX",
+            "zip": "75230",
+            "phone": "2143418770"
+          },
+          {
+            "address": "2210 Paddock Way Drive",
+            "address2": "",
+            "city": "Grand Prairie",
+            "state": "TX",
+            "zip": "75050",
+            "phone": "2143418770"
+          },
+          {
+            "address": "6491 Southwest Blvd",
+            "address2": "",
+            "city": "Benbrook",
+            "state": "TX",
+            "zip": "76132",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1905 W. Ennis Ave #500",
+            "address2": "",
+            "city": "Ennis",
+            "state": "TX",
+            "zip": "75119",
+            "phone": "2143418770"
+          },
+          {
+            "address": "1034 E Hwy 67",
+            "address2": "",
+            "city": "Duncanville",
+            "state": "TX",
+            "zip": "75137",
+            "phone": "2143418770"
+          },
+          {
+            "address": "155 School St 100",
+            "address2": "",
+            "city": "Tomball",
+            "state": "TX",
+            "zip": "77375",
+            "phone": "7134613399"
+          },
+          {
+            "address": "9990 Dallas Pkwy 100",
+            "address2": "",
+            "city": "Frisco",
+            "state": "TX",
+            "zip": "75033",
+            "phone": "2143418770"
+          },
+          {
+            "address": "122 West Castellano",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79912",
+            "phone": "9155770100"
+          },
+          {
+            "address": "7812 Gateway East",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79915",
+            "phone": "9155770101"
+          },
+          {
+            "address": "1727 Lee Trevino",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79935",
+            "phone": "9155770102"
+          },
+          {
+            "address": "3080 Joe Battle Blvd",
+            "address2": "",
+            "city": "El Paso",
+            "state": "TX",
+            "zip": "79938",
+            "phone": "9155770103"
+          },
+          {
+            "address": "13650 Eastlake Blvd",
+            "address2": "",
+            "city": "Horizon City",
+            "state": "TX",
+            "zip": "79928",
+            "phone": "9155770104"
+          }
+        ],
+        "networks": [],
+        "year": [
+          "2027"
+        ]
+      }
+    ]
+  }
+]

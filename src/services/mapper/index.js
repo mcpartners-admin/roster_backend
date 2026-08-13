@@ -5,6 +5,7 @@ const locationMapper = require("./location.mapper");
 const healthcareServiceMapper = require("./healthcareService.mapper");
 const insurancePlanMapper = require("./insurancePlan.mapper");
 const endpointMapper = require("./endpoint.mapper");
+const networkMapper=require("./network.mapper");
 
 module.exports = {
   practitioner: practitionerMapper,
@@ -14,4 +15,5 @@ module.exports = {
   healthcareService: healthcareServiceMapper,
   insurancePlan: insurancePlanMapper,
   endpoint: endpointMapper,
+  network:networkMapper
 };

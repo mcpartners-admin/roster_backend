@@ -62,6 +62,22 @@ function createProvider(normalizedRow) {
   };
 }
 
+function createFacility(normalizedRow) {
+  return {
+    npi: normalizedRow.npi,
+    type: "Facility",
+
+    // CMS required fields
+    facilityName: normalizedRow.facilityName || "",
+    facilityType: [...new Set(normalizedRow.facilityType || [])],
+    lastUpdatedOn: new Date().toISOString().split("T")[0],
+    // Same default 3 plans as Individual
+    plans: DEFAULT_PLAN_IDS.map((planId) =>
+      createPlan(planId, normalizedRow)
+    ),
+  };
+}
+
 function mergeNormalizedRowIntoProvider(provider, normalizedRow) {
   let hasChanges = false;
 
@@ -104,6 +120,90 @@ function mergeNormalizedRowIntoProvider(provider, normalizedRow) {
 
   return hasChanges;
 }
+function mergeNormalizedRowIntoFacility(facility, normalizedRow) {
+  let hasChanges = false;
+
+  // Merge facility taxonomy codes
+  if (Array.isArray(normalizedRow.facilityType)) {
+    normalizedRow.facilityType.forEach((code) => {
+      const formattedCode = formatSpecialtyCode(code);
+
+      if (
+        formattedCode &&
+        !facility.facilityType.includes(formattedCode)
+      ) {
+        facility.facilityType.push(formattedCode);
+        hasChanges = true;
+      }
+    });
+  }
+
+  facility.plans.forEach((plan) => {
+    // Plan specialty (HPMS Facility Specialty Codes)
+    if (Array.isArray(normalizedRow.specialty)) {
+      normalizedRow.specialty.forEach((code) => {
+        const formattedCode = formatSpecialtyCode(code);
+
+        if (
+          formattedCode &&
+          !plan.specialty.has(formattedCode)
+        ) {
+          plan.specialty.add(formattedCode);
+          hasChanges = true;
+        }
+      });
+    }
+
+    // Network
+    if (
+      normalizedRow.network &&
+      !plan.networks.has(normalizedRow.network)
+    ) {
+      plan.networks.add(normalizedRow.network);
+      hasChanges = true;
+    }
+
+    // Address
+    const address = {
+      address: normalizedRow.address || "",
+      address2: normalizedRow.address2 || "",
+      city: normalizedRow.city || "",
+      state: normalizedRow.state || "",
+      zip: normalizedRow.zip || "",
+      phone: normalizedRow.phone || "",
+    };
+
+    const addressKey = JSON.stringify(address);
+
+    if (address.address && !plan.addresses.has(addressKey)) {
+      plan.addresses.add(addressKey);
+      hasChanges = true;
+    }
+  });
+
+  return hasChanges;
+}
+
+function finalizeFacility(facility) {
+  return {
+    npi: facility.npi,
+    type: facility.type,
+    facilityName: facility.facilityName,
+    facilityType: facility.facilityType,
+    lastUpdatedOn: new Date().toISOString().split("T")[0],
+
+    plans: facility.plans.map((plan) => ({
+      maPlanId: plan.maPlanId,
+      accepting: plan.accepting,
+      specialty: [...plan.specialty],
+      addresses: [...plan.addresses].map((address) =>
+        JSON.parse(address)
+      ),
+      networks: [...plan.networks],
+      year: plan.year,
+    })),
+  };
+}
 
 function finalizeProvider(provider) {
   return {
@@ -128,6 +228,9 @@ function finalizeProvider(provider) {
 
 module.exports = {
   createProvider,
+  createFacility,
   mergeNormalizedRowIntoProvider,
   finalizeProvider,
+  finalizeFacility,
+  mergeNormalizedRowIntoFacility
 };
