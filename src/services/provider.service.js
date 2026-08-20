@@ -38,71 +38,77 @@ const convertFacilityExcelToJson = async (filePath) => {
   const facilities = new Map();
   let skippedRows = 0;
 
-  for (let index = 0; index < rows.length; index += 1) {
-    const row = rows[index];
+ for (let index = 0; index < rows.length; index += 1) {
+  const row = rows[index];
 
-    // Normalize Facility Excel row
-    const normalizedRow = {
-      npi: String(row["npi"] || "").trim(),
-      type: String(row["facility type"]),
-      facilityName: String(row["facility name"] || "").trim(),
+  const normalizedRow = {
+    npi: String(row["npi"] || "").trim(),
+    type: String(row["facility type"] || "").trim(),
+    facilityName: String(row["facility name"] || "").trim(),
 
-      facilityType: row["type"]
-        ? [String(row["type"]).trim()]
-        : [],
+    facilityType: row["HPMS Facility Specialty Codes"]
+      ? [String(row["HPMS Facility Specialty Codes"]).trim()]
+      : [],
 
-      specialty: row["HPMS Facility Specialty Codes"]
-        ? [String(row["HPMS Facility Specialty Codes"]).trim()]
-        : [],
+    specialty: row["HPMS Facility Specialty Codes"]
+      ? [String(row["HPMS Facility Specialty Codes"]).trim()]
+      : [],
 
-      address: String(row["address (required)"] || "").trim(),
-      address2: "",
-      city: String(row["city (required)"] || "").trim(),
-      state: String(row["state (required)"] || "").trim(),
-      zip: String(row["zip (required)"] || "").trim(),
-      phone: String(row["phone (required)"] || "").trim(),
-      accepting: "",
-      network: "",
-      year: row[" contract year (required)"]
-        ? [String(row[" contract year (required)"]).trim()]
-        : [],
-    };
+    address: String(row["address (required)"] || "").trim(),
+    address2: "",
+    city: String(row["city (required)"] || "").trim(),
+    state: String(row["state (required)"] || "").trim(),
+    zip: String(row["zip (required)"] || "").trim(),
+    phone: String(row["phone (required)"] || "").trim(),
+    accepting: "",
+    network: "",
+    year: row[" contract year (required)"]
+      ? [String(row[" contract year (required)"]).trim()]
+      : [],
+  };
 
-    if (!normalizedRow.npi) {
-      skippedRows += 1;
-      logger.record(index + 2, "", {
-        field: "npi",
-        message: "Missing NPI",
-        severity: "error",
-      });
-      continue;
-    }
-
-    const facilityKey = normalizedRow.npi;
-    let facility = facilities.get(facilityKey);
-
-    if (!facility) {
-      facility = createFacility(normalizedRow);
-      facilities.set(facilityKey, facility);
-    }
-
-    const isUpdated = mergeNormalizedRowIntoFacility(
-      facility,
-      normalizedRow
-    );
-
-    if (!isUpdated) {
-      logger.record(index + 2, normalizedRow.npi, {
-        field: "npi",
-        message: `Duplicate facility found with NPI ${normalizedRow.npi}`,
-        severity: "warning",
-      });
-    }
+  if (!normalizedRow.npi) {
+    skippedRows += 1;
+    logger.record(index + 2, "", {
+      field: "npi",
+      message: "Missing NPI",
+      severity: "error",
+    });
+    continue;
   }
 
-  const finalizedFacilities = Array.from(facilities.values()).map(
-    finalizeFacility
+  const specialtyCode = normalizedRow.specialty?.[0] || ""
+  const zipCode = normalizedRow.zip || "";
+  // Uniqueness = NPI + Specialty + ZIP
+  const facilityKey = `${normalizedRow.npi}_${specialtyCode}_${zipCode}`;
+
+  let facility = facilities.get(facilityKey);
+
+  if (!facility) {
+    facility = createFacility(normalizedRow);
+    facilities.set(facilityKey, facility);
+    continue;
+  }
+
+  const isUpdated = mergeNormalizedRowIntoFacility(
+    facility,
+    normalizedRow
   );
+console.log("hellow==>",isUpdated)
+  if (!isUpdated) {
+    logger.record(index + 2, normalizedRow.npi, {
+      field: "npi",
+      message:
+        `Duplicate facility found with NPI ${normalizedRow.npi}, ` +
+        `Specialty ${specialtyCode}, ZIP ${zipCode}`,
+      severity: "warning",
+    });
+  }
+}
+
+const finalizedFacilities = Array.from(facilities.values()).map(
+  finalizeFacility
+);
 
   const outputPath = path.join(outputDir, "facility.json");
   await fs.ensureDir(outputDir);

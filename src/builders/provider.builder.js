@@ -26,18 +26,28 @@ function formatSpecialtyCode(code) {
 }
 
 function createPlan(planId, normalizedRow) {
+  const specialtyCode = formatSpecialtyCode(
+    normalizedRow.specialty?.[0] || ""
+  );
+
+  const address = {
+    address: normalizedRow.address || "",
+    address2: normalizedRow.address2 || "",
+    city: normalizedRow.city || "",
+    state: normalizedRow.state || "",
+    zip: normalizedRow.zip || "",
+    phone: normalizedRow.phone || "",
+  };
+
   return {
     maPlanId: planId,
-    accepting: normalizedRow.accepting ?? null,
-    specialty: new Set(),
-    addresses: new Set(),
-    networks: new Set(),
-    year:
-      Array.isArray(normalizedRow.year) && normalizedRow.year.length
-        ? [...normalizedRow.year]
-        : normalizedRow.year !== undefined && normalizedRow.year !== null && normalizedRow.year !== ""
-          ? [normalizedRow.year]
-          : [...DEFAULT_YEAR],
+    accepting: normalizedRow.accepting,
+    specialty: new Set(specialtyCode ? [specialtyCode] : []),
+    addresses: new Set(address.address ? [JSON.stringify(address)] : []),
+    networks: new Set(
+      normalizedRow.network ? [normalizedRow.network] : []
+    ),
+    year: normalizedRow.year,
   };
 }
 
@@ -63,17 +73,23 @@ function createProvider(normalizedRow) {
 }
 
 function createFacility(normalizedRow) {
+  const specialtyCode = formatSpecialtyCode(
+    normalizedRow.specialty?.[0] || ""
+  );
+
   return {
     npi: normalizedRow.npi,
     type: "Facility",
-
     // CMS required fields
     facilityName: normalizedRow.facilityName || "",
     facilityType: [...new Set(normalizedRow.facilityType || [])],
     lastUpdatedOn: new Date().toISOString().split("T")[0],
-    // Same default 3 plans as Individual
+    // Each facility contains only one specialty
     plans: DEFAULT_PLAN_IDS.map((planId) =>
-      createPlan(planId, normalizedRow)
+      createPlan(planId, {
+        ...normalizedRow,
+        specialty: [specialtyCode],
+      })
     ),
   };
 }
@@ -120,9 +136,10 @@ function mergeNormalizedRowIntoProvider(provider, normalizedRow) {
 
   return hasChanges;
 }
+
 function mergeNormalizedRowIntoFacility(facility, normalizedRow) {
   let hasChanges = false;
-
+  console.log("hell",facility)
   // Merge facility taxonomy codes
   if (Array.isArray(normalizedRow.facilityType)) {
     normalizedRow.facilityType.forEach((code) => {
@@ -139,21 +156,6 @@ function mergeNormalizedRowIntoFacility(facility, normalizedRow) {
   }
 
   facility.plans.forEach((plan) => {
-    // Plan specialty (HPMS Facility Specialty Codes)
-    if (Array.isArray(normalizedRow.specialty)) {
-      normalizedRow.specialty.forEach((code) => {
-        const formattedCode = formatSpecialtyCode(code);
-
-        if (
-          formattedCode &&
-          !plan.specialty.has(formattedCode)
-        ) {
-          plan.specialty.add(formattedCode);
-          hasChanges = true;
-        }
-      });
-    }
-
     // Network
     if (
       normalizedRow.network &&
@@ -183,7 +185,6 @@ function mergeNormalizedRowIntoFacility(facility, normalizedRow) {
 
   return hasChanges;
 }
-
 function finalizeFacility(facility) {
   return {
     npi: facility.npi,

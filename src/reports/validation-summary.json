@@ -1,17 +1,17 @@
 {
   "totalRows": 154,
-  "validRows": 37,
+  "validRows": 143,
   "skippedRows": 0,
-  "executionTime": "248.477321ms",
+  "executionTime": "367.838159ms",
   "memoryUsage": {
-    "rss": "121MB",
-    "heapUsed": "44MB",
+    "rss": "118MB",
+    "heapUsed": "45MB",
     "heapTotal": "53MB"
   },
-  "duplicateFacilities": 117,
-  "warnings": 4,
+  "duplicateFacilities": 11,
+  "warnings": 0,
   "errors": 0,
   "performance": {
-    "rowsPerSecond": 620
+    "rowsPerSecond": 419
   }
 }
