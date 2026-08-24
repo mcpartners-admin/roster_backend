@@ -34,17 +34,7 @@ function normalizeType(value) {
   if (!value) {
     return null;
   }
-
   const type = String(value).trim().toUpperCase();
-
-  if (type === "PCP" || type === "SPC") {
-    return "INDIVIDUAL";
-  }
-
-  if (type === "FAC") {
-    return "FACILITY";
-  }
-
   return value; // or return null if you want to reject unknown values
 }
 function normalizeSpecialty(value) {
@@ -65,7 +55,6 @@ function pickValue(row, headers) {
   }
 
   const keys = Object.keys(row);
-
   for (const header of headers) {
     const matchedKey = keys.find(
       (key) => key.toLowerCase() === header.toLowerCase()
