@@ -2146,53 +2146,6 @@
     ]
   },
   {
-    "npi": "1043389034",
-    "type": "Facility",
-    "facilityName": "Kindred Hospital - Houston Northwest",
-    "facilityType": [
-      "047"
-    ],
-    "lastUpdatedOn": "2026-08-20",
-    "plans": [
-      {
-        "maPlanId": "H5767-001-000",
-        "accepting": "",
-        "specialty": [
-          "047"
-        ],
-        "addresses": [],
-        "networks": [],
-        "year": [
-          "2027"
-        ]
-      },
-      {
-        "maPlanId": "H5767-002-000",
-        "accepting": "",
-        "specialty": [
-          "047"
-        ],
-        "addresses": [],
-        "networks": [],
-        "year": [
-          "2027"
-        ]
-      },
-      {
-        "maPlanId": "H5767-003-000",
-        "accepting": "",
-        "specialty": [
-          "047"
-        ],
-        "addresses": [],
-        "networks": [],
-        "year": [
-          "2027"
-        ]
-      }
-    ]
-  },
-  {
     "npi": "1952054603",
     "type": "Facility",
     "facilityName": "Kindred Hospital - Houston Northwest Acute Rehab Unit",

@@ -1,17 +1,17 @@
 {
-  "totalRows": 154,
-  "validRows": 143,
+  "totalRows": 3446,
+  "validRows": 1326,
   "skippedRows": 0,
-  "executionTime": "367.838159ms",
+  "executionTime": "35757.848213ms",
   "memoryUsage": {
-    "rss": "118MB",
-    "heapUsed": "45MB",
-    "heapTotal": "53MB"
+    "rss": "521MB",
+    "heapUsed": "74MB",
+    "heapTotal": "110MB"
   },
-  "duplicateFacilities": 11,
-  "warnings": 0,
+  "duplicateProviders": 2120,
+  "warnings": 283,
   "errors": 0,
   "performance": {
-    "rowsPerSecond": 419
+    "rowsPerSecond": 96
   }
 }
