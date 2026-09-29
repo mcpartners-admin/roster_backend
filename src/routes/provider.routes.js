@@ -4,7 +4,8 @@ const {
   getProvidersByRoster,
   uploadProvidersFromExcel,
   uploadSeedFromJson,
-  uploadFacilitiesFromExcel
+  uploadFacilitiesFromExcel,
+  getProvider
 } = require("../controller/provider.controller");
 const upload = multer({ dest: "src/uploads/" });
 const router = express.Router();
@@ -148,5 +149,86 @@ router.post(
   upload.single("file"),
   uploadSeedFromJson
 );
-
+/**
+ * @swagger
+ * /api/search-provider:
+ *   get:
+ *     summary: Search providers by ZIP code and type
+ *     description: Returns providers whose type and at least one plan address ZIP code match the supplied values exactly.
+ *     parameters:
+ *       - in: query
+ *         name: zipCode
+ *         required: true
+ *         description: ZIP code to match against plan addresses, preserving leading zeros.
+ *         schema:
+ *           type: string
+ *         example: "02108"
+ *       - in: query
+ *         name: type
+ *         required: true
+ *         description: Provider type, such as Individual or Facility (case-sensitive).
+ *         schema:
+ *           type: string
+ *         example: Individual
+ *     responses:
+ *       200:
+ *         description: Matching providers found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Data found successfully
+ *                 data:
+ *                   type: array
+ *                   description: Matching provider documents, including their plans and addresses.
+ *                   items:
+ *                     type: object
+ *                     additionalProperties: true
+ *       400:
+ *         description: Missing required query parameters or no matching providers found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   nullable: true
+ *                   description: Null when no providers match; omitted when parameters are missing.
+ *             examples:
+ *               missingParameters:
+ *                 value:
+ *                   success: false
+ *                   message: Zipcode and Type is required
+ *               noMatches:
+ *                 value:
+ *                   success: false
+ *                   message: No data found
+ *                   data: null
+ *       500:
+ *         description: Unexpected server error while searching providers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   description: Error message from the server.
+ */
+router.get("/search-provider",getProvider)
 module.exports = router;

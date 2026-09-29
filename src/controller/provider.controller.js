@@ -65,8 +65,6 @@ const uploadFacilitiesFromExcel = async (req, res) => {
     });
   }
 };
-
-
 const uploadSeedFromJson = async (req, res) => {
   try {
     if (!req.file) {
@@ -102,10 +100,40 @@ const uploadSeedFromJson = async (req, res) => {
     });
   }
 };
+const getProvider = async (req, res) => {
+  try {
+     const {zipCode,type}=req.query;
+     if(!zipCode || !type){
+      return res.status(400).json({
+      success: false,
+      message: "Zipcode and Type is required"
+      });
+     }
+     const getProviders=await providerService.getProvider(zipCode,type);
+     if(getProviders.success){
+         return res.status(200).json({
+            success: true,
+            message: "Data found successfully",
+           data: getProviders.data,
+        });
+      }
+      return res.status(400).json({
+        success: false,
+        message: "No data found",
+        data: null,
+      });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to seed data",
+    });
+  }
+};
 
 module.exports = {
   getProvidersByRoster,
   uploadProvidersFromExcel,
   uploadSeedFromJson,
-  uploadFacilitiesFromExcel
+  uploadFacilitiesFromExcel,
+  getProvider
 };

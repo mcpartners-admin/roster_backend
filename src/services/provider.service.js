@@ -2,6 +2,7 @@ const fs = require("fs-extra");
 const path = require("path");
 const XLSX = require("xlsx");
 const Provider = require("../schemas/provider.schema");
+const PrimaryCareProvider=require("../schemas/primarycare.provider.schema");
 const { convertExcelToCmsJson } = require("../converter/cms.converter");
 const { validateNormalizedRow } = require("../validators/provider.validators");
 const { finalizeFacility,createFacility,mergeNormalizedRowIntoFacility } = require("../builders/provider.builder");
@@ -146,7 +147,6 @@ const finalizedFacilities = Array.from(facilities.values()).map(
     summary,
   };
 };
-
 const addRosterData = async (
   rosterData,
   rosterName = "providers",
@@ -286,9 +286,43 @@ const addRosterData = async (
     throw err;
   }
 };
+const getProvider = async (zipCode, type) => {
+  try {
+    let providers;
+    if(type==="primary_care_provider"){
+    providers=await PrimaryCareProvider.find({zip:zipCode})
+    }else{
+       providers = await Provider.find({
+        type: type,
+        "plans.addresses.zip": zipCode
+      });
+    }
+    if (providers.length === 0) {
+      return {
+        success: false,
+        message: "No data found",
+        data: null
+      };
+    }
+console.log(providers.length)
+    return {
+      success: true,
+      message: "Data fetched successfully",
+      data: providers
+    };
+
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+      data: null
+    };
+  }
+};
 module.exports = {
   getProvidersByRoster,
   convertExcelToJson,
   addRosterData,
-  convertFacilityExcelToJson
+  convertFacilityExcelToJson,
+  getProvider
 };
