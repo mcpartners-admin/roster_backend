@@ -286,37 +286,75 @@ const addRosterData = async (
     throw err;
   }
 };
-const getProvider = async (zipCode, type) => {
+const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const getProvider = async (zipCode, type, name = "", address = "") => {
   try {
-    let providers;
-    if(type==="primary_care_provider"){
-    providers=await PrimaryCareProvider.find({zip:zipCode})
-    }else{
-       providers = await Provider.find({
-        type: type,
-        "plans.addresses.zip": zipCode
-      });
+    const providers = [];
+    const nameRegex = String(name || "").trim()
+      ? new RegExp(escapeRegex(String(name).trim()), "i")
+      : null;
+    const addressRegex = String(address || "").trim()
+      ? new RegExp(escapeRegex(String(address).trim()), "i")
+      : null;
+
+    if (type === "primary_care_provider") {
+      const filter = {};
+      if (String(zipCode || "").trim()) filter.zip = String(zipCode).trim();
+      const conditions = [];
+      if (nameRegex) {
+        conditions.push({ $or: [
+          { firstName: nameRegex },
+          { lastName: nameRegex },
+          { providerEntityName: nameRegex },
+        ] });
+      }
+      if (addressRegex) {
+        conditions.push({ $or: [
+          { addressLine1: addressRegex },
+          { addressLine2: addressRegex },
+          { city: addressRegex },
+          { state: addressRegex },
+        ] });
+      }
+      if (conditions.length) filter.$and = conditions;
+      providers.push(...await PrimaryCareProvider.find(filter).lean());
+    } else {
+      const filter = { type };
+      if (String(zipCode || "").trim()) {
+        filter["plans.addresses.zip"] = String(zipCode).trim();
+      }
+      const conditions = [];
+      if (nameRegex) {
+        conditions.push({ $or: [
+          { "name.first": nameRegex },
+          { "name.last": nameRegex },
+          { facilityName: nameRegex },
+        ] });
+      }
+      if (addressRegex) {
+        conditions.push({ $or: [
+          { "plans.addresses.address": addressRegex },
+          { "plans.addresses.address2": addressRegex },
+          { "plans.addresses.city": addressRegex },
+          { "plans.addresses.state": addressRegex },
+        ] });
+      }
+      if (conditions.length) filter.$and = conditions;
+      providers.push(...await Provider.find(filter).lean());
     }
+
     if (providers.length === 0) {
-      return {
-        success: false,
-        message: "No data found",
-        data: null
-      };
+      return { success: false, message: "No data found", data: null };
     }
-console.log(providers.length)
+
     return {
       success: true,
       message: "Data fetched successfully",
-      data: providers
+      data: providers,
     };
-
   } catch (error) {
-    return {
-      success: false,
-      message: error.message,
-      data: null
-    };
+    return { success: false, message: error.message, data: null };
   }
 };
 module.exports = {

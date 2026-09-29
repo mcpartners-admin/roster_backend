@@ -8,6 +8,8 @@ const routes = require("./src/routes");
 const dotenv = require("dotenv");
 dotenv.config();
 
+
+
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
@@ -62,6 +64,7 @@ const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("MongoDB connected successfully");
+
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);
   }
@@ -69,7 +72,7 @@ const connectDB = async () => {
 
 const startServer = (port = process.env.PORT || 5000) => {
   connectDB();
-
+ 
   return app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });

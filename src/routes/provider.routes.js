@@ -153,13 +153,12 @@ router.post(
  * @swagger
  * /api/search-provider:
  *   get:
- *     summary: Search providers by ZIP code and type
- *     description: Returns providers whose type and at least one plan address ZIP code match the supplied values exactly.
+ *     summary: Search providers by ZIP code, type, name, and address
+ *     description: Type is required. ZIP code, name, and address are optional filters and may be used in any combination. Name and address use case-insensitive partial matching.
  *     parameters:
  *       - in: query
  *         name: zipCode
- *         required: true
- *         description: ZIP code to match against plan addresses, preserving leading zeros.
+ *         description: Optional ZIP code filter; leading zeros are preserved.
  *         schema:
  *           type: string
  *         example: "02108"
@@ -170,6 +169,20 @@ router.post(
  *         schema:
  *           type: string
  *         example: Individual
+ *       - in: query
+ *         name: name
+ *         required: false
+ *         description: Partial first name, last name, or facility name to match (case-insensitive).
+ *         schema:
+ *           type: string
+ *         example: Jane
+ *       - in: query
+ *         name: address
+ *         required: false
+ *         description: Partial street address, city, or state to match (case-insensitive).
+ *         schema:
+ *           type: string
+ *         example: Main Street
  *     responses:
  *       200:
  *         description: Matching providers found
