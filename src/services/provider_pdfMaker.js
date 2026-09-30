@@ -8,32 +8,6 @@ const {
   rgb,
 } = require("pdf-lib");
 
-// ============================================================
-// MONGODB PCP MODEL
-// ============================================================
-//
-// IMPORTANT:
-//
-// Your PCP model must already be registered with Mongoose.
-//
-// If your model is registered as:
-//
-//   mongoose.model("PCP", PCPSchema)
-//
-// this will work directly.
-//
-// If your actual model name is different, change:
-//
-//   PCP_MODEL_NAME: "PCP"
-//
-// below.
-//
-// ============================================================
-
-
-// ============================================================
-// CONFIGURATION
-// ============================================================
 
 const CONFIG = {
   templatePath: path.join(
@@ -954,14 +928,12 @@ async function getPCPsFromMongoDB() {
     );
   }
 
-  const rows =
-    await PCP.find({})
-      .lean()
-      .exec();
+  const rows =await PCP.find({}).lean().exec();
 
   console.log(
     `PCP database rows: ${rows.length}`
   );
+  
 
   return rows;
 }
@@ -4007,22 +3979,10 @@ async function generateProviderDirectory() {
   );
 }
 
+module.exports = {
+  generateProviderDirectory,
+};
 // ============================================================
 // RUN
 // ============================================================
 
-generateProviderDirectory()
-  .catch(
-    async (error) => {
-      console.error(
-        "\nProvider directory generation failed:\n"
-      );
-
-      console.error(
-        error.stack ||
-          error
-      );
-
-      process.exit(1);
-    }
-  );

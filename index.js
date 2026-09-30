@@ -7,7 +7,7 @@ const swaggerSpec = require("./swagger");
 const routes = require("./src/routes");
 const dotenv = require("dotenv");
 dotenv.config();
-
+const {generateProviderDirectory}=require("./src/services/provider_pdfMaker")
 
 
 const app = express();
@@ -72,7 +72,14 @@ const connectDB = async () => {
 
 const startServer = (port = process.env.PORT || 5000) => {
   connectDB();
- 
+  generateProviderDirectory()
+  .catch(
+    async (error) => {
+      console.error("\nProvider directory generation failed:\n" );
+      console.error(error.stack ||error);
+      process.exit(1);
+    }
+  );
   return app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
