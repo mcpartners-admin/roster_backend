@@ -4,6 +4,7 @@ const FacilityProvider = require("../schemas/facility.provider.schema");
 const CommonProvider = require("../schemas/common.provider.schema");
 
 const normalizeHeader = (header) => String(header || "")
+  .normalize("NFKD")
   .toLowerCase()
   .replace(/\u00a0/g, " ")
   .replace(/\s+/g, " ")
@@ -17,9 +18,9 @@ const splitLanguages = (value) => String(value || "")
 const COMMON_FIELD_HEADERS = {
   taxId: ["tax id 1"],
   namePerW9: ["name per w-9", "name per w9"],
-  npi: ["npi", "npi # ind"],
-  lastName: ["last name"],
-  firstName: ["first name"],
+  npi: ["npi", "npi # ind", "npi (required)"],
+  lastName: ["last name", "last name (required)"],
+  firstName: ["first name", "first name (required)"],
   degree: ["degree"],
   sex: ["gender", "sex"],
   pcpSpec: ["pcp/spec"],
@@ -56,6 +57,21 @@ const COMMON_FIELD_HEADERS = {
 
 const detectCommonType = (headers, cells) => {
   const has = (...names) => names.some((name) => headers.has(normalizeHeader(name)));
+  const pcpSpec = String(cells[normalizeHeader("pcp/spec")] || "")
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "");
+  if (pcpSpec === "PCP") return "primarycareproviders";
+  if (pcpSpec === "PSEC") return "specialists";
+  if (pcpSpec === "HOS") return "hospitals";
+
+  const sourceType = String(
+    cells[normalizeHeader("type (required)")] || cells[normalizeHeader("type")] || ""
+  ).toLowerCase();
+  if (/facility|hospital/.test(sourceType)) return "hospitals";
+  if (/specialist|spec/.test(sourceType)) return "specialists";
+  if (/primary|\bpcp\b/.test(sourceType)) return "primarycareproviders";
+  if (/individual/.test(sourceType)) return "individuals";
   if (has("facility type", "contract year (required)", "primary specialty code (required)")) {
     return "hospitals";
   }
@@ -74,18 +90,47 @@ const detectCommonType = (headers, cells) => {
 const importCommonProvidersFromExcel = async (filePath) => {
   try {
     const workbook = XLSX.readFile(filePath, { cellDates: false });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    if (!sheet) throw invalidSpreadsheet("The Excel file does not contain a worksheet");
-
-    const rows = XLSX.utils.sheet_to_json(sheet, { defval: "", raw: false });
-    if (!rows.length) throw invalidSpreadsheet("The Excel worksheet is empty");
-    const headers = new Set(Object.keys(rows[0]).map(normalizeHeader));
     const recognizedHeaders = new Set(Object.values(COMMON_FIELD_HEADERS).flat().map(normalizeHeader));
-    if (![...headers].some((header) => recognizedHeaders.has(header))) {
+    recognizedHeaders.add(normalizeHeader("type (required)"));
+    recognizedHeaders.add(normalizeHeader("type"));
+
+    let selectedSheet;
+    let selectedHeaderIndex = -1;
+    let selectedHeaderScore = 0;
+    for (const sheetName of workbook.SheetNames) {
+      const candidateSheet = workbook.Sheets[sheetName];
+      const grid = XLSX.utils.sheet_to_json(candidateSheet, {
+        header: 1,
+        defval: "",
+        raw: false,
+      });
+      const candidate = grid.slice(0, 25).reduce((best, row, index) => {
+        const score = row.filter((cell) => recognizedHeaders.has(normalizeHeader(cell))).length;
+        return score > best.score ? { index, score } : best;
+      }, { index: -1, score: 0 });
+      if (candidate.score > selectedHeaderScore) {
+        selectedSheet = candidateSheet;
+        selectedHeaderIndex = candidate.index;
+        selectedHeaderScore = candidate.score;
+      }
+    }
+
+    if (!selectedSheet || selectedHeaderScore < 2) {
       throw invalidSpreadsheet("The worksheet headers do not match a supported provider spreadsheet");
     }
 
-    const documents = rows.map((row) => {
+    const rows = XLSX.utils.sheet_to_json(selectedSheet, {
+      range: selectedHeaderIndex,
+      defval: "",
+      raw: false,
+    });
+    const headers = new Set(Object.keys(rows[0] || {}).map(normalizeHeader));
+
+    const documents = rows.filter((row) => {
+      const values = Object.values(row).map((value) => String(value ?? "").trim());
+      const text = values.join(" ").toLowerCase();
+      return values.some(Boolean) && !/should be \d+|individual or facility|\[.*\]|\d+ digit number/.test(text);
+    }).map((row) => {
       const cells = Object.fromEntries(
         Object.entries(row).map(([key, value]) => [normalizeHeader(key), String(value ?? "").trim()])
       );

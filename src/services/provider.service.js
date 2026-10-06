@@ -343,20 +343,46 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       if (conditions.length) filter.$and = conditions;
       providers.push(...await Provider.find(filter).lean());
     } else {
-      const filter = {};
-      if (String(zipCode || "").trim()) filter.zip = String(zipCode).trim();
-      const conditions = [];
-      if (nameRegex) conditions.push({ $or: [
+  const filter = {};
+
+  // primarySpecialty MUST always match the requested type
+  filter.primarySpecialty = new RegExp(
+    escapeRegex(String(type || "").trim()),
+    "i"
+  );
+  // ZIP is optional
+  if (String(zipCode || "").trim()) {
+    filter.zip = String(zipCode).trim();
+  }
+  const conditions = [];
+  // Name is optional
+  if (nameRegex) {
+    conditions.push({
+      $or: [
         { facilityName: nameRegex },
-        { primarySpecialty: nameRegex },
-      ] });
-      if (addressRegex) conditions.push({ $or: [
+      ],
+    });
+  }
+
+  // Address is optional
+  if (addressRegex) {
+    conditions.push({
+      $or: [
         { address: addressRegex },
         { city: addressRegex },
         { state: addressRegex },
-      ] });
-      if (conditions.length) filter.$and = conditions;
-      providers.push(...await FacilityProvider.find(filter).lean());
+      ],
+    });
+  }
+
+  if (conditions.length) {
+    filter.$and = conditions;
+  }
+
+  console.log("Facility filter:", filter);
+  providers.push(
+    ...(await FacilityProvider.find(filter).lean())
+  );
     }
 
     if (providers.length === 0) {
