@@ -157,9 +157,12 @@ const mapExcelRowToProvider = (row) => {
     }
 
     // Convert date fields properly
-    if (fieldName === "startDate" || fieldName === "endDate") {
-      providerData[fieldName] = parseDate(value);
+    if (fieldName === "startDate") {
+      providerData[fieldName] = "2027-01-01";
       return;
+    }
+    if(fieldName==="endDate"){
+      providerData[fieldName]=parseDate(value);
     }
 
     providerData[fieldName] = cellToString(value);

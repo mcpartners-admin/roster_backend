@@ -1,12 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const PCP = require("../schemas/primarycare.provider.schema");
-
-const {
-  PDFDocument,
-  StandardFonts,
-  rgb,
-} = require("pdf-lib");
+const FacilityProvider = require("../schemas/facility.provider.schema");
+const {PDFDocument,StandardFonts,rgb,} = require("pdf-lib");
 
 
 const CONFIG = {
@@ -20,12 +16,6 @@ const CONFIG = {
     "src",
     "jsonfiles",
     "provider_directory.json"
-  ),
-
-  facilitiesPath: path.join(
-    "src",
-    "jsonfiles",
-    "facility.json"
   ),
 
   outputPath: path.join(
@@ -111,71 +101,28 @@ const PROVIDER_CONFIG = {
   // ==========================================================
 
   SPECIALTY_MAP: {
-    "207Q00000X":
-      "Family Medicine",
-
-    "208600000X":
-      "General Surgery",
-
-    "208G00000X":
-      "Cardiothoracic Surgery",
-
-    "363L00000X":
-      "Nurse Practitioner",
-
-    "163WW0000X":
-      "Wound Care",
-
-    "207RR0500X":
-      "Rheumatology",
-
-    "207X00000X":
-      "Orthopedic Surgery",
-
-    "207RN0300X":
-      "Nephrology",
-
-    "207R00000X":
-      "Internal Medicine",
-
-    "213E00000X":
-      "Podiatry",
-
-    "2084N0400X":
-      "Neurology",
-
-    "2086S0122X":
-      "Plastic Surgery",
-
-    "207RI0200X":
-      "Infectious Diseases",
-
-    "207RC0000X":
-      "Cardiology",
-
-    "207RX0202X":
-      "Oncology",
-
-    "225100000X":
-      "Physical Therapy",
-
-    "207RP1001X":
-      "Pulmonary Diseases",
-
-    "208VP0000X":
-      "Pain Management",
-
-    "363LF0000X":
-      "Family Nurse Practitioner",
-
-    "2086S0129X":
-      "Vascular Surgery",
-
-    "208800000X":
-      "Urology",
-
-    "208C00000X":
-      "Colon & Rectal Surgery",
+    "207Q00000X":"Family Medicine",
+    "208600000X":"General Surgery",
+    "208G00000X":"Cardiothoracic Surgery",
+    "363L00000X":"Nurse Practitioner",
+    "163WW0000X":"Wound Care",
+    "207RR0500X":"Rheumatology",
+    "207X00000X":"Orthopedic Surgery",
+    "207RN0300X":"Nephrology",
+    "207R00000X":"Internal Medicine",
+    "213E00000X":"Podiatry",
+    "2084N0400X":"Neurology",
+    "2086S0122X":"Plastic Surgery",
+    "207RI0200X":"Infectious Diseases",
+    "207RC0000X":"Cardiology",
+    "207RX0202X":"Oncology",
+    "225100000X":"Physical Therapy",
+    "207RP1001X":"Pulmonary Diseases",
+    "208VP0000X":"Pain Management",
+    "363LF0000X":"Family Nurse Practitioner",
+    "2086S0129X":"Vascular Surgery",
+    "208800000X":"Urology",
+    "208C00000X":"Colon & Rectal Surgery",
 
     "207V00000X":
       "Obstetrics & Gynecology",
@@ -924,17 +871,25 @@ async function getPCPsFromMongoDB() {
     typeof PCP.find !== "function"
   ) {
     throw new Error(
-      `MongoDB model "${PCP_MODEL_NAME}" is not available.`
+      `MongoDB model "${PCP.modelName}" is not available.`
     );
   }
-
   const rows =await PCP.find({}).lean().exec();
-
   console.log(
     `PCP database rows: ${rows.length}`
   );
-  
+  return rows;
+}
 
+async function getFacilityProvidersFromMongoDB() {
+  if (!FacilityProvider || typeof FacilityProvider.find !== "function") {
+    throw new Error(
+      `MongoDB model "${FacilityProvider.modelName}" is not available.`
+    );
+  }
+
+  const rows = await FacilityProvider.find().lean().exec();
+  console.log(`Facility provider database rows: ${rows.length}`);
   return rows;
 }
 
@@ -1293,13 +1248,12 @@ function normalizeMongoPCP(
     );
 
   const providerName =
-    entityName ||
-    [
-      firstName,
-      lastName,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  [
+    firstName,
+    lastName,
+  ]
+    .filter(Boolean)
+    .join(" ") || entityName;
 
   const addresses =
     dedupeAddresses(
@@ -1343,17 +1297,12 @@ function normalizeMongoPCP(
 
   const provider = {
     npi,
-
     type:
       "Individual",
-
     name:
       providerName,
-
     firstName,
-
     lastName,
-
     degree:
       clean(
         pick(
@@ -1364,10 +1313,8 @@ function normalizeMongoPCP(
           ]
         )
       ),
-
     providerEntityName:
       entityName,
-
     providerTin:
       clean(
         pick(
@@ -1423,19 +1370,13 @@ function normalizeMongoPCP(
           ]
         )
       ),
-
     languages,
-
     accepting,
-
     specialties: [
       "Primary Care",
     ],
-
     specialtyCodes: [],
-
     addresses,
-
     directoryType:
       "Primary Care Providers (PCPs)",
   };
@@ -1452,145 +1393,19 @@ function normalizeMongoPCP(
 }
 
 // ============================================================
-// BUILD UNIQUE PCPs
+// BUILD PCP ENTRIES FROM MONGODB ROWS
 // ============================================================
 
 function buildPCPsFromMongoRows(
   rows
 ) {
-  const providers =
-    new Map();
-
-  for (
-    const row of rows
-  ) {
-    const normalized =
-      normalizeMongoPCP(
-        row
-      );
-
-    if (!normalized) {
-      continue;
-    }
-
-    /*
-     * NPI is the primary identity.
-     *
-     * If NPI is missing, use Provider_ID.
-     * If that is also missing, use Mongo _id.
-     */
-
-    const fallbackId =
-      clean(
-        pick(
-          row,
-          [
-            "Provider_ID",
-            "ProviderId",
-            "providerId",
-            "_id",
-          ]
-        )
-      );
-
-    const providerKey =
-      normalized.npi ||
-      fallbackId;
-
-    if (!providerKey) {
-      continue;
-    }
-
-    if (
-      !providers.has(
-        providerKey
-      )
-    ) {
-      providers.set(
-        providerKey,
-        normalized
-      );
-
-      continue;
-    }
-
-    const existing =
-      providers.get(
-        providerKey
-      );
-
-    /*
-     * Merge missing provider fields.
-     */
-
-    existing.name =
-      existing.name ||
-      normalized.name;
-
-    existing.firstName =
-      existing.firstName ||
-      normalized.firstName;
-
-    existing.lastName =
-      existing.lastName ||
-      normalized.lastName;
-
-    existing.degree =
-      existing.degree ||
-      normalized.degree;
-
-    existing.providerEntityName =
-      existing.providerEntityName ||
-      normalized.providerEntityName;
-
-    existing.providerTin =
-      existing.providerTin ||
-      normalized.providerTin;
-
-    existing.providerId =
-      existing.providerId ||
-      normalized.providerId;
-
-    existing.practiceId =
-      existing.practiceId ||
-      normalized.practiceId;
-
-    existing.locationId =
-      existing.locationId ||
-      normalized.locationId;
-
-    existing.accepting =
-      existing.accepting ||
-      normalized.accepting;
-
-    existing.languages =
-      uniqueStrings([
-        ...(existing.languages ||
-          []),
-
-        ...(normalized.languages ||
-          []),
-      ]);
-
-    existing.addresses =
-      dedupeAddresses([
-        ...(existing.addresses ||
-          []),
-
-        ...(normalized.addresses ||
-          []),
-      ]);
-  }
-
-  const result =
-    [
-      ...providers.values(),
-    ];
+  const result = rows
+    .map(normalizeMongoPCP)
+    .filter(Boolean);
 
   console.log(
-    `Unique PCPs from MongoDB: ${result.length}`
+    `PCP entries from MongoDB: ${result.length}`
   );
-
   return result;
 }
 
@@ -1855,136 +1670,27 @@ function normalizeIndividual(
 function normalizeFacility(
   facility
 ) {
-  if (
-    !facility ||
-    clean(
-      facility.type
-    ).toLowerCase() !==
-      "facility"
-  ) {
-    return null;
-  }
+  if (!facility) return null;
 
-  const plans =
-    Array.isArray(
-      facility.plans
-    )
-      ? facility.plans
-      : [];
-
-  const yearPlans =
-    plans.length
-      ? plans.filter(
-          (plan) =>
-            getPlanYears(
-              plan
-            ).includes(
-              PROVIDER_CONFIG.YEAR
-            )
-        )
-      : [];
-
-  if (
-    plans.length &&
-    !yearPlans.length
-  ) {
-    return null;
-  }
-
-  const usablePlans =
-    yearPlans.length
-      ? yearPlans
-      : plans;
-
-  const facilityCodes =
-    uniqueStrings([
-      ...(Array.isArray(
-        facility.facilityType
-      )
-        ? facility.facilityType
-        : []),
-
-      ...usablePlans.flatMap(
-        (plan) =>
-          Array.isArray(
-            plan.specialty
-          )
-            ? plan.specialty
-            : []
-      ),
-    ]);
-
-  const facilitySpecialties =
-    uniqueStrings(
-      facilityCodes.map(
-        (code) =>
-          PROVIDER_CONFIG
-            .FACILITY_SPECIALTY_MAP[
-            code
-          ] || ""
-      )
-    );
-
-  const addresses =
-    [];
-
-  for (
-    const plan of
-      usablePlans
-  ) {
-    if (
-      Array.isArray(
-        plan.addresses
-      )
-    ) {
-      addresses.push(
-        ...plan.addresses
-      );
-    }
-  }
-
-  if (
-    Array.isArray(
-      facility.addresses
-    )
-  ) {
-    addresses.push(
-      ...facility.addresses
-    );
-  }
-
+  const primarySpecialty = clean(facility.primarySpecialty);
   return {
-    npi:
-      normalizeNpi(
-        facility.npi
-      ),
-
-    type:
-      "Facility",
-
-    name:
-      clean(
-        facility.facilityName
-      ) ||
-      clean(
-        facility.name
-      ) ||
-      clean(
-        facility.providerName
-      ),
-
-    facilityCodes,
-
-    specialties:
-      facilitySpecialties,
-
-    addresses:
-      dedupeAddresses(
-        addresses
-      ),
-
-    directoryType:
-      "Hospitals",
+    npi: normalizeNpi(facility.npi),
+    type: "Facility",
+    name: clean(facility.facilityName),
+    facilityType: clean(facility.facilityType),
+    contractYear: clean(facility.contractYear),
+    primarySpecialtyCode: clean(facility.primarySpecialtyCode),
+    languages: uniqueStrings(Array.isArray(facility.languages) ? facility.languages : []),
+    specialties: uniqueStrings([facility.secondarySpeciality]),
+    addresses: dedupeAddresses([{
+      address: clean(facility.address),
+      address2: "",
+      city: clean(facility.city),
+      state: clean(facility.state),
+      zip: clean(facility.zip),
+      phone: clean(facility.phone),
+    }]),
+    directoryType: primarySpecialty || "Facilities",
   };
 }
 
@@ -2128,25 +1834,23 @@ function buildGroups(
   );
 
   /*
-   * Hospitals are ONLY from facility JSON.
+   * Facilities are grouped under their primary specialty.
    */
   facilities.forEach(
     add
   );
 
-  const order = [
-    "Primary Care Providers (PCPs)",
-    "Specialists",
-    "Hospitals",
-  ];
-
   const sections =
     [
       ...groups.keys(),
     ].sort(
-      (a, b) =>
-        order.indexOf(a) -
-        order.indexOf(b)
+      (a, b) => {
+        const rank = (section) =>
+          section === "Primary Care Providers (PCPs)" ? 0
+            : section === "Specialists" ? 1
+              : 2;
+        return rank(a) - rank(b) || a.localeCompare(b);
+      }
     );
 
   for (
@@ -2531,8 +2235,7 @@ function getProviderLines(
    * Hospital specialty/type.
    */
   if (
-    provider.directoryType ===
-      "Hospitals" &&
+    provider.type === "Facility" &&
     provider.specialties?.length
   ) {
     lines.push({
@@ -2571,6 +2274,21 @@ function getProviderLines(
       gapAfter:
         2.5,
     });
+  }
+
+  if (provider.type === "Facility") {
+    const facilityDetails = [
+      provider.facilityType && `Facility Type: ${provider.facilityType}`,
+    ].filter(Boolean);
+
+    for (const value of facilityDetails) {
+      lines.push({
+        value,
+        font: fonts.font,
+        size: CONFIG.DETAIL_SIZE,
+        gapAfter: 2,
+      });
+    }
   }
 
   /*
@@ -3608,11 +3326,6 @@ async function generateProviderDirectory() {
     "Provider JSON"
   );
 
-  assertFileExists(
-    CONFIG.facilitiesPath,
-    "Facility JSON"
-  );
-
   // ----------------------------------------------------------
   // Load template
   // ----------------------------------------------------------
@@ -3753,16 +3466,13 @@ async function generateProviderDirectory() {
       .filter(Boolean);
 
   // ----------------------------------------------------------
-  // READ HOSPITALS
+  // LOAD FACILITIES FROM MONGODB
   // ----------------------------------------------------------
 
-  const rawFacilities =
-    readJson(
-      CONFIG.facilitiesPath
-    );
+  const facilityRows = await getFacilityProvidersFromMongoDB();
 
   const facilities =
-    rawFacilities
+    facilityRows
       .map(
         normalizeFacility
       )
@@ -3785,7 +3495,7 @@ async function generateProviderDirectory() {
   );
 
   console.log(
-    `Hospitals from JSON: ${facilities.length}`
+    `Facilities from MongoDB: ${facilities.length}`
   );
 
   // ----------------------------------------------------------
@@ -3967,11 +3677,7 @@ async function generateProviderDirectory() {
   );
 
   console.log(
-    `Hospitals: ${
-      groups.get(
-        "Hospitals"
-      )?.length || 0
-    }`
+    `Facilities: ${facilities.length}`
   );
 
   console.log(
@@ -3985,4 +3691,3 @@ module.exports = {
 // ============================================================
 // RUN
 // ============================================================
-

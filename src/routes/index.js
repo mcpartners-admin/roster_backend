@@ -2,10 +2,12 @@ const express = require("express");
 const providerRoutes = require("./provider.routes");
 const fhirSyncRoutes = require("./fhirSync.routes");
 const primaryCareProviderRoutes = require("./primarycare.provider.routes");
+const facilityProviderRoutes = require("./facility.provider.routes");
 
 const router = express.Router();
 router.use(providerRoutes);
 router.use(fhirSyncRoutes);
 router.use(primaryCareProviderRoutes);
+router.use(facilityProviderRoutes);
 
 module.exports = router;
