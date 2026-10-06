@@ -80,6 +80,7 @@ const startServer = (port = process.env.PORT || 5000) => {
       process.exit(1);
     }
   );
+
   return app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });

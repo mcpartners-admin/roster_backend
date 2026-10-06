@@ -4,6 +4,7 @@ const XLSX = require("xlsx");
 const Provider = require("../schemas/provider.schema");
 const FacilityProvider = require("../schemas/facility.provider.schema");
 const PrimaryCareProvider=require("../schemas/primarycare.provider.schema");
+const CommonProvider =require("../schemas/common.provider.schema");
 const { convertExcelToCmsJson } = require("../converter/cms.converter");
 const { validateNormalizedRow } = require("../validators/provider.validators");
 const { finalizeFacility,createFacility,mergeNormalizedRowIntoFacility } = require("../builders/provider.builder");
@@ -22,12 +23,9 @@ const convertExcelToJson = async (filePath) => {
 const convertFacilityExcelToJson = async (filePath) => {
   const outputDir = path.join(__dirname, "../jsonfiles");
   const startTime = process.hrtime.bigint();
-
   console.log(`Starting Facility conversion: ${filePath}`);
-
   const workbook = XLSX.readFile(filePath);
   const sheet = workbook.Sheets[workbook.SheetNames[0]];
-
   const rows = XLSX.utils.sheet_to_json(sheet, {
     defval: "",
     raw: false,
@@ -341,7 +339,52 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
         ] });
       }
       if (conditions.length) filter.$and = conditions;
-      providers.push(...await Provider.find(filter).lean());
+     const providerResults = await Provider.find(filter).lean();
+
+  if (providerResults.length > 0) {
+    providers.push(...providerResults);
+  } else {
+    const commonFilter = {
+    type: "Individual",
+  };
+
+  if (String(zipCode || "").trim()) {
+    commonFilter.zip = String(zipCode).trim();
+  }
+  const commonConditions = [];
+  if (nameRegex) {
+    commonConditions.push({
+      $or: [
+        { firstName: nameRegex },
+        { lastName: nameRegex },
+        { facilityName: nameRegex },
+        { primarySpecialty: nameRegex },
+      ],
+    });
+  }
+
+  if (addressRegex) {
+    commonConditions.push({
+      $or: [
+        { address: addressRegex },
+        { address2: addressRegex },
+        { city: addressRegex },
+        { state: addressRegex },
+      ],
+    });
+  }
+
+  if (commonConditions.length) {
+    commonFilter.$and = commonConditions;
+  }
+  console.log("CommonProvider filter:", commonFilter);
+  const commonProviderResults =
+    await CommonProvider.find(commonFilter).lean();
+
+  if (commonProviderResults.length > 0) {
+    providers.push(...commonProviderResults);
+  }
+  }
     } else {
   const filter = {};
 
@@ -374,7 +417,6 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       ],
     });
   }
-
   if (conditions.length) {
     filter.$and = conditions;
   }

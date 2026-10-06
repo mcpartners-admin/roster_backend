@@ -29,7 +29,7 @@ const COMMON_FIELD_HEADERS = {
   facilityName: ["facility name", "practice name"],
   facilityType: ["facility type"],
   address: ["address 1", "address line 1", "address (required)"],
-  address2: ["address2", "adress line 2", "address line 2"],
+  address2: ["address2", "address 2", "adress line 2", "address line 2"],
   city: ["city 1", "city (required)", "city"],
   state: ["state 1", "state (required)", "state"],
   zip: ["zip 1", "zip (required)", "zip"],
@@ -61,41 +61,48 @@ const detectCommonType = (headers, cells) => {
     .trim()
     .toUpperCase()
     .replace(/[^A-Z]/g, "");
-  if (pcpSpec === "PCP") return "primarycareproviders";
-  if (pcpSpec === "PSEC") return "specialists";
-  if (pcpSpec === "HOS") return "hospitals";
+  if (pcpSpec === "PCP") return "primary_care_provider";
+  if (pcpSpec === "SPEC" || pcpSpec === "PSEC") return "Individual";
+  if (pcpSpec === "HOS") return "Hospital";
 
   const sourceType = String(
     cells[normalizeHeader("type (required)")] || cells[normalizeHeader("type")] || ""
   ).toLowerCase();
-  if (/facility|hospital/.test(sourceType)) return "hospitals";
-  if (/specialist|spec/.test(sourceType)) return "specialists";
-  if (/primary|\bpcp\b/.test(sourceType)) return "primarycareproviders";
-  if (/individual/.test(sourceType)) return "individuals";
+  const sourceTypeCode = sourceType.trim().toUpperCase().replace(/[^A-Z]/g, "");
+  if (sourceTypeCode === "PCP") return "primary_care_provider";
+  if (sourceTypeCode === "SPEC" || sourceTypeCode === "PSEC") return "Individual";
+  if (sourceTypeCode === "HOS") return "Hospital";
+  if (/facility|hospital/.test(sourceType)) return "Hospital";
+  if (/specialist|spec/.test(sourceType)) return "Individual";
+  if (/primary|\bpcp\b/.test(sourceType)) return "primary_care_provider";
+  if (/individual/.test(sourceType)) return "Individual";
   if (has("facility type", "contract year (required)", "primary specialty code (required)")) {
-    return "hospitals";
+    return "Hospital";
   }
   if (has("pcp/spec")) {
     const label = String(cells[normalizeHeader("pcp/spec")] || "").toLowerCase();
-    if (/spec/.test(label)) return "specialists";
-    if (/pcp|primary/.test(label)) return "primarycareproviders";
-    return "individuals";
+    if (/spec/.test(label)) return "Individual";
+    if (/pcp|primary/.test(label)) return "primary_care_provider";
+    return "Individual";
   }
   if (has("provider_entity_name", "provider entity name", "provider_id", "provider id", "start date")) {
-    return "primarycareproviders";
+    return "primary_care_provider";
   }
-  return "individuals";
+  return "Individual";
 };
 
 const importCommonProvidersFromExcel = async (filePath) => {
   try {
     const workbook = XLSX.readFile(filePath, { cellDates: false });
     const recognizedHeaders = new Set(Object.values(COMMON_FIELD_HEADERS).flat().map(normalizeHeader));
+    
     recognizedHeaders.add(normalizeHeader("type (required)"));
     recognizedHeaders.add(normalizeHeader("type"));
 
     let selectedSheet;
+    let selectedGrid;
     let selectedHeaderIndex = -1;
+    let selectedHeaderCells;
     let selectedHeaderScore = 0;
     for (const sheetName of workbook.SheetNames) {
       const candidateSheet = workbook.Sheets[sheetName];
@@ -110,7 +117,9 @@ const importCommonProvidersFromExcel = async (filePath) => {
       }, { index: -1, score: 0 });
       if (candidate.score > selectedHeaderScore) {
         selectedSheet = candidateSheet;
+        selectedGrid = grid;
         selectedHeaderIndex = candidate.index;
+        selectedHeaderCells = grid[candidate.index];
         selectedHeaderScore = candidate.score;
       }
     }
@@ -119,20 +128,28 @@ const importCommonProvidersFromExcel = async (filePath) => {
       throw invalidSpreadsheet("The worksheet headers do not match a supported provider spreadsheet");
     }
 
-    const rows = XLSX.utils.sheet_to_json(selectedSheet, {
-      range: selectedHeaderIndex,
-      defval: "",
-      raw: false,
-    });
-    const headers = new Set(Object.keys(rows[0] || {}).map(normalizeHeader));
-
+    const headers = new Set(
+      selectedHeaderCells.map(normalizeHeader).filter(Boolean)
+    );
+    const rows = selectedGrid
+      .slice(selectedHeaderIndex + 1)
+      .map((row) => {
+        const cells = {};
+        selectedHeaderCells.forEach((header, columnIndex) => {
+          const normalizedHeader = normalizeHeader(header);
+          if (normalizedHeader) {
+            cells[normalizedHeader] = row[columnIndex] ?? "";
+          }
+        });
+        return cells;
+      });
     const documents = rows.filter((row) => {
       const values = Object.values(row).map((value) => String(value ?? "").trim());
       const text = values.join(" ").toLowerCase();
       return values.some(Boolean) && !/should be \d+|individual or facility|\[.*\]|\d+ digit number/.test(text);
     }).map((row) => {
       const cells = Object.fromEntries(
-        Object.entries(row).map(([key, value]) => [normalizeHeader(key), String(value ?? "").trim()])
+        Object.entries(row).map(([key, value]) => [key, String(value ?? "").trim()])
       );
       const document = {};
       for (const [field, aliases] of Object.entries(COMMON_FIELD_HEADERS)) {
@@ -146,7 +163,11 @@ const importCommonProvidersFromExcel = async (filePath) => {
       }
       document.type = detectCommonType(headers, cells);
       return document;
-    });
+    }).filter((document) => Object.keys(document).length > 1);
+
+    if (!documents.length) {
+      throw invalidSpreadsheet("No provider data rows were found under the detected headers");
+    }
 
     const inserted = await CommonProvider.insertMany(documents, { ordered: true });
     return { importedCount: inserted.length };

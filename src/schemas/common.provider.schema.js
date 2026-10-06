@@ -5,7 +5,15 @@ const commonProviderSchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: ["individuals", "primarycareproviders", "specialists", "hospitals"],
+      enum: [
+        "Individual",
+        "Hospital",
+        "primary_care_provider",
+        "individuals",
+        "primarycareproviders",
+        "specialists",
+        "hospitals",
+      ],
       index: true,
     },
     npi: { type: String, trim: true },
