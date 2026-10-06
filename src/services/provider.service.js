@@ -2,7 +2,8 @@ const fs = require("fs-extra");
 const path = require("path");
 const XLSX = require("xlsx");
 const Provider = require("../schemas/provider.schema");
-const CommonProvider = require("../schemas/common.provider.schema");
+const FacilityProvider = require("../schemas/facility.provider.schema");
+const PrimaryCareProvider=require("../schemas/primarycare.provider.schema");
 const { convertExcelToCmsJson } = require("../converter/cms.converter");
 const { validateNormalizedRow } = require("../validators/provider.validators");
 const { finalizeFacility,createFacility,mergeNormalizedRowIntoFacility } = require("../builders/provider.builder");
@@ -288,71 +289,75 @@ const addRosterData = async (
 };
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-const getProvider = async (
-  zipCode,
-  type,
-  name = "",
-  address = ""
-) => {
+const getProvider = async (zipCode, type, name = "", address = "") => {
   try {
     const providers = [];
-    const makeRegex = (value) => String(value || "").trim()
-      ? new RegExp(escapeRegex(String(value).trim()), "i")
+    const nameRegex = String(name || "").trim()
+      ? new RegExp(escapeRegex(String(name).trim()), "i")
       : null;
-    const nameRegex = makeRegex(name);
-    const addressRegex = makeRegex(address);
-    const zip = String(zipCode || "").trim();
+    const addressRegex = String(address || "").trim()
+      ? new RegExp(escapeRegex(String(address).trim()), "i")
+      : null;
 
-    const requestedType = String(type).trim().toLowerCase().replace(/[\s-]+/g, "_");
-    const typeAliases = {
-      individual: "individuals",
-      individuals: "individuals",
-      pcp: "primarycareproviders",
-      primary_care_provider: "primarycareproviders",
-      primary_care_providers: "primarycareproviders",
-      primarycareprovider: "primarycareproviders",
-      primarycareproviders: "primarycareproviders",
-      specialist: "specialists",
-      specialists: "specialists",
-      spec: "specialists",
-      facility: "hospitals",
-      facilities: "hospitals",
-      hospital: "hospitals",
-      hospitals: "hospitals",
-    };
-    const normalizedType = typeAliases[requestedType] || requestedType;
-    const filter = { type: normalizedType };
-    const conditions = [];
-
-    if (zip) {
-      conditions.push({ $or: [
-        { zip },
-        { billingZip: zip },
-      ] });
-    }
-    if (nameRegex) {
-      conditions.push({ $or: [
-        { firstName: nameRegex },
-        { lastName: nameRegex },
-        { providerEntityName: nameRegex },
-        { namePerW9: nameRegex },
+    if (String(type).trim().toLowerCase() === "primary_care_provider") {
+      const filter = {};
+      if (String(zipCode || "").trim()) filter.zip = String(zipCode).trim();
+      const conditions = [];
+      if (nameRegex) {
+        conditions.push({ $or: [
+          { firstName: nameRegex },
+          { lastName: nameRegex },
+          { providerEntityName: nameRegex },
+        ] });
+      }
+      if (addressRegex) {
+        conditions.push({ $or: [
+          { addressLine1: addressRegex },
+          { addressLine2: addressRegex },
+          { city: addressRegex },
+          { state: addressRegex },
+        ] });
+      }
+      if (conditions.length) filter.$and = conditions;
+      providers.push(...await PrimaryCareProvider.find(filter).lean());
+    } else if (String(type).trim().toLowerCase() === "individual") {
+      const filter = { type: "Individual" };
+      if (String(zipCode || "").trim()) {
+        filter["plans.addresses.zip"] = String(zipCode).trim();
+      }
+      const conditions = [];
+      if (nameRegex) {
+        conditions.push({ $or: [
+          { "name.first": nameRegex },
+          { "name.last": nameRegex },
+        ] });
+      }
+      if (addressRegex) {
+        conditions.push({ $or: [
+          { "plans.addresses.address": addressRegex },
+          { "plans.addresses.address2": addressRegex },
+          { "plans.addresses.city": addressRegex },
+          { "plans.addresses.state": addressRegex },
+        ] });
+      }
+      if (conditions.length) filter.$and = conditions;
+      providers.push(...await Provider.find(filter).lean());
+    } else {
+      const filter = {};
+      if (String(zipCode || "").trim()) filter.zip = String(zipCode).trim();
+      const conditions = [];
+      if (nameRegex) conditions.push({ $or: [
         { facilityName: nameRegex },
         { primarySpecialty: nameRegex },
       ] });
-    }
-    if (addressRegex) {
-      conditions.push({ $or: [
+      if (addressRegex) conditions.push({ $or: [
         { address: addressRegex },
-        { address2: addressRegex },
         { city: addressRegex },
         { state: addressRegex },
-        { billingAddress: addressRegex },
-        { billingCity: addressRegex },
-        { billingState: addressRegex },
       ] });
+      if (conditions.length) filter.$and = conditions;
+      providers.push(...await FacilityProvider.find(filter).lean());
     }
-    if (conditions.length) filter.$and = conditions;
-    providers.push(...await CommonProvider.find(filter).lean());
 
     if (providers.length === 0) {
       return { success: false, message: "No data found", data: null };
