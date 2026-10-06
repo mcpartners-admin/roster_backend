@@ -71,8 +71,8 @@ const connectDB = async () => {
 };
 
 const startServer = (port = process.env.PORT || 5000) => {
-  connectDB();
-  generateProviderDirectory()
+  connectDB()
+  // generateProviderDirectory()
   .catch(
     async (error) => {
       console.error("\nProvider directory generation failed:\n" );

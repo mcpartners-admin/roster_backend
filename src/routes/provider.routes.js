@@ -153,8 +153,8 @@ router.post(
  * @swagger
  * /api/search-provider:
  *   get:
- *     summary: Search providers by ZIP code, type, name, and address
- *     description: Type is required. ZIP code, name, and address are optional filters and may be used in any combination. Name and address use case-insensitive partial matching.
+ *     summary: Search providers in the common provider collection
+ *     description: Type is required and selects individuals, primarycareproviders, specialists, or hospitals. ZIP code, name, and address are optional filters and may be combined. Name matches person names, provider entity, W-9 name, facility name, or primary specialty. Address matches street, city, state, and billing address fields. Text filters use case-insensitive partial matching.
  *     parameters:
  *       - in: query
  *         name: zipCode
@@ -165,21 +165,21 @@ router.post(
  *       - in: query
  *         name: type
  *         required: true
- *         description: Provider type, such as Individual or Facility (case-sensitive).
+ *         description: Provider category, such as individuals, primarycareproviders, specialists, or hospitals. Legacy aliases Individual and primary_care_provider are also accepted.
  *         schema:
  *           type: string
  *         example: Individual
  *       - in: query
  *         name: name
  *         required: false
- *         description: Partial first name, last name, or facility name to match (case-insensitive).
+ *         description: Partial match against first name, last name, provider entity name, W-9 name, facility name, or primary specialty.
  *         schema:
  *           type: string
  *         example: Jane
  *       - in: query
  *         name: address
  *         required: false
- *         description: Partial street address, city, or state to match (case-insensitive).
+ *         description: Partial match against street address, city, state, or billing address fields.
  *         schema:
  *           type: string
  *         example: Main Street
@@ -199,7 +199,7 @@ router.post(
  *                   example: Data found successfully
  *                 data:
  *                   type: array
- *                   description: Matching provider documents, including their plans and addresses.
+ *                   description: Matching documents from the common provider collection.
  *                   items:
  *                     type: object
  *                     additionalProperties: true

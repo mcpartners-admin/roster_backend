@@ -102,14 +102,24 @@ const uploadSeedFromJson = async (req, res) => {
 };
 const getProvider = async (req, res) => {
   try {
-     const { zipCode, type, name = "", address = "" } = req.query;
+     const {
+       zipCode,
+       type,
+       name = "",
+       address = "",
+     } = req.query;
      if( !type){
       return res.status(400).json({
       success: false,
       message: " Type is required"
       });
      }
-     const getProviders=await providerService.getProvider(zipCode, type, name, address);
+     const getProviders = await providerService.getProvider(
+       zipCode,
+       type,
+       name,
+       address
+     );
      if(getProviders.success){
          return res.status(200).json({
             success: true,
