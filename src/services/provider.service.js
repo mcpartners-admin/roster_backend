@@ -302,11 +302,26 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       if (String(zipCode || "").trim()) filter.zip = String(zipCode).trim();
       const conditions = [];
       if (nameRegex) {
-        conditions.push({ $or: [
-          { firstName: nameRegex },
-          { lastName: nameRegex },
-          { providerEntityName: nameRegex },
-        ] });
+        conditions.push({
+      $or: [
+         {
+           $expr: {
+             $regexMatch: {
+               input: {
+                $concat: [
+                 { $ifNull: ["$firstName", ""] },
+                  " ",
+                { $ifNull: ["$lastName", ""] },
+             ],
+          },
+            regex: nameRegex.source,
+            options: "i",
+          },
+          },
+        },
+        { providerEntityName: nameRegex },
+       ],
+      });
       }
       if (addressRegex) {
         conditions.push({ $or: [

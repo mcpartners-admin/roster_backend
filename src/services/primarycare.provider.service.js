@@ -180,6 +180,19 @@ const isEmptyRow = (row) => {
   );
 };
 
+// Normalize the four identifying fields so whitespace and letter casing do
+// not cause the same provider/address to be imported twice.
+const duplicateKey = (provider) => {
+  const values = [
+    provider.npi,
+    provider.firstName,
+    provider.lastName,
+    provider.addressLine1,
+  ].map((value) => String(value || "").trim().toLowerCase());
+
+  return values.every(Boolean) ? values.join("|") : null;
+};
+
 /**
  * Imports Primary Care Provider data from an Excel file.
  */
@@ -204,7 +217,7 @@ const importExcel = async (filePath) => {
     throw new Error("The Excel sheet contains no data rows");
   }
 
-  const records = [];
+  const candidates = [];
   const failedRows = [];
 
   rows.forEach((row, index) => {
@@ -237,7 +250,7 @@ const importExcel = async (filePath) => {
         return;
       }
 
-      records.push(provider.toObject());
+      candidates.push({ row: index + 2, data: provider.toObject() });
     } catch (error) {
       failedRows.push({
         row: index + 2,
@@ -246,6 +259,37 @@ const importExcel = async (filePath) => {
       });
     }
   });
+
+  // Read existing DB entries for candidate NPIs in one query, then compare
+  // the complete NPI + first name + last name + address identity.
+  const npis = [...new Set(candidates.map(({ data }) => data.npi).filter(Boolean))];
+  const existingProviders = npis.length
+    ? await PrimaryCareProvider.find({ npi: { $in: npis } })
+        .select("npi firstName lastName addressLine1")
+        .lean()
+    : [];
+  const existingKeys = new Set(
+    existingProviders.map(duplicateKey).filter(Boolean)
+  );
+  const seenKeys = new Set();
+  const records = [];
+  const duplicateRows = [];
+
+  for (const candidate of candidates) {
+    const key = duplicateKey(candidate.data);
+
+    if (key && (existingKeys.has(key) || seenKeys.has(key))) {
+      duplicateRows.push({
+        row: candidate.row,
+        npi: candidate.data.npi || "",
+        message: "Duplicate provider already exists (NPI, first name, last name, and address)",
+      });
+      continue;
+    }
+
+    if (key) seenKeys.add(key);
+    records.push(candidate.data);
+  }
 
   let insertedCount = 0;
 
@@ -263,6 +307,8 @@ const importExcel = async (filePath) => {
   return {
     totalRows: rows.length,
     insertedCount,
+    duplicateCount: duplicateRows.length,
+    duplicateRows,
     failedCount: failedRows.length,
     failedRows,
   };
