@@ -10,7 +10,7 @@ async function convertExcelToCmsJson(filePath, outputDir = path.resolve(__dirnam
   const startTime = process.hrtime.bigint();
   console.log(`Starting conversion of Excel file: ${startTime}`);
   const workbook = XLSX.readFile(filePath);
-  const sheet = workbook.Sheets[workbook.SheetNames[1]];
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
 
 const rows = XLSX.utils.sheet_to_json(sheet, {
   defval: "",
@@ -56,7 +56,7 @@ const rows = XLSX.utils.sheet_to_json(sheet, {
 
   const finalizedProviders = Array.from(providers.values()).map(finalizeProvider);
 
-  const outputPath = path.join(outputDir, "provider_directory.json");
+  const outputPath = path.join(outputDir, "providerrrrrr_directoryeee.json");
   await fs.ensureDir(outputDir);
   fs.writeFileSync(
     outputPath,

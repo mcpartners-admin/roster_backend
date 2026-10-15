@@ -3,13 +3,16 @@ const path = require("path");
 const XLSX = require("xlsx");
 const Provider = require("../schemas/provider.schema");
 const FacilityProvider = require("../schemas/facility.provider.schema");
-const PrimaryCareProvider=require("../schemas/primarycare.provider.schema");
-const CommonProvider =require("../schemas/common.provider.schema");
+const PrimaryCareProvider = require("../schemas/primarycare.provider.schema");
+const CommonProvider = require("../schemas/common.provider.schema");
 const { convertExcelToCmsJson } = require("../converter/cms.converter");
 const { validateNormalizedRow } = require("../validators/provider.validators");
-const { finalizeFacility,createFacility,mergeNormalizedRowIntoFacility } = require("../builders/provider.builder");
+const {
+  finalizeFacility,
+  createFacility,
+  mergeNormalizedRowIntoFacility,
+} = require("../builders/provider.builder");
 const { createValidationLogger } = require("../logger/validation.logger");
-
 
 const getProvidersByRoster = async (rosterName) => {
   return Provider.find({ rosterName }).lean();
@@ -31,91 +34,86 @@ const convertFacilityExcelToJson = async (filePath) => {
     raw: false,
   });
 
-  const logger = createValidationLogger(
-    path.resolve(__dirname, "..", "..")
-  );
+  const logger = createValidationLogger(path.resolve(__dirname, "..", ".."));
 
   const facilities = new Map();
   let skippedRows = 0;
 
- for (let index = 0; index < rows.length; index += 1) {
-  const row = rows[index];
+  for (let index = 0; index < rows.length; index += 1) {
+    const row = rows[index];
 
-  const normalizedRow = {
-    npi: String(row["npi"] || "").trim(),
-    type: String(row["facility type"] || "").trim(),
-    facilityName: String(row["facility name"] || "").trim(),
+    const normalizedRow = {
+      npi: String(row["npi"] || "").trim(),
+      type: String(row["facility type"] || "").trim(),
+      facilityName: String(row["facility name"] || "").trim(),
 
-    facilityType: row["HPMS Facility Specialty Codes"]
-      ? [String(row["HPMS Facility Specialty Codes"]).trim()]
-      : [],
+      facilityType: row["HPMS Facility Specialty Codes"]
+        ? [String(row["HPMS Facility Specialty Codes"]).trim()]
+        : [],
 
-    specialty: row["HPMS Facility Specialty Codes"]
-      ? [String(row["HPMS Facility Specialty Codes"]).trim()]
-      : [],
+      specialty: row["HPMS Facility Specialty Codes"]
+        ? [String(row["HPMS Facility Specialty Codes"]).trim()]
+        : [],
 
-    address: String(row["address (required)"] || "").trim(),
-    address2: "",
-    city: String(row["city (required)"] || "").trim(),
-    state: String(row["state (required)"] || "").trim(),
-    zip: String(row["zip (required)"] || "").trim(),
-    phone: String(row["phone (required)"] || "").trim(),
-    accepting: "",
-    network: "",
-    year: row[" contract year (required)"]
-      ? [String(row[" contract year (required)"]).trim()]
-      : [],
-  };
+      address: String(row["address (required)"] || "").trim(),
+      address2: "",
+      city: String(row["city (required)"] || "").trim(),
+      state: String(row["state (required)"] || "").trim(),
+      zip: String(row["zip (required)"] || "").trim(),
+      phone: String(row["phone (required)"] || "").trim(),
+      accepting: "",
+      network: "",
+      year: row[" contract year (required)"]
+        ? [String(row[" contract year (required)"]).trim()]
+        : [],
+    };
 
-  if (!normalizedRow.npi) {
-    skippedRows += 1;
-    logger.record(index + 2, "", {
-      field: "npi",
-      message: "Missing NPI",
-      severity: "error",
-    });
-    continue;
+    if (!normalizedRow.npi) {
+      skippedRows += 1;
+      logger.record(index + 2, "", {
+        field: "npi",
+        message: "Missing NPI",
+        severity: "error",
+      });
+      continue;
+    }
+
+    const specialtyCode = normalizedRow.specialty?.[0] || "";
+    const zipCode = normalizedRow.zip || "";
+    // Uniqueness = NPI + Specialty + ZIP
+    const facilityKey = `${normalizedRow.npi}_${specialtyCode}_${zipCode}`;
+
+    let facility = facilities.get(facilityKey);
+
+    if (!facility) {
+      facility = createFacility(normalizedRow);
+      facilities.set(facilityKey, facility);
+      continue;
+    }
+
+    const isUpdated = mergeNormalizedRowIntoFacility(facility, normalizedRow);
+    console.log("hellow==>", isUpdated);
+    if (!isUpdated) {
+      logger.record(index + 2, normalizedRow.npi, {
+        field: "npi",
+        message:
+          `Duplicate facility found with NPI ${normalizedRow.npi}, ` +
+          `Specialty ${specialtyCode}, ZIP ${zipCode}`,
+        severity: "warning",
+      });
+    }
   }
 
-  const specialtyCode = normalizedRow.specialty?.[0] || ""
-  const zipCode = normalizedRow.zip || "";
-  // Uniqueness = NPI + Specialty + ZIP
-  const facilityKey = `${normalizedRow.npi}_${specialtyCode}_${zipCode}`;
-
-  let facility = facilities.get(facilityKey);
-
-  if (!facility) {
-    facility = createFacility(normalizedRow);
-    facilities.set(facilityKey, facility);
-    continue;
-  }
-
-  const isUpdated = mergeNormalizedRowIntoFacility(
-    facility,
-    normalizedRow
+  const finalizedFacilities = Array.from(facilities.values()).map(
+    finalizeFacility,
   );
-console.log("hellow==>",isUpdated)
-  if (!isUpdated) {
-    logger.record(index + 2, normalizedRow.npi, {
-      field: "npi",
-      message:
-        `Duplicate facility found with NPI ${normalizedRow.npi}, ` +
-        `Specialty ${specialtyCode}, ZIP ${zipCode}`,
-      severity: "warning",
-    });
-  }
-}
-
-const finalizedFacilities = Array.from(facilities.values()).map(
-  finalizeFacility
-);
 
   const outputPath = path.join(outputDir, "facility.json");
   await fs.ensureDir(outputDir);
   fs.writeFileSync(
     outputPath,
     JSON.stringify(finalizedFacilities, null, 2),
-    "utf8"
+    "utf8",
   );
   console.log(`Saved Facility JSON to ${outputPath}`);
   const endTime = process.hrtime.bigint();
@@ -149,7 +147,7 @@ const finalizedFacilities = Array.from(facilities.values()).map(
 const addRosterData = async (
   rosterData,
   rosterName = "providers",
-  jsonFilePath = ""
+  jsonFilePath = "",
 ) => {
   try {
     console.log(`Received ${rosterData.length} providers`);
@@ -159,8 +157,7 @@ const addRosterData = async (
       npi: String(provider.npi || "").trim(),
       type: provider.type === "Facility" ? "Facility" : "Individual",
       lastUpdatedOn:
-        provider.lastUpdatedOn ||
-        new Date().toISOString().split("T")[0],
+        provider.lastUpdatedOn || new Date().toISOString().split("T")[0],
 
       ...(provider.type === "Facility"
         ? {
@@ -179,9 +176,7 @@ const addRosterData = async (
             sex: provider.sex || "",
 
             languages:
-              provider.languages?.length > 0
-                ? provider.languages
-                : ["English"],
+              provider.languages?.length > 0 ? provider.languages : ["English"],
           }),
 
       plans: (provider.plans || []).map((plan) => ({
@@ -211,9 +206,7 @@ const addRosterData = async (
         addresses: (plan.addresses || []).map((address) => ({
           address: String(address.address || "").trim(),
 
-          address2: String(
-            address.address2 || address.address_2 || ""
-          ).trim(),
+          address2: String(address.address2 || address.address_2 || "").trim(),
 
           city: String(address.city || "").trim(),
 
@@ -256,9 +249,7 @@ const addRosterData = async (
 
         if (err.name === "ValidationError") {
           Object.values(err.errors).forEach((e) => {
-            console.log(
-              `${e.path} => ${e.message} (value: ${e.value})`
-            );
+            console.log(`${e.path} => ${e.message} (value: ${e.value})`);
           });
         } else {
           console.log(err);
@@ -303,36 +294,38 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       const conditions = [];
       if (nameRegex) {
         conditions.push({
-      $or: [
-         {
-           $expr: {
-             $regexMatch: {
-               input: {
-                $concat: [
-                 { $ifNull: ["$firstName", ""] },
-                  " ",
-                { $ifNull: ["$lastName", ""] },
-             ],
-          },
-            regex: nameRegex.source,
-            options: "i",
-          },
-          },
-        },
-        { providerEntityName: nameRegex },
-       ],
-      });
+          $or: [
+            {
+              $expr: {
+                $regexMatch: {
+                  input: {
+                    $concat: [
+                      { $ifNull: ["$firstName", ""] },
+                      " ",
+                      { $ifNull: ["$lastName", ""] },
+                    ],
+                  },
+                  regex: nameRegex.source,
+                  options: "i",
+                },
+              },
+            },
+            { providerEntityName: nameRegex },
+          ],
+        });
       }
       if (addressRegex) {
-        conditions.push({ $or: [
-          { addressLine1: addressRegex },
-          { addressLine2: addressRegex },
-          { city: addressRegex },
-          { state: addressRegex },
-        ] });
+        conditions.push({
+          $or: [
+            { addressLine1: addressRegex },
+            { addressLine2: addressRegex },
+            { city: addressRegex },
+            { state: addressRegex },
+          ],
+        });
       }
       if (conditions.length) filter.$and = conditions;
-      providers.push(...await PrimaryCareProvider.find(filter).lean());
+      providers.push(...(await PrimaryCareProvider.find(filter).lean()));
     } else if (String(type).trim().toLowerCase() === "individual") {
       const filter = { type: "Individual" };
       if (String(zipCode || "").trim()) {
@@ -340,106 +333,132 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       }
       const conditions = [];
       if (nameRegex) {
-        conditions.push({ $or: [
-          { "name.first": nameRegex },
-          { "name.last": nameRegex },
-        ] });
+        conditions.push({
+          $or: [
+            {
+              $expr: {
+                $regexMatch: {
+                  input: {
+                    $concat: [
+                      { $ifNull: ["$firstName", ""] },
+                      " ",
+                      { $ifNull: ["$lastName", ""] },
+                    ],
+                  },
+                  regex: nameRegex.source,
+                  options: "i",
+                },
+              },
+            },
+          ],
+        });
       }
       if (addressRegex) {
-        conditions.push({ $or: [
-          { "plans.addresses.address": addressRegex },
-          { "plans.addresses.address2": addressRegex },
-          { "plans.addresses.city": addressRegex },
-          { "plans.addresses.state": addressRegex },
-        ] });
+        conditions.push({
+          $or: [
+            { "plans.addresses.address": addressRegex },
+            { "plans.addresses.address2": addressRegex },
+            { "plans.addresses.city": addressRegex },
+            { "plans.addresses.state": addressRegex },
+          ],
+        });
       }
       if (conditions.length) filter.$and = conditions;
-     const providerResults = await Provider.find(filter).lean();
+      const providerResults = await Provider.find(filter).lean();
 
-  if (providerResults.length > 0) {
-    providers.push(...providerResults);
-  } else {
-    const commonFilter = {
-    type: "Individual",
-  };
+      if (providerResults.length > 0) {
+        providers.push(...providerResults);
+      } else {
+        const commonFilter = {
+          type: "Individual",
+        };
 
-  if (String(zipCode || "").trim()) {
-    commonFilter.zip = String(zipCode).trim();
-  }
-  const commonConditions = [];
-  if (nameRegex) {
-    commonConditions.push({
-      $or: [
-        { firstName: nameRegex },
-        { lastName: nameRegex },
-        { facilityName: nameRegex },
-        { primarySpecialty: nameRegex },
-      ],
-    });
-  }
+        if (String(zipCode || "").trim()) {
+          commonFilter.zip = String(zipCode).trim();
+        }
+        const commonConditions = [];
+        if (nameRegex) {
+          commonConditions.push({
+            $or: [
+              {
+                $expr: {
+                  $regexMatch: {
+                    input: {
+                      $concat: [
+                        { $ifNull: ["$firstName", ""] },
+                        " ",
+                        { $ifNull: ["$lastName", ""] },
+                      ],
+                    },
+                    regex: nameRegex.source,
+                    options: "i",
+                  },
+                },
+              },
+              { facilityName: nameRegex },
+              { primarySpecialty: nameRegex },
+            ],
+          });
+        }
 
-  if (addressRegex) {
-    commonConditions.push({
-      $or: [
-        { address: addressRegex },
-        { address2: addressRegex },
-        { city: addressRegex },
-        { state: addressRegex },
-      ],
-    });
-  }
+        if (addressRegex) {
+          commonConditions.push({
+            $or: [
+              { address: addressRegex },
+              { address2: addressRegex },
+              { city: addressRegex },
+              { state: addressRegex },
+            ],
+          });
+        }
 
-  if (commonConditions.length) {
-    commonFilter.$and = commonConditions;
-  }
-  console.log("CommonProvider filter:", commonFilter);
-  const commonProviderResults =
-    await CommonProvider.find(commonFilter).lean();
+        if (commonConditions.length) {
+          commonFilter.$and = commonConditions;
+        }
+        console.log("CommonProvider filter:", commonFilter);
+        const commonProviderResults =
+          await CommonProvider.find(commonFilter).lean();
 
-  if (commonProviderResults.length > 0) {
-    providers.push(...commonProviderResults);
-  }
-  }
+        if (commonProviderResults.length > 0) {
+          providers.push(...commonProviderResults);
+        }
+      }
     } else {
-  const filter = {};
+      const filter = {};
 
-  // primarySpecialty MUST always match the requested type
-  filter.primarySpecialty = new RegExp(
-    escapeRegex(String(type || "").trim()),
-    "i"
-  );
-  // ZIP is optional
-  if (String(zipCode || "").trim()) {
-    filter.zip = String(zipCode).trim();
-  }
-  const conditions = [];
-  // Name is optional
-  if (nameRegex) {
-    conditions.push({
-      $or: [
-        { facilityName: nameRegex },
-      ],
-    });
-  }
+      // primarySpecialty MUST always match the requested type
+      filter.primarySpecialty = new RegExp(
+        escapeRegex(String(type || "").trim()),
+        "i",
+      );
+      // ZIP is optional
+      if (String(zipCode || "").trim()) {
+        filter.zip = String(zipCode).trim();
+      }
+      const conditions = [];
+      // Name is optional
+      if (nameRegex) {
+        conditions.push({
+          $or: [{ facilityName: nameRegex }],
+        });
+      }
 
-  // Address is optional
-  if (addressRegex) {
-    conditions.push({
-      $or: [
-        { address: addressRegex },
-        { city: addressRegex },
-        { state: addressRegex },
-      ],
-    });
-  }
-  if (conditions.length) {
-    filter.$and = conditions;
-  }
+      // Address is optional
+      if (addressRegex) {
+        conditions.push({
+          $or: [
+            { address: addressRegex },
+            { city: addressRegex },
+            { state: addressRegex },
+          ],
+        });
+      }
+      if (conditions.length) {
+        filter.$and = conditions;
+      }
 
-  console.log("Facility filter:", filter);
-  providers.push(
-    ...(await FacilityProvider.find(filter).lean())
-  );
+      console.log("Facility filter:", filter);
+      providers.push(...(await FacilityProvider.find(filter).lean()));
     }
 
     if (providers.length === 0) {
@@ -460,5 +479,5 @@ module.exports = {
   convertExcelToJson,
   addRosterData,
   convertFacilityExcelToJson,
-  getProvider
+  getProvider,
 };
