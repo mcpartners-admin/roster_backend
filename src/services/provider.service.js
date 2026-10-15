@@ -340,9 +340,9 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
                 $regexMatch: {
                   input: {
                     $concat: [
-                      { $ifNull: ["$firstName", ""] },
+                      { $ifNull: ["$name.first", ""] },
                       " ",
-                      { $ifNull: ["$lastName", ""] },
+                      { $ifNull: ["$name.last", ""] },
                     ],
                   },
                   regex: nameRegex.source,
