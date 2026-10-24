@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const primaryCareProviderSchema = new mongoose.Schema(
   {
     npi: { type: String, trim: true, },
+    accepting: { type: String, default: "Accepting" },
     firstName: { type: String, trim: true, required: true, default: "" },
     lastName: { type: String, trim: true, required: true, default: "" },
     startDate: { type: Date, default: null },

@@ -2,6 +2,7 @@ const fs = require("fs-extra");
 const path = require("path");
 const XLSX = require("xlsx");
 const Provider = require("../schemas/provider.schema");
+const Specialist = require("../schemas/specialist.schema");
 const FacilityProvider = require("../schemas/facility.provider.schema");
 const PrimaryCareProvider = require("../schemas/primarycare.provider.schema");
 const CommonProvider = require("../schemas/common.provider.schema");
@@ -327,9 +328,9 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       if (conditions.length) filter.$and = conditions;
       providers.push(...(await PrimaryCareProvider.find(filter).lean()));
     } else if (String(type).trim().toLowerCase() === "individual") {
-      const filter = { type: "Individual" };
+      const filter = {};
       if (String(zipCode || "").trim()) {
-        filter["plans.addresses.zip"] = String(zipCode).trim();
+        filter["address.zip"] = String(zipCode).trim();
       }
       const conditions = [];
       if (nameRegex) {
@@ -356,18 +357,17 @@ const getProvider = async (zipCode, type, name = "", address = "") => {
       if (addressRegex) {
         conditions.push({
           $or: [
-            { "plans.addresses.address": addressRegex },
-            { "plans.addresses.address2": addressRegex },
-            { "plans.addresses.city": addressRegex },
-            { "plans.addresses.state": addressRegex },
+            { "address.address": addressRegex },
+            { "address.address2": addressRegex },
+            { "address.city": addressRegex },
+            { "address.state": addressRegex },
           ],
         });
       }
       if (conditions.length) filter.$and = conditions;
-      const providerResults = await Provider.find(filter).lean();
-
-      if (providerResults.length > 0) {
-        providers.push(...providerResults);
+      const specialistResults = await Specialist.find(filter).lean();
+      if (specialistResults.length > 0) {
+        providers.push(...specialistResults);
       } else {
         const commonFilter = {
           type: "Individual",

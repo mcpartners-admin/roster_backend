@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const PCP = require("../schemas/primarycare.provider.schema");
+const Specialist = require("../schemas/specialist.schema");
 const FacilityProvider = require("../schemas/facility.provider.schema");
 const {PDFDocument,StandardFonts,rgb,} = require("pdf-lib");
 
@@ -10,12 +11,6 @@ const CONFIG = {
     "src",
     "templates",
     "MCP_2027_Provider_Directory_Alphabetical_with_Introduction.pdf"
-  ),
-
-  individualsPath: path.join(
-    "src",
-    "jsonfiles",
-    "provider_directory.json"
   ),
 
   outputPath: path.join(
@@ -622,62 +617,6 @@ function assertFileExists(
   }
 }
 
-function readJson(
-  filePath
-) {
-  assertFileExists(
-    filePath,
-    "JSON file"
-  );
-
-  const raw =
-    fs.readFileSync(
-      filePath,
-      "utf8"
-    );
-
-  if (!raw.trim()) {
-    return [];
-  }
-
-  let data;
-
-  try {
-    data = JSON.parse(raw);
-  } catch (error) {
-    throw new Error(
-      `Invalid JSON in ${filePath}: ${error.message}`
-    );
-  }
-
-  if (Array.isArray(data)) {
-    return data;
-  }
-
-  const keys = [
-    "providers",
-    "provider",
-    "facilities",
-    "facility",
-    "data",
-    "results",
-    "items",
-  ];
-
-  for (const key of keys) {
-    if (Array.isArray(data[key])) {
-      return data[key];
-    }
-  }
-
-  const firstArray =
-    Object.values(data).find(
-      Array.isArray
-    );
-
-  return firstArray || [];
-}
-
 function clean(
   value
 ) {
@@ -878,6 +817,16 @@ async function getPCPsFromMongoDB() {
   console.log(
     `PCP database rows: ${rows.length}`
   );
+  return rows;
+}
+
+async function getSpecialistsFromMongoDB() {
+  if (!Specialist || typeof Specialist.find !== "function") {
+    throw new Error("MongoDB Specialist model is not available.");
+  }
+
+  const rows = await Specialist.find({}).lean().exec();
+  console.log(`Specialist database rows: ${rows.length}`);
   return rows;
 }
 
@@ -1413,254 +1362,43 @@ function buildPCPsFromMongoRows(
 // SPECIALIST NORMALIZATION
 // ============================================================
 
-function getPlanYears(
-  plan
-) {
-  if (!plan) {
-    return [];
-  }
-
-  if (
-    Array.isArray(
-      plan.year
-    )
-  ) {
-    return uniqueStrings(
-      plan.year
-    );
-  }
-
-  if (
-    plan.year !==
-      undefined &&
-    plan.year !== null
-  ) {
-    return [
-      clean(
-        plan.year
-      ),
-    ];
-  }
-
-  if (
-    plan.Year !==
-      undefined &&
-    plan.Year !== null
-  ) {
-    return [
-      clean(
-        plan.Year
-      ),
-    ];
-  }
-
-  return [];
-}
-
-function normalizeIndividual(
+function normalizeMongoSpecialist(
   provider
 ) {
-  if (
-    !provider ||
-    clean(
-      provider.type
-    ).toLowerCase() !==
-      "individual"
-  ) {
-    return null;
-  }
+  if (!provider) return null;
 
-  const name =
-    provider.name || {};
+  const name = provider.name || {};
+  const fullName = [name.prefix, name.first, name.middle, name.last, name.suffix]
+    .map(clean)
+    .filter(Boolean)
+    .join(" ");
+  const rawSpecialties = uniqueStrings([
+    ...(Array.isArray(provider.specialty) ? provider.specialty : [provider.specialty]),
+    provider.primarySpecialty,
+  ]).filter((value) => !["SPC", "PCP"].includes(value.toUpperCase()));
+  const specialtyCodes = uniqueStrings([
+    ...rawSpecialties.filter((value) => PROVIDER_CONFIG.SPECIALTY_MAP[value]),
+    provider.specialistCode,
+  ]).filter((value) => PROVIDER_CONFIG.SPECIALTY_MAP[value]);
+  const specialties = uniqueStrings(rawSpecialties.map((value) =>
+    PROVIDER_CONFIG.SPECIALTY_MAP[value] || value
+  ));
+  const address = provider.address || {};
 
-  const fullName =
-    [
-      name.prefix,
-      name.first,
-      name.middle,
-      name.last,
-      name.suffix,
-    ]
-      .map(clean)
-      .filter(Boolean)
-      .join(" ");
-
-  const plans =
-    Array.isArray(
-      provider.plans
-    )
-      ? provider.plans
-      : [];
-
-  const yearPlans =
-    plans.length
-      ? plans.filter(
-          (plan) =>
-            getPlanYears(
-              plan
-            ).includes(
-              PROVIDER_CONFIG.YEAR
-            )
-        )
-      : [];
-
-  /*
-   * If the JSON provider has plans,
-   * only 2027 plans are used.
-   *
-   * If no plans exist, keep the provider.
-   */
-
-  if (
-    plans.length &&
-    !yearPlans.length
-  ) {
-    return null;
-  }
-
-  const usablePlans =
-    yearPlans.length
-      ? yearPlans
-      : plans;
-
-  const specialtyCodes =
-    uniqueStrings(
-      usablePlans.flatMap(
-        (plan) =>
-          Array.isArray(
-            plan.specialty
-          )
-            ? plan.specialty
-            : []
-      )
-    );
-
-  const specialties =
-    uniqueStrings(
-      specialtyCodes.map(
-        (code) =>
-          PROVIDER_CONFIG
-            .SPECIALTY_MAP[
-            code
-          ] ||
-          "Other Specialty"
-      )
-    );
-
-  const accepting =
-    uniqueStrings(
-      usablePlans.map(
-        (plan) =>
-          normalizeAccepting(
-            plan.accepting
-          )
-      )
-    ).join(", ");
-
-  const addresses =
-    [];
-
-  for (
-    const plan of
-      usablePlans
-  ) {
-    if (
-      Array.isArray(
-        plan.addresses
-      )
-    ) {
-      addresses.push(
-        ...plan.addresses
-      );
-    }
-  }
-
-  if (
-    Array.isArray(
-      provider.addresses
-    )
-  ) {
-    addresses.push(
-      ...provider.addresses
-    );
-  }
-
-  const normalized =
-    {
-      npi:
-        normalizeNpi(
-          provider.npi
-        ),
-
-      type:
-        "Individual",
-
-      name:
-        fullName ||
-        clean(
-          provider.providerName
-        ),
-
-      firstName:
-        clean(
-          name.first
-        ),
-
-      lastName:
-        clean(
-          name.last
-        ),
-
-      languages:
-        uniqueStrings([
-          ...(Array.isArray(
-            provider.languages
-          )
-            ? provider.languages
-            : []),
-        ]),
-
-      specialties,
-
-      specialtyCodes,
-
-      accepting,
-
-      addresses:
-        dedupeAddresses(
-          addresses
-        ),
-
-      website:
-        clean(
-          provider.website
-        ),
-
-      email:
-        clean(
-          provider.email
-        ),
-
-      medicalGroup:
-        clean(
-          provider.medicalGroup
-        ),
-
-      telehealth:
-        clean(
-          provider.telehealth
-        ),
-
-      oudExpertise:
-        clean(
-          provider.oudExpertise
-        ),
-
-      directoryType:
-        "Specialists",
-    };
-
-  return normalized;
+  return {
+    npi: normalizeNpi(provider.npi),
+    type: "Individual",
+    name: fullName || clean(provider.providerName),
+    firstName: clean(name.first),
+    lastName: clean(name.last),
+    languages: uniqueStrings(Array.isArray(provider.languages) ? provider.languages : []),
+    specialties,
+    specialtyCodes,
+    accepting: normalizeAccepting(provider.accepting),
+    addresses: dedupeAddresses([address]),
+    medicalGroup: clean(provider.groupName),
+    directoryType: "Specialists",
+  };
 }
 
 // ============================================================
@@ -3321,11 +3059,6 @@ async function generateProviderDirectory() {
     "Provider PDF template"
   );
 
-  assertFileExists(
-    CONFIG.individualsPath,
-    "Provider JSON"
-  );
-
   // ----------------------------------------------------------
   // Load template
   // ----------------------------------------------------------
@@ -3440,30 +3173,13 @@ async function generateProviderDirectory() {
     );
 
   // ----------------------------------------------------------
-  // READ SPECIALISTS
+  // READ SPECIALISTS FROM MONGODB
   // ----------------------------------------------------------
 
-  const rawIndividuals =
-    readJson(
-      CONFIG.individualsPath
-    );
-
-  /*
-   * IMPORTANT:
-   *
-   * We DO NOT remove specialists based
-   * on PCP NPI.
-   *
-   * MongoDB controls PCP section.
-   *
-   * JSON controls Specialist section.
-   */
-  const specialists =
-    rawIndividuals
-      .map(
-        normalizeIndividual
-      )
-      .filter(Boolean);
+  const specialistRows = await getSpecialistsFromMongoDB();
+  const specialists = specialistRows
+    .map(normalizeMongoSpecialist)
+    .filter(Boolean);
 
   // ----------------------------------------------------------
   // LOAD FACILITIES FROM MONGODB
@@ -3491,7 +3207,7 @@ async function generateProviderDirectory() {
   );
 
   console.log(
-    `Specialists from JSON: ${specialists.length}`
+    `Specialists from MongoDB: ${specialists.length}`
   );
 
   console.log(

@@ -1,319 +1,190 @@
 const XLSX = require("xlsx");
 const PrimaryCareProvider = require("../schemas/primarycare.provider.schema");
+const Specialist = require("../schemas/specialist.schema");
 
-/**
- * Maps Excel column names to MongoDB schema fields.
- */
-const HEADER_MAP = {
-  npi: "npi",
-  firstname: "firstName",
-  lastname: "lastName",
-  startdate: "startDate",
-  enddate: "endDate",
-  degree: "degree",
-  providerentityname: "providerEntityName",
-  providertin: "providerTin",
-  addressline1: "addressLine1",
-  addressline2: "addressLine2",
+// Excel files commonly contain the Unicode ligature "ﬁ" in "ﬁrst name".
+// Normalize compatibility characters before removing punctuation so it maps
+// to the same key as the plain ASCII "first name" header.
+const normalizeHeader = (header) => String(header || "")
+  .normalize("NFKD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .trim()
+  .toLowerCase()
+  .replace(/[^a-z0-9]/g, "")
+  .replace(/required$/, "");
+const value = (row, ...names) => {
+  const found = Object.entries(row).find(([header]) => names.includes(normalizeHeader(header)));
+  return found && found[1] != null ? String(found[1]).trim() : "";
+};
+const splitList = (text) => text ? text.split(/[,;|]/).map((item) => item.trim()).filter(Boolean) : [];
+const isEmptyRow = (row) => Object.values(row).every((item) => item === "" || item == null);
 
-  // Supports the typo "Adress Line 2" from the Excel file
-  adressline2: "addressLine2",
+const normalizeIdentityPart = (item) => String(item || "").trim().toLowerCase();
+const specialistIdentity = (data) => JSON.stringify([
+    normalizeIdentityPart(data.npi),
+    normalizeIdentityPart(data.name?.first),
+    normalizeIdentityPart(data.name?.last),
+    normalizeIdentityPart(data.address?.address),
+    normalizeIdentityPart(data.address?.address2),
+    normalizeIdentityPart(data.address?.city),
+    normalizeIdentityPart(data.address?.state),
+    normalizeIdentityPart(data.address?.zip),
+]);
 
-  city: "city",
-  state: "state",
-  zip: "zip",
-  zipcode: "zip",
-  providerid: "providerId",
-  practiceid: "practiceId",
-  locationid: "locationId",
+// Older versions created a unique index on NPI alone. Remove that obsolete
+// index so multiple distinct specialist records can share an NPI.
+const removeLegacyUniqueNpiIndex = async () => {
+  const indexes = await Specialist.collection.indexes();
+  const legacyIndex = indexes.find((index) => index.unique && index.key?.npi === 1 && Object.keys(index.key).length === 1);
+  if (legacyIndex) await Specialist.collection.dropIndex(legacyIndex.name);
 };
 
-/**
- * Converts Excel header into a normalized format.
- *
- * Example:
- * "First Name" -> "firstname"
- * "Provider TIN" -> "providertin"
- */
-const normalizeHeader = (header) => {
-  return String(header || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
+const getHeaderRowIndex = (sheet) => {
+  const requiredHeaders = ["npi", "firstname", "lastname", "pcpspecialty"];
+  const headerRows = XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false });
+  for (let index = 0; index < Math.min(headerRows.length, 30); index += 1) {
+    const firstRow = headerRows[index] || [];
+    const headers = new Set(firstRow.map(normalizeHeader));
+    if (requiredHeaders.every((header) => headers.has(header))) return index;
+  }
+  return -1;
 };
 
-/**
- * Converts an Excel cell value to a trimmed string.
- */
-const cellToString = (value) => {
-  if (value === null || value === undefined) {
-    return "";
-  }
-
-  return String(value).trim();
-};
-
-/**
- * Converts Excel date values into JavaScript Date objects.
- *
- * Supported formats:
- * - Excel date serial number
- * - JavaScript Date
- * - MM/DD/YYYY
- */
-const parseDate = (value) => {
-  if (value === null || value === undefined || value === "") {
-    return null;
-  }
-
-  // Already a JavaScript Date
-  if (value instanceof Date) {
-    if (Number.isNaN(value.getTime())) {
-      throw new Error(`Invalid date: ${value}`);
-    }
-
-    return value;
-  }
-
-  // Excel serial date
-  if (typeof value === "number") {
-    const excelDate = XLSX.SSF.parse_date_code(value);
-
-    if (!excelDate) {
-      throw new Error(`Invalid Excel date: ${value}`);
-    }
-
-    return new Date(
-      Date.UTC(
-        excelDate.y,
-        excelDate.m - 1,
-        excelDate.d
-      )
-    );
-  }
-
-  const dateText = String(value).trim();
-
-  /**
-   * Expected format:
-   * MM/DD/YYYY
-   *
-   * Example:
-   * 01/01/2027
-   * 12/31/2027
-   */
-  const usDate = dateText.match(
-    /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
-  );
-
-  if (usDate) {
-    const [, monthText, dayText, yearText] = usDate;
-
-    const month = Number(monthText);
-    const day = Number(dayText);
-    const year = Number(yearText);
-
-    const parsedDate = new Date(
-      Date.UTC(year, month - 1, day)
-    );
-
-    // Validate the date
-    if (
-      month < 1 ||
-      month > 12 ||
-      day < 1 ||
-      parsedDate.getUTCMonth() !== month - 1 ||
-      parsedDate.getUTCDate() !== day
-    ) {
-      throw new Error(`Invalid date: ${value}`);
-    }
-
-    return parsedDate;
-  }
-
-  // Fallback for other valid date strings
-  const parsedDate = new Date(dateText);
-
-  if (Number.isNaN(parsedDate.getTime())) {
-    throw new Error(`Invalid date: ${value}`);
-  }
-
-  return parsedDate;
-};
-
-/**
- * Converts one Excel row into a MongoDB provider object.
- */
-const mapExcelRowToProvider = (row) => {
-  const providerData = {};
-
-  Object.entries(row).forEach(([header, value]) => {
-    const normalizedHeader = normalizeHeader(header);
-    const fieldName = HEADER_MAP[normalizedHeader];
-
-    // Ignore Excel columns that are not part of our schema
-    if (!fieldName) {
-      return;
-    }
-
-    // Convert date fields properly
-    if (fieldName === "startDate") {
-      providerData[fieldName] = "2027-01-01";
-      return;
-    }
-    if(fieldName==="endDate"){
-      providerData[fieldName]=parseDate(value);
-    }
-
-    providerData[fieldName] = cellToString(value);
+const readRowsBelowHeaders = (sheet, headerRowIndex) => {
+  const matrix = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "", raw: false, blankrows: false });
+  const headers = matrix[headerRowIndex] || [];
+  return matrix.slice(headerRowIndex + 1).map((cells) => {
+    const row = {};
+    headers.forEach((header, index) => {
+      if (header !== "" && header != null) row[header] = cells[index] ?? "";
+    });
+    return row;
   });
-
-  return providerData;
 };
 
-/**
- * Checks whether an Excel row is completely empty.
- */
-const isEmptyRow = (row) => {
-  return Object.values(row).every(
-    (value) => value === "" || value === null || value === undefined
-  );
-};
+const mapPcp = (row) => ({
+  npi: value(row, "npi"),
+  firstName: value(row, "firstname"),
+  lastName: value(row, "lastname"),
+  providerEntityName: value(row, "group", "groupname"),
+  addressLine1: value(row, "address"),
+  addressLine2: value(row, "address2"),
+  city: value(row, "city"),
+  state: value(row, "state"),
+  zip: value(row, "zip"),
+  degree: value(row, "type"),
+  accepting: value(row, "accepting"),
+  practiceId: value(row, "groupid"),
+  providerId: value(row, "mcproviderid", "mcpproviderid"),
+});
 
-// Normalize the four identifying fields so whitespace and letter casing do
-// not cause the same provider/address to be imported twice.
-const duplicateKey = (provider) => {
-  const values = [
-    provider.npi,
-    provider.firstName,
-    provider.lastName,
-    provider.addressLine1,
-  ].map((value) => String(value || "").trim().toLowerCase());
+const mapSpecialist = (row) => ({
+  npi: value(row, "npi"),
+  type: value(row, "type"),
+  name: { first: value(row, "firstname"), last: value(row, "lastname") },
+  languages: splitList(value(row, "languages")),
+  // PCP/Specialty is the row classifier (SPC/PCP), not a specialty name.
+  specialty: splitList(value(row, "primaryspecialty", "specialty")),
+  accepting: value(row, "accepting"),
+  networkId: splitList(value(row, "networkid")),
+  address: {
+    address: value(row, "address"), address2: value(row, "address2"),
+    city: value(row, "city"), state: value(row, "state"), zip: value(row, "zip"),
+    phone: value(row, "phone"),
+  },
+  groupName: value(row, "group"),
+  contractYear: value(row, "contractyear"),
+  primarySpecialty: value(row, "primaryspecialty"),
+  specialistCode: value(row, "specialistcode"),
+  pcpSpecialty: value(row, "pcpspecialty"),
+  specialtyCode: value(row, "specialtycode"),
+  groupId: value(row, "groupid"),
+  mcpProviderId: value(row, "mcpproviderid"),
+  providerType: value(row, "typespcialistpcp", "typespecialistpcp", "providertype"),
+});
 
-  return values.every(Boolean) ? values.join("|") : null;
-};
-
-/**
- * Imports Primary Care Provider data from an Excel file.
- */
 const importExcel = async (filePath) => {
-  const workbook = XLSX.readFile(filePath, {
-    cellDates: true,
-  });
-
-  const firstSheetName = workbook.SheetNames[0];
-  const sheet = workbook.Sheets[firstSheetName];
-
-  if (!sheet) {
-    throw new Error("The uploaded workbook has no worksheets");
+  await removeLegacyUniqueNpiIndex();
+  const workbook = XLSX.readFile(filePath, { cellDates: true });
+  const secondSheetName = workbook.SheetNames[1];
+  const sheet = secondSheetName ? workbook.Sheets[secondSheetName] : null;
+  if (!sheet) throw new Error("The uploaded workbook has no worksheets");
+  const headerRowIndex = getHeaderRowIndex(sheet);
+  if (headerRowIndex < 0) {
+    throw new Error("Could not find the roster headers on the second worksheet");
   }
+  const rows = readRowsBelowHeaders(sheet, headerRowIndex);
+  if (!rows.length) throw new Error("The Excel sheet contains no data rows");
 
-  const rows = XLSX.utils.sheet_to_json(sheet, {
-    defval: "",
-    raw: false,
-  });
-
-  if (!rows.length) {
-    throw new Error("The Excel sheet contains no data rows");
-  }
-
-  const candidates = [];
+  const candidates = { pcp: [], specialist: [] };
   const failedRows = [];
-
   rows.forEach((row, index) => {
-    // IMPORTANT:
-    // Declare providerData outside try so catch can access it.
-    let providerData = {};
-
-    try {
-      // Ignore completely empty rows
-      if (isEmptyRow(row)) {
-        return;
-      }
-
-      // Convert Excel row into MongoDB structure
-      providerData = mapExcelRowToProvider(row);
-
-      // Create Mongoose document
-      const provider = new PrimaryCareProvider(providerData);
-
-      // Validate before inserting
-      const validationError = provider.validateSync();
-
-      if (validationError) {
-        failedRows.push({
-          row: index + 2,
-          npi: providerData.npi || "",
-          message: validationError.message,
-        });
-
-        return;
-      }
-
-      candidates.push({ row: index + 2, data: provider.toObject() });
-    } catch (error) {
-      failedRows.push({
-        row: index + 2,
-        npi: providerData.npi || "",
-        message: error.message,
-      });
+    if (isEmptyRow(row)) return;
+    const rowNumber = index + headerRowIndex + 2;
+    const classification = value(row, "pcpspecialty").toUpperCase();
+    const isSpecialist = classification === "SPC";
+    if (!isSpecialist && classification !== "PCP") {
+      failedRows.push({ row: rowNumber, npi: value(row, "npi"), message: 'PCP/Specialty must be "SPC" or "PCP"' });
+      return;
     }
+    const Model = isSpecialist ? Specialist : PrimaryCareProvider;
+    const data = isSpecialist ? mapSpecialist(row) : mapPcp(row);
+    if (isSpecialist) {
+      const missing = [
+        ["npi", data.npi], ["first name", data.name.first], ["last name", data.name.last],
+        ["address", data.address.address], ["city", data.address.city],
+        ["state", data.address.state], ["zip", data.address.zip],
+      ].filter(([, fieldValue]) => !fieldValue).map(([field]) => field);
+      if (missing.length) {
+        failedRows.push({ row: rowNumber, npi: data.npi || "", message: `Missing required specialist fields: ${missing.join(", ")}` });
+        return;
+      }
+    }
+    const doc = new Model(data);
+    const error = doc.validateSync();
+    if (error) {
+      failedRows.push({ row: rowNumber, npi: data.npi || "", message: error.message });
+      return;
+    }
+    candidates[isSpecialist ? "specialist" : "pcp"].push({ row: rowNumber, data: doc.toObject() });
   });
 
-  // Read existing DB entries for candidate NPIs in one query, then compare
-  // the complete NPI + first name + last name + address identity.
-  const npis = [...new Set(candidates.map(({ data }) => data.npi).filter(Boolean))];
-  const existingProviders = npis.length
-    ? await PrimaryCareProvider.find({ npi: { $in: npis } })
-        .select("npi firstName lastName addressLine1")
-        .lean()
-    : [];
-  const existingKeys = new Set(
-    existingProviders.map(duplicateKey).filter(Boolean)
-  );
-  const seenKeys = new Set();
-  const records = [];
   const duplicateRows = [];
-
-  for (const candidate of candidates) {
-    const key = duplicateKey(candidate.data);
-
-    if (key && (existingKeys.has(key) || seenKeys.has(key))) {
-      duplicateRows.push({
-        row: candidate.row,
-        npi: candidate.data.npi || "",
-        message: "Duplicate provider already exists (NPI, first name, last name, and address)",
-      });
-      continue;
-    }
-
-    if (key) seenKeys.add(key);
-    records.push(candidate.data);
-  }
-
-  let insertedCount = 0;
-
-  if (records.length > 0) {
-    const insertedRecords = await PrimaryCareProvider.insertMany(
-      records,
-      {
-        ordered: false,
-      }
+  const insertedCounts = { pcp: 0, specialist: 0 };
+  for (const [kind, Model] of [["pcp", PrimaryCareProvider], ["specialist", Specialist]]) {
+    const batch = candidates[kind];
+    const seen = new Set();
+    const existingNpis = [...new Set(batch.map(({ data }) => data.npi))];
+    const existing = existingNpis.length
+      ? await Model.find({ npi: { $in: existingNpis } }).lean()
+      : [];
+    const existingSet = new Set(
+      kind === "specialist"
+        ? existing.map(specialistIdentity)
+        : existing.map((item) => item.npi)
     );
-
-    insertedCount = insertedRecords.length;
+    const records = [];
+    for (const item of batch) {
+      const identity = kind === "specialist" ? specialistIdentity(item.data) : item.data.npi;
+      if (kind === "specialist"
+        ? existingSet.has(identity) || seen.has(identity)
+        : item.data.npi && (existingSet.has(identity) || seen.has(identity))) {
+        duplicateRows.push({ row: item.row, npi: item.data.npi, message: `Duplicate ${kind} NPI already exists` });
+      } else {
+        if (kind === "specialist" || item.data.npi) seen.add(identity);
+        records.push(item.data);
+      }
+    }
+    if (records.length) insertedCounts[kind] = (await Model.insertMany(records, { ordered: false })).length;
   }
 
+  const insertedCount = insertedCounts.pcp + insertedCounts.specialist;
   return {
-    totalRows: rows.length,
-    insertedCount,
-    duplicateCount: duplicateRows.length,
-    duplicateRows,
-    failedCount: failedRows.length,
-    failedRows,
+    totalRows: rows.length, insertedCount, insertedPcpCount: insertedCounts.pcp,
+    insertedSpecialistCount: insertedCounts.specialist,
+    duplicateCount: duplicateRows.length, duplicateRows,
+    failedCount: failedRows.length, failedRows,
   };
 };
 
-module.exports = {
-  importExcel,
-};
+module.exports = { importExcel };
